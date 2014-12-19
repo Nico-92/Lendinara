@@ -215,6 +215,13 @@ lendinara.controller('IscrizioneLendinaraCtrl', function ($scope, $http, $timeou
                     $scope.id = data.id;
                     $scope.iscritto = data;
                     $scope.iscritto.cap = parseFloat($scope.iscritto.cap, 2);
+                    //Verifico se il certificato è scaduto
+                    var oggi = new Date();
+                    var scadenza = new Date($scope.iscritto.scadenza);
+                    if(scadenza.setHours(0,0,0,0) <= oggi.setHours(0,0,0,0)){
+                        $scope.risultato=false;
+                        $scope.messaggio = 'ATTENZIONE: Certificato medico scaduto';
+                    }
                 }
             })
     };
