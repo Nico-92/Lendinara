@@ -94,6 +94,7 @@ lendinara.controller('CreaEventoCtrl', function ($scope, $http) {
 });
 
 lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
+    $scope.nuovo = false;
     $scope.indice_corrente = 0;
     $scope.indice_massimo = 0;
     $scope.testo = "";
@@ -101,23 +102,27 @@ lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
         $scope.bigliettodx = data.bigliettodx;
         $scope.bigliettosx = data.bigliettosx;
     })
-    $scope.modifica = function(testo, posizione){
+    $scope.modifica = function(testo, posizione, azione){
+        console.log(azione)
         $http({
                 url: 'testo_da_stampare.php',
                 method: 'GET',
                 params: { testo: testo,
-                        posizione: posizione }
+                        posizione: posizione,
+                        id: $scope.testi[$scope.indice_corrente].id,
+                        azione: azione }
             }).success(function (data){
                 if(data == 'true'){
+                    $scope.nuovo = false;
                     $scope.risultato = true;
-                    $scope.messaggio = 'Testo modificato con successo';
+                    $scope.messaggio = azione + ' eseguito con successo';
                 }else{
                     $scope.risultato=false;
                     $scope.messaggio = data;
                 }
             })
         
-    }
+    };
     $http.get('ricerca_testi.php').success(function (data){
         $scope.indice_massimo = data.length-1;
         $scope.testi = data;
@@ -132,6 +137,7 @@ lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
         console.log(data)
     })
     $scope.cambia = function(direzione){
+        $scope.nuovo = false;
         console.log($scope.indice_corrente);
         //Gestione indice
         if(direzione=='successivo'){
@@ -160,6 +166,7 @@ lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
     $scope.reset = function(){
         $scope.testo = '';
         $scope.posizione = '';
+        $scope.nuovo = true;
     }
     $scope.modificaBiglietti = function(bigliettosx, bigliettodx){
         if(!bigliettosx){

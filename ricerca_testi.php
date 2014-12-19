@@ -19,9 +19,9 @@ $ris = '[';
 while($array = mysql_fetch_array($result)){
 	//$array['testo'] = str_replace("<br/>", "\n", $array['testo']);
 	if($i==mysql_num_rows($result)-1)
-		$ris = $ris . '{ "testo": "'.$array['testo'].'", "posizione": "'.$array['posizione'].'"}';
+		$ris = $ris . '{ "testo": "'.$array['testo'].'", "posizione": "'.$array['posizione'].'", "id": "'.$array['id'].'"}';
 	else
-		$ris = $ris . '{ "testo": "'.$array['testo'].'", "posizione": "'.$array['posizione'].'"},';
+		$ris = $ris . '{ "testo": "'.$array['testo'].'", "posizione": "'.$array['posizione'].'", "id": "'.$array['id'].'"},';
 	$i++;
 }
 $ris=$ris.']';
