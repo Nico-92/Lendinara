@@ -98,6 +98,7 @@
 					    </label>
   					</div>
   					<input type="submit" value="Modifica" ng-click="modifica(testo, posizione)" class="btn btn-success" />
+  					<input type="submit" value="Elimina" ng-click="elimina(testo, posizione)" class="btn btn-danger" />
   					<button class="btn" ng-click="reset()">Pulisci form</button>
   					<div ng-if="risultato==true" class="alert alert-success alert-dismissable">{{messaggio}}</div>
 					<div ng-if="risultato==false" class="alert alert-danger alert-dismissable">{{messaggio}}</div>

@@ -121,10 +121,12 @@ lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
     $http.get('ricerca_testi.php').success(function (data){
         $scope.indice_massimo = data.length-1;
         $scope.testi = data;
+        console.log(data)
         for(i = 0; i < $scope.testi.length; i++){
             $scope.testi[i].testo = $scope.testi[i].testo.replace(/<br\s*\/?>/mg,"\n");
         }
         $scope.testo = $scope.testi[$scope.indice_corrente].testo; 
+        $scope.posizione = $scope.testi[$scope.indice_corrente].posizione; 
         
     }).error(function (data){
         console.log(data)
@@ -140,6 +142,7 @@ lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
             }
             //--------
             $scope.testo = $scope.testi[$scope.indice_corrente].testo; 
+            $scope.posizione = $scope.testi[$scope.indice_corrente].posizione; 
         }else{
             //Gestione indice
             if($scope.indice_corrente == 0){
@@ -149,8 +152,8 @@ lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
             }
             //------
             
-             console.log($scope.testi[$scope.indice_corrente].testo);
             $scope.testo = $scope.testi[$scope.indice_corrente].testo; 
+            $scope.posizione = $scope.testi[$scope.indice_corrente].posizione; 
 
         }
     }

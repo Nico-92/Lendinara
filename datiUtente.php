@@ -33,6 +33,7 @@
 			$ris = $ris.'"citta": "'.$array['citta'].'",';
 			$ris = $ris.'"email": "'.$array['email'].'",';
 			$ris = $ris.'"telefono": "'.$array['telefono'].'",';
+			$ris = $ris.'"scadenza": "'.$array['scadenza_visita'].'",';
 			$ris = $ris.'"varie": "'.$array['sangue'].'",';
 			$ris = $ris.'"tessera_el": "'.$array_lendinara['tesserael'].'",';
 			$ris = $ris.'"data_el": "'.$array_lendinara['datael'].'",';
