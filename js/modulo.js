@@ -269,6 +269,9 @@ lendinara.controller('IscrizioneLendinaraCtrl', function ($scope, $http, $timeou
 
 
     $scope.stampa = function(){
+        if(!$scope.nuovoIscritto){
+            $scope.salva($scope.iscritto, 'modifica');
+        }
         getTesto2('tesseramento');
         var mediaQueryList2 = window.matchMedia('print');
         $scope.printable = '';
