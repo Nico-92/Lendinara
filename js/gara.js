@@ -95,13 +95,11 @@ lendinara.controller('CreaEventoCtrl', function ($scope, $http) {
 
 lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
     $scope.nuovo = false;
-    $scope.indice_corrente = 0;
-    $scope.indice_massimo = 0;
-    $scope.testo = "";
     $http.get('ricerca_biglietti.php').success(function (data){
         $scope.bigliettodx = data.bigliettodx;
         $scope.bigliettosx = data.bigliettosx;
-    })
+    });
+
     $scope.modifica = function(testo, posizione, azione){
         console.log(azione)
         $http({
@@ -113,6 +111,9 @@ lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
                         azione: azione }
             }).success(function (data){
                 if(data == 'true'){
+                    if((azione == 'salva') || (azione == 'elimina')){
+                        carica_testi();
+                    }
                     $scope.nuovo = false;
                     $scope.risultato = true;
                     $scope.messaggio = azione + ' eseguito con successo';
@@ -123,19 +124,26 @@ lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
             })
         
     };
-    $http.get('ricerca_testi.php').success(function (data){
-        $scope.indice_massimo = data.length-1;
-        $scope.testi = data;
-        console.log(data)
-        for(i = 0; i < $scope.testi.length; i++){
-            $scope.testi[i].testo = $scope.testi[i].testo.replace(/<br\s*\/?>/mg,"\n");
-        }
-        $scope.testo = $scope.testi[$scope.indice_corrente].testo; 
-        $scope.posizione = $scope.testi[$scope.indice_corrente].posizione; 
-        
-    }).error(function (data){
-        console.log(data)
-    })
+    carica_testi = function(){
+        $scope.indice_corrente = 0;
+        $scope.indice_massimo = 0;
+        $scope.testo = "";
+        $http.get('ricerca_testi.php').success(function (data){
+            $scope.indice_massimo = data.length-1;
+            $scope.testi = data;
+            console.log(data)
+            for(i = 0; i < $scope.testi.length; i++){
+                $scope.testi[i].testo = $scope.testi[i].testo.replace(/<br\s*\/?>/mg,"\n");
+            }
+            $scope.testo = $scope.testi[$scope.indice_corrente].testo; 
+            $scope.posizione = $scope.testi[$scope.indice_corrente].posizione; 
+            
+            }).error(function (data){
+                console.log(data)
+        })
+    };
+
+    carica_testi();
     $scope.cambia = function(direzione){
         $scope.nuovo = false;
         console.log($scope.indice_corrente);
