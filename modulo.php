@@ -213,8 +213,8 @@ mysql_close();
 		
 			  	<table class="table">
 			    <tr>
-			    	<td><input type="submit" value="Modifica" ng-click="salva(iscritto, 'modifica');" class="unstamp btn btn-warning" ng-show="iscritto.nome && !nuovoIscritto"/></td>
-			    	<td><input type="submit" value="Salva" ng-click="salva(iscritto, 'salva');" class="unstamp btn btn-success" ng-show="iscritto.nome && nuovoIscritto"/></td>
+			    	<td><input type="submit" value="Modifica" ng-click="salva(iscritto, 'modifica');" class="unstamp btn btn-warning" ng-show="iscritto.nome && iscritto.id"/></td>
+			    	<td><input type="submit" value="Salva" ng-click="salva(iscritto, 'salva');" class="unstamp btn btn-success" ng-show="iscritto.nome && nuovoIscritto && !iscritto.id"/></td>
 			   		<td><input type="button" value="Elimina" ng-click="elimina(iscritto);" class="unstamp btn btn-danger" ng-if="iscritto.nome"/></td>
 			    	<td><input type="reset" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></td><td><!--<input type="button" value="Modifica Moto Club" onclick="modificamotorclub();" />--></td><td><!--<input type="button" value="Salva Moto club" onclick="salvamotorclub();" class="unstamp" /> --></td>
 			    	<td><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></td>
