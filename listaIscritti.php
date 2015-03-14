@@ -3,7 +3,7 @@
 	$conn = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die ("connessione impossibile"/* . mysql_error()*/);
 	mysql_select_db(DB_NAME, $conn) or die ("no database"/* . mysql_error()*/);
 	
-		$query = "SELECT *, date_format(datanascita,'%d/%m/%Y') FROM iscritti";
+		$query = "SELECT * FROM iscritti";
 		$result=mysql_query($query, $conn) or die('Error, select query1 failed'/* . mysql_error()*/);
 		
 		// $query_tessere_lendinara = "SELECT * FROM lendinara";
@@ -15,29 +15,42 @@
 		while($array = mysql_fetch_array($result)) {
 			$id = $array['id'];
 			
-			$query_tessere_motorclub = "SELECT * FROM motorclub where id = '$id'";
-			$result_tessere_motorclub = mysql_query($query_tessere_motorclub, $conn) or die('Error, select query_tessere_motorclub failed' . mysql_error());
-			$array_motorclub=mysql_fetch_array($result_tessere_motorclub);
+			$query_tessere_lendinara = "SELECT * FROM lendinara where id = '$id'";
+			$result_tessere_lendinara = mysql_query($query_tessere_lendinara, $conn) or die('Error, select query_tessere_motorclub failed' . mysql_error());
+			$array_lendinara=mysql_fetch_array($result_tessere_lendinara);
 
-			$ris = $ris . '{ "nome": "'.$array['nominativo'].'",';
-			$ris = $ris . '"datanascita": "'.$array['datanascita'].'",';
-			$ris = $ris . '"luogonascita": "'.$array['luogonascita'].'",';
-			$ris = $ris . '"via": "'.$array['via'].'",';
-			$ris = $ris . '"cap": "'.$array['cap'].'",';
-			$ris = $ris . '"citta": "'.$array['citta'].'",';
-			$ris = $ris . '"email": "'.$array['email'].'",';
-			$ris = $ris . '"telefono": "'.$array['telefono'].'",';
-			$ris = $ris . '"varie": "'.$array['sangue'].'",';
-			// $ r is=$ r is.'"tessera_el": "'.$array_lendinara['tesserael'].'",';
-			// $ r is=$ r is.'"data_el": "'.$array_lendinara['datael'].'",';
-			// $ r is=$ r is.'"tessera_csen": "'.$array_lendinara['tesseracsen'].'",';
-			// $ r is=$ r is.'"data_csen": "'.$array_lendinara['datacsen'].'",';
-			$ris = $ris . '"tessera_fmi": "'.$array_motorclub['tessera'].'",';
+			$datanascita = date('d-m-Y', strtotime($array['datanascita']));
+			if($array_lendinara['datael'] == '0000-00-00'){
+				$array_lendinara['datael'] = '';
+			}
+			if($array_lendinara['datacsen'] == '0000-00-00'){
+				$array_lendinara['datacsen'] = '';
+			}
+			$data_el = date('d-m-Y', strtotime($array_lendinara['datael']));
+			$data_csen = date('d-m-Y', strtotime($array_lendinara['datacsen']));
+
+			$ris = $ris . '{ "nome": "'.trim ($array['nominativo'] ).'",';
+			$ris = $ris . '"datanascita": "'.trim ( $datanascita ).'",';
+			$ris = $ris . '"luogonascita": "'.trim ($array['luogonascita'] ).'",';
+			$ris = $ris . '"via": "'.trim ($array['via'] ).'",';
+			$ris = $ris . '"cap": "'.trim ($array['cap'] ).'",';
+			$ris = $ris . '"citta": "'.trim ($array['citta'] ).'",';
+			$ris = $ris . '"email": "'.trim ($array['email'] ).'",';
+			$ris = $ris . '"telefono": "'.trim ($array['telefono'] ).'",';
+			//$ris = $ris . '"varie": "'.trim ($array['sangue'] ).'",';
+			if($array_lendinara['tesserael'] != ''){
+				$ris= $ris.'"tessera": "'.$array_lendinara['tesserael'].'",';
+				$ris= $ris.'"data": "'. $data_el .'",';
+			}else{
+				$ris= $ris.'"tessera": "'.$array_lendinara['tesseracsen'].'",';
+				$ris= $ris.'"data": "'.$data_csen.'",';
+			}
+			/*$ris = $ris . '"tessera_fmi": "'.$array_motorclub['tessera'].'",';
 			$ris = $ris . '"data_fmi": "'.$array_motorclub['datatessera'].'",';
 			$ris = $ris . '"tessera_sport": "'.$array_motorclub['tesserasport'].'",';
 			$ris = $ris . '"data_sport": "'.$array_motorclub['datasport'].'",';
 			$ris = $ris . '"licenza": "'.$array_motorclub['licenza'].'",';
-			$ris = $ris . '"data_licenza": "'.$array_motorclub['datalicenza'].'",';
+			$ris = $ris . '"data_licenza": "'.$array_motorclub['datalicenza'].'",';*/
 			$ris = $ris . '"id": "'.$id.'"';
 			if($i==mysql_num_rows($result)-1){
 				$ris = $ris . '}';

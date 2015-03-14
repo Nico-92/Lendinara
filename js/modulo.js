@@ -1,4 +1,31 @@
 var lendinara = angular.module('lendinara', ['ngResource', 'ui.bootstrap']);
+lendinara.run(function($rootScope, $http) {
+  $rootScope.loadData = function(val){
+        var promessa = $http({
+            url: 'datiUtente.php',
+            method: 'GET',
+            params: { iscritto: val }
+            }).success(function (data){
+                // if(data == 'false'){
+                //     $scope.nuovoIscritto = true;
+                // }
+                // else{
+                //     $scope.nuovoIscritto = false;
+                //     $scope.id = data.id;
+                //     $scope.iscritto = data;
+                //     $scope.iscritto.cap = parseFloat($scope.iscritto.cap, 2);
+                //     //Verifico se il certificato è scaduto
+                //     var oggi = new Date();
+                //     var scadenza = new Date($scope.iscritto.scadenza);
+                //     if(scadenza.setHours(0,0,0,0) <= oggi.setHours(0,0,0,0)){
+                //         $scope.risultato=false;
+                //         $scope.messaggio = 'ATTENZIONE: Certificato medico scaduto';
+                //     }
+                // }
+            })
+            return promessa;
+    };
+});
 lendinara.controller('IscrizioneGaraCtrl', function ($scope, $http, $rootScope, $timeout) {
     $scope.classeStampa = 'hide';
     $scope.printable = 'unstamp';
@@ -79,7 +106,7 @@ lendinara.controller('IscrizioneGaraCtrl', function ($scope, $http, $rootScope, 
         return Math.round(difference_ms/one_day); 
     }
     $scope.checkTessera = function(iscritto){
-        $rootScope.iscritto = iscritto;
+        $rootScope.loadData(iscritto);
         document.getElementById('nominativo').value = iscritto;
         $http({
             url: 'datiUtente.php',
@@ -188,7 +215,7 @@ lendinara.controller('IscrizioneGaraCtrl', function ($scope, $http, $rootScope, 
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-lendinara.controller('IscrizioneLendinaraCtrl', function ($scope, $http, $timeout) {
+lendinara.controller('IscrizioneLendinaraCtrl', function ($scope, $http, $timeout, $rootScope) {
     $scope.stato = 'Mostra';
     $scope.classeStampa = 'hide';
     $scope.printable = 'unstamp';
@@ -217,28 +244,48 @@ lendinara.controller('IscrizioneLendinaraCtrl', function ($scope, $http, $timeou
         });
     };
     $scope.loadData = function(val){
-        $http({
-            url: 'datiUtente.php',
-            method: 'GET',
-            params: { iscritto: val }
-            }).success(function (data){
-                if(data == 'false'){
-                    $scope.nuovoIscritto = true;
-                }
-                else{
-                    $scope.nuovoIscritto = false;
-                    $scope.id = data.id;
-                    $scope.iscritto = data;
-                    $scope.iscritto.cap = parseFloat($scope.iscritto.cap, 2);
-                    //Verifico se il certificato è scaduto
-                    var oggi = new Date();
-                    var scadenza = new Date($scope.iscritto.scadenza);
-                    if(scadenza.setHours(0,0,0,0) <= oggi.setHours(0,0,0,0)){
-                        $scope.risultato=false;
-                        $scope.messaggio = 'ATTENZIONE: Certificato medico scaduto';
-                    }
-                }
-            })
+        $rootScope.loadData(val).then(function (res){
+            var data = res.data;
+            if(data == 'false'){
+                     $scope.nuovoIscritto = true;
+                 }
+                 else{
+                     $scope.nuovoIscritto = false;
+                     $scope.id = data.id;
+                     $scope.iscritto = data;
+                     $scope.iscritto.cap = parseFloat($scope.iscritto.cap, 2);
+                     //Verifico se il certificato è scaduto
+                     var oggi = new Date();
+                     var scadenza = new Date($scope.iscritto.scadenza);
+                     if(scadenza.setHours(0,0,0,0) <= oggi.setHours(0,0,0,0)){
+                         $scope.risultato=false;
+                         $scope.messaggio = 'ATTENZIONE: Certificato medico scaduto';
+                     }
+                 }
+        })
+        
+        // $http({
+        //     url: 'datiUtente.php',
+        //     method: 'GET',
+        //     params: { iscritto: val }
+        //     }).success(function (data){
+        //         if(data == 'false'){
+        //             $scope.nuovoIscritto = true;
+        //         }
+        //         else{
+        //             $scope.nuovoIscritto = false;
+        //             $scope.id = data.id;
+        //             $scope.iscritto = data;
+        //             $scope.iscritto.cap = parseFloat($scope.iscritto.cap, 2);
+        //             //Verifico se il certificato è scaduto
+        //             var oggi = new Date();
+        //             var scadenza = new Date($scope.iscritto.scadenza);
+        //             if(scadenza.setHours(0,0,0,0) <= oggi.setHours(0,0,0,0)){
+        //                 $scope.risultato=false;
+        //                 $scope.messaggio = 'ATTENZIONE: Certificato medico scaduto';
+        //             }
+        //         }
+        //     })
     };
     $scope.reset = function(val){
         $scope.iscritto = {};
@@ -284,6 +331,7 @@ lendinara.controller('IscrizioneLendinaraCtrl', function ($scope, $http, $timeou
 
 
     $scope.stampa = function(){
+        console.log('aaaaaaaaaaaaaaaaaa');
         if(!$scope.nuovoIscritto){
             $scope.salva($scope.iscritto, 'modifica');
         }
@@ -301,9 +349,10 @@ lendinara.controller('IscrizioneLendinaraCtrl', function ($scope, $http, $timeou
                 console.log('not match')
                 $scope.classeStampa = 'hide';
                 $scope.printable = 'unstamp';
+                $scope.reset(1);
                 //document.getElementById('testo2').className = 'hide';
             }
-            $scope.reset(1);
+            
         });
         
         
@@ -388,7 +437,7 @@ lendinara.controller('IscrizioneLendinaraCtrl', function ($scope, $http, $timeou
                         $scope.stampa();
                     }else{
                         $scope.messaggio = iscritto.nome +' è stato modificato con successo';
-                        $scope.reset(1);
+                        //$scope.reset(1);
                     }
                 }else{
                     console.log(data)

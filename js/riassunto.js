@@ -7,8 +7,8 @@ lendinara.controller('RiassuntoIscrittiCtrl', function ($scope, $http, $rootScop
                 {field:'nome', displayName:'Nome e cognome'},
                 {field:'datanascita', displayName:'Data nascita'},
                 {field:'luogonascita', displayName:'Luogo nascita'},
-                {field:'tessera_fmi', displayName:'Tessera CSEN n°'},
-                {field:'data_fmi', displayName:'Data di rilascio'},
+                {field:'tessera', displayName:'Tessera'},
+                {field:'data', displayName:'Data di rilascio'},
                 {field:'telefono', displayName:'Telefono'},
                 {field:'email', displayName:'Email'}
                 ] 
