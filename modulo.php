@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Modulo Iscrizione</title>
-<link rel="stylesheet" type="text/css" href="stile.css" />
+<link rel="stylesheet" type="text/css" href="css/stile.css" />
 <?php 
 require dirname(__FILE__) . '/' . 'dbconfig.php';
 $conn = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die ("connessione impossibile"/* . mysql_error()*/);
@@ -37,12 +37,15 @@ function PlaySound() {
 <script src="bootstrap/js/bootstrap-ui.js"></script>
 
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/modulo.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/iscrittiService.js"></script>
+<script type="text/javascript" src="js/moduloController.js"></script>
+
 <script type="text/javascript" src="script.js"></script>
 <script src="ajax/prototype.js" type="text/javascript"></script>
 <script src="ajax/effects.js" type="text/javascript"></script>
 <script src="ajax/controls.js" type="text/javascript"></script>
-<style type="text/css"> @import url("stilistampa.css") print;</style>
+<style type="text/css"> @import url("css/stilistampa.css") print;</style>
 </head>
 <body ng-app="lendinara">
 <div align="center">
@@ -78,11 +81,11 @@ function PlaySound() {
 				<td>
 				<form name="iscrizione">
 				<tabset justified="true" >
-			    	<tab heading="Dati Persona" select="active()">
+			    	<tab heading="Dati Persona" select="reset()">
 
 			    		<table class="table">
-							<tr><td>Nome</td><td><input tabindex="1" type="text" ng-model="iscritto.nome" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" ng-blur="checkTessera(iscritto.nome)" />
-								<p class="error" ng-show="tessera_non_valida">Attenzione, tessera non valida</p></td></tr>
+							<tr><td>Nome</td><td><input tabindex="1" type="text" ng-model="iscritto.nome" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" ng-blur="checkIscritto(iscritto.nome)" />
+								<p class="error" ng-show="errore1">{{errore1}}</p></td></tr>
 							<tr><td>Categoria</td><td><input tabindex="2" type="text" placeholder="Categoria" ng-model="iscritto.categoria" /></td></tr>
 							<tr><td>Moto</td><td><input tabindex="4" type="text" placeholder="Moto" ng-model="iscritto.moto" /></td></tr>
 							<tr><td>M.C.</td><td><input tabindex="5"type="text" placeholder="Moto club" ng-model="iscritto.motoclub" /></td></tr>
@@ -93,7 +96,7 @@ function PlaySound() {
 							</td></tr>
 						</table>
 			    	</tab>
-				    <tab heading="Dati Squadra" select="active()">
+				    <tab heading="Dati Squadra" select="reset()">
 
 				    	<table class="table">
 							<tr><td>Primo iscritto</td><td><input type="text" ng-model="iscritto.nome1" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" /></td></tr>

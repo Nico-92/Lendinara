@@ -26,7 +26,7 @@
 <script src="ajax/controls.js" type="text/javascript"></script>
 </head>
 <body ng-app="lendinara">
-<input type="button" class="btn btn-primary" value="Vai a Modulo" onclick="goto();"/>
+<a href="modulo.php"><input type="button" value="Vai a Modulo" class="btn btn-primary unstamp" /></a>
 <div align="center">
 <div id="corpo">
 	<h1>Pannello di controllo</h1>
