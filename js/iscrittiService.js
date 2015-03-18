@@ -36,6 +36,22 @@ angular.module('moduloServices')
 		            method: 'GET',
 		            params: { evento: evento }
 				})
+			},
+			getNumeri: function(evento){
+				return $http({
+		            url: 'ricerca_numeri.php',
+		            method: 'GET',
+		            params: { evento: evento }
+				})
+			},
+			getCategorie: function(evento, categoria){
+				return $http({
+		            url: 'ricerca_classi.php',
+		            method: 'GET',
+		            params: { 	evento: evento,
+		            			categoria: categoria
+		            		}
+				})
 			}
 		}
 }]);

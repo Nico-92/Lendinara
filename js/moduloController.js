@@ -22,31 +22,53 @@ angular.module('moduloControllers').run(function($rootScope, $http) {
         $rootScope.eventi = data;
     })
 });
-angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', '$http', '$rootScope', '$timeout', 'iscrittiService', 'eventiService', 'mySharedService',
- function ($scope, $http, $rootScope, $timeout, iscrittiService, eventiService, sharedService) {
+angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscrittiService', 'eventiService', 'mySharedService',
+ function ($scope, $http, $timeout, iscrittiService, eventiService, sharedService) {
     $scope.classeStampa = 'hide';
     $scope.printable = 'unstamp';
     $scope.vuoi_stampare = false;
     $scope.numeri_doppi = false;
+    
     $scope.getIscritti = function(val) {
-        return $http.get('listaNomi.php', {
-            params: { nome: val }
-        }).then(function(res){
-            var nomi = [];
+        var nomi = [];
+        return iscrittiService.query(val)
+            .then(function(res){
             angular.forEach(res.data.risultato, function(item){
                 nomi.push(item.nome);
             });
             return nomi;
         });
     };
+
+    $scope.getCategoria = function(val){
+        var categorie = [];
+        return eventiService.getCategorie($scope.selezionaEvento.nome, val)
+            .then(function(res){   
+                angular.forEach(res.data.risultato, function(item){
+                    categorie.push(item.categoria);
+                });
+                return categorie;
+            });
+    };
     
 	$scope.selezionato = function(){
+        var numeriDisponibili = [];
+        eventiService.getNumeri($scope.selezionaEvento)
+            .success(function(data){
+                for (var i = 0; i < data.risultato.length; i++) {
+                    if(i != data.risultato[i].numero){
+                        numeriDisponibili.push(i);
+                    }
+                };
+                console.log(numeriDisponibili)
+            });
         eventiService.get($scope.selezionaEvento)
             .success(function (data){
     			$scope.datievento = data;
     			$scope.datievento.costo = parseFloat($scope.datievento.costo, 2);
         })
     };
+
     $scope.checkNumero = function(){
         if($scope.selezionaEvento != undefined){
             if ($scope.grandeNumero != 0) {
@@ -65,6 +87,7 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
             }
         }
     };
+
     getTesto = function(posizione){
         $http({
             url: 'ricerca_testi.php',
@@ -77,6 +100,7 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
         	console.log(data);
         })
     };
+
     $scope.checkIscritto = function(iscritto){
         iscrittiService.get(iscritto)
             .success( function(data){
@@ -118,6 +142,7 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
             .error(function(data){
             });
     };
+
     $scope.iscrivi = function(iscritto){
         if( iscritto != undefined && ( iscritto.hasOwnProperty('nome') || iscritto.hasOwnProperty('nome1') ) && $scope.grandeNumero){
             iscritto.evento = $scope.selezionaEvento.nome;
@@ -184,23 +209,24 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
             $scope.risultato=false;
             $scope.messaggio = 'Nome e numero sono obbligatori';
         }
-    }
+    };
+
     $scope.reset = function(val){
-        $scope.iscritto = {};
         $scope.errore1 = false;
         $scope.grandeNumero = "";
         $scope.numero_in_uso = false;
         if(val==1){
             $timeout(function(){
+                $scope.iscritto = {};
                 $scope.messaggio = "";
                 $scope.risultato = undefined;
             }, 2500);
         }else{
             $scope.messaggio = "";
             $scope.risultato = undefined;
-        }
-        
+        }    
     };
+
 }]);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -417,7 +443,7 @@ angular.module('moduloControllers').controller('IscrizioneLendinaraCtrl', ['$sco
                 }
             })
     }
-    
+
     $scope.elimina = function(iscritto){
         if(confirm('Sicuro di voler eliminare '+ iscritto.nome +'? Tutti i dati andranno persi')) {
             iscrittiService.del($scope.id)
