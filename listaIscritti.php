@@ -20,14 +20,17 @@
 			$array_lendinara=mysql_fetch_array($result_tessere_lendinara);
 
 			$datanascita = date('d-m-Y', strtotime($array['datanascita']));
-			if($array_lendinara['datael'] == '0000-00-00'){
-				$array_lendinara['datael'] = '';
+			if($array_lendinara['datael'] == '0000-00-00' || !$array_lendinara['datael']){
+				$data_el = '';
+			}else{
+				$data_el = date('d-m-Y', strtotime($array_lendinara['datael']));
 			}
-			if($array_lendinara['datacsen'] == '0000-00-00'){
-				$array_lendinara['datacsen'] = '';
+			if($array_lendinara['datacsen'] == '0000-00-00' || !$array_lendinara['datacsen']){
+				$data_csen = '';
+			}else{
+				$data_csen = date('d-m-Y', strtotime($array_lendinara['datacsen']));
 			}
-			$data_el = date('d-m-Y', strtotime($array_lendinara['datael']));
-			$data_csen = date('d-m-Y', strtotime($array_lendinara['datacsen']));
+		
 
 			$ris = $ris . '{ "nome": "'.trim ($array['nominativo'] ).'",';
 			$ris = $ris . '"datanascita": "'.trim ( $datanascita ).'",';

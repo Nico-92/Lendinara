@@ -14,24 +14,25 @@
 	<script src="js/angular/ngAutocomplete.js"></script>
 	<!-- endbower -->
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="stile.css" />
+	<link rel="stylesheet" type="text/css" href="css/stile.css" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="bootstrap/js/bootstrap-ui.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>-->
 	<script type="text/javascript" src="http://angular-ui.github.com/ng-grid/lib/ng-grid.debug.js"></script>
 	<link rel="stylesheet" type="text/css" href="http://angular-ui.github.com/ng-grid/css/ng-grid.css" />
 
+	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/riassunto.js"></script>
-	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="js/iscrittiService.js"></script>
+	<script type="text/javascript" src="js/riassuntoController.js"></script>
 
 	<style type="text/css">
 		@import url("stilistampa.css") print;
 	</style>
 </head>
 
-<body ng-app="lendinara">
-	<input type="button" class="btn btn-primary unstamp" value="Vai a Modulo" onclick="goto();" />
+<body ng-app="tesserati">
+	<a href="modulo.php"><input type="button" value="Vai a Modulo" class="btn btn-primary unstamp" /></a>
 	<table cellpadding="5" cellspacing="5">
 		<tr>
 			<td><img src="csen.png" />
@@ -46,8 +47,13 @@
 		<br />
 		<div class = "filtri">
 			<h1><small>Filtri</small></h1>
-			<input type="checkbox" ng-model="only_csen" ng-change="filtra()"> Visualizza solo csen
+			<table>
+				<tr><td>Da</td><td><input type="date" class="input-medium" ng-model="filtro.inizio" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>
+				<tr><td>A</td><td><input type="date" class="input-medium" ng-model="filtro.fine" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>
+			</table>
+			 Visualizza solo tesserati <input type="checkbox" ng-model="filtro.tesserati" ng-change="filtra()">
 		</div>
+		Totale tesserati: {{iscritti.length}}
 		<div class="tabella" ng-grid="gridOptions">
 		</div>
 	</div>
