@@ -213,10 +213,10 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
 
     $scope.reset = function(val){
         $scope.errore1 = false;
-        $scope.grandeNumero = "";
         $scope.numero_in_uso = false;
         if(val==1){
             $timeout(function(){
+                $scope.grandeNumero = "";
                 $scope.iscritto = {};
                 $scope.messaggio = "";
                 $scope.risultato = undefined;

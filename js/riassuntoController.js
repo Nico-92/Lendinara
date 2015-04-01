@@ -13,11 +13,15 @@ angular.module('riassuntoControllers').controller('RiassuntoIscrittiCtrl', ['$sc
             if($scope.filtro.inizio){
                 var inizio = new Date($scope.filtro.inizio);
                 inizio = inizio.getTime();
+                console.log($scope.filtro.inizio + ' ' + inizio)
                 var datatessera;
+                var arrayData = [];
                 for(i = 0; i < $scope.iscritti.length; i++){
                     if($scope.iscritti[i].data){
-                        datatessera = new Date($scope.iscritti[i].data);
+                        arrayData = $scope.iscritti[i].data.split('-');
+                        datatessera = new Date(arrayData[2] + '-' + arrayData[1] + '-' + arrayData[0]);
                         datatessera = datatessera.getTime();
+                        console.log($scope.iscritti[i].nome + ' ' + $scope.iscritti[i].data + ' ' + datatessera)
                         if(datatessera >= inizio ){
                             tesserati.push($scope.iscritti[i]); 
                         }
@@ -33,9 +37,8 @@ angular.module('riassuntoControllers').controller('RiassuntoIscrittiCtrl', ['$sc
                 for(i = 0; i < $scope.iscritti.length; i++){
                     if($scope.iscritti[i].data){
                         arrayData = $scope.iscritti[i].data.split('-');
-                        datatessera = new Date();
-                        datatessera = datatessera.setFullYear(arrayData[2], arrayData[1]-1, arrayData[0]);
-                       // console.log(fine)
+                        datatessera = new Date(arrayData[2] + '-' + arrayData[1] + '-' + arrayData[0]);
+                        datatessera = datatessera.getTime();
                         if(datatessera <= fine ){
                             tesserati.push($scope.iscritti[i]); 
                         }
