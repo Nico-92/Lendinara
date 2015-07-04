@@ -28,7 +28,6 @@ $moto = mysql_escape_string($moto);
 $motoclub = mysql_escape_string($motoclub);
 $grandeNumero = mysql_escape_string($grandeNumero);
 
-
 $controllo = "select numero from r1 where numero='$grandeNumero' and nomeevento='$evento'";
 $result_controllo = mysql_query($controllo, $conn) or die('Error, check query failed ' . mysql_error());
 if( (mysql_num_rows($result_controllo) == 0) || ($grandeNumero == 0) ){

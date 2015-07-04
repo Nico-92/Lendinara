@@ -35,7 +35,7 @@
 	<a href="modulo.php"><input type="button" value="Vai a Modulo" class="btn btn-primary unstamp" /></a>
 	<table cellpadding="5" cellspacing="5">
 		<tr>
-			<td><img src="csen.png" />
+			<td><img src="images/csen.png" />
 			</td>
 			<td>CENTRO SPORTIVO EDUCATIVO NAZIONALE
 				<br /> ENTE DI PROMOZIONE SPORTIVA RICONOSCIUTO DAL C.O.N.I. (Art. 31 D.P.R. 2-8-1974 n. 530)

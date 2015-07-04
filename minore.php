@@ -1,6 +1,7 @@
 <?php
 $nominativo=$_GET['nominativo'];
 $datanascita=$_GET['datanascita'];
+$datanascita = date("d-m-Y", strtotime($datanascita));
 $luogonascita=$_GET['luogonascita'];
 $citta=$_GET['citta'];
 $via=$_GET['via'];
@@ -31,7 +32,7 @@ input{
 <a href="#" onclick="window.print();">Stampa pagina</a>
 <div align="center">
 <div id="content">
-<img src="csen.png"/><img src="enduro.jpg" />
+<img src="images/csen.png"/><img src="images/enduro.jpg" />
 <table cellpadding="5px" border="5" width="880">
 <tr>
 <td width="435">
@@ -57,7 +58,7 @@ Il dichiarante..................................................................
 Informativa ai sensi del D.lgs. 196/2003: i dati riportati sono prescritti dalle vigenti disposizioni ai fini del procedimento per il quale sono richiesti e utilizzati esclusivamente a tale scopo.
 </td>
 <td width="435">
-<h4>DICHIARAZIONE DI ASSENSO DEL PADRE<BR />ESERCENTE LA POTESTA' SU MINORE DI ANNI 18</h4>
+<h4>DICHIARAZIONE DI ASSENSO DEL MADRE<BR />ESERCENTE LA POTESTA' SU MINORE DI ANNI 18</h4>
 (ex L. 4-1-1968 n.15 e D.P.R 25-1-1994 n.130 - cosi come integrata e modificata dalla L. 15-5-1997 n.127 ex art. 46 T.U.D.P.R n.445 del 28-12-2000)<br /><br />
 La sottoscritta <input type="text" /><br />
 nata a <input type="text" /><br />

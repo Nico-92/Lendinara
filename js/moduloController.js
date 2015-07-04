@@ -159,7 +159,7 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
             if(!iscritto.hasOwnProperty('varie')){
                 iscritto.varie = '';
             }
-            if(!iscritto.hasOwnProperty('nome')){
+            if(iscritto.hasOwnProperty('nome1')){
                 iscritto.nome = iscritto.nome1;
             }
             if(!iscritto.hasOwnProperty('nome2')){
@@ -168,6 +168,7 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
             if(!iscritto.hasOwnProperty('nome3')){
                 iscritto.nome3 = '';
             }
+            console.log(iscritto)
             $http({
                 url: 'iscrivi_concorrente.php',
                 method: 'GET',

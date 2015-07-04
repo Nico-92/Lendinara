@@ -90,7 +90,8 @@ mysql_close();
 				    <tab heading="Dati Squadra" select="reset()">
 
 				    	<table class="table">
-							<tr><td>Primo iscritto</td><td><input type="text" ng-model="iscritto.nome1" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" /></td></tr>
+							<tr><td>Primo iscritto</td><td><input type="text" ng-model="iscritto.nome1" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" ng-blur="checkIscritto(iscritto.nome1)"/>
+								<p class="error unstamp" ng-show="errore1">{{errore1}}</p></td></tr>
 							<tr><td>Secondo iscritto</td><td><input type="text" ng-model="iscritto.nome2" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4"  /></td></tr>
 							<tr><td>Terzo iscritto</td><td><input type="text" ng-model="iscritto.nome3" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" /></td></tr>
 							<tr><td>Categoria</td><td><input type="text" placeholder="Categoria" ng-model="iscritto.categoria" /></td></tr>

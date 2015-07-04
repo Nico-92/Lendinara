@@ -61,6 +61,7 @@ lendinara.controller('stampaIscritti', function ($scope, $http, $location) {
                 $scope.numero_iscritti = data.length;
                 $scope.iscritti = data;
                 $scope.properties = Object.keys(data[0]);
+                console.log(data);
         }).error(function(data){
         	console.log(data);
         });
