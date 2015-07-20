@@ -18,8 +18,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="bootstrap/js/bootstrap-ui.js"></script>
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>-->
-	<script type="text/javascript" src="http://angular-ui.github.com/ng-grid/lib/ng-grid.debug.js"></script>
-	<link rel="stylesheet" type="text/css" href="http://angular-ui.github.com/ng-grid/css/ng-grid.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.debug.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ng-grid/2.0.11/ng-grid.min.css" />
 
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -45,7 +45,7 @@
 	</table>
 	<div ng-controller="RiassuntoIscrittiCtrl" style="height:100%">
 		<br />
-		<div class = "filtri">
+		<div class = "filtri unstamp">
 			<h1><small>Filtri</small></h1>
 			<table>
 				<tr><td>Da</td><td><input type="date" class="input-medium" ng-model="filtro.inizio" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>

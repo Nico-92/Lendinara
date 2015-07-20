@@ -18,6 +18,7 @@ $citta=$iscritto->{'citta'};
 $email=$iscritto->{'email'};
 $telefono=$iscritto->{'telefono'};
 $scadenza=$iscritto->{'scadenza'};
+$codicefiscale=$iscritto->{'codicefiscale'};
 $varie=$iscritto->{'varie'};
 $tessera_el=$iscritto->{'tessera_el'};
 $data_el=$iscritto->{'data_el'};
@@ -39,11 +40,12 @@ $citta=mysql_escape_string($citta);
 $email=mysql_escape_string($email);
 $telefono=mysql_escape_string($telefono);
 $scadenza=mysql_escape_string($scadenza);
+$codicefiscale=mysql_escape_string($codicefiscale);
 $varie=mysql_escape_string($varie);
 
 /* VERIFICO SE DEVO SALVARE O MODIFICARE*/
 if($funzione=="salva"){
-	$query="insert into iscritti (nominativo, datanascita, luogonascita, via, cap, citta, email, telefono, sangue, scadenza_visita) values ('$nome', '$datanascita', '$luogonascita', '$via', '$cap', '$citta', '$email', '$telefono', '$varie', '$scadenza')";
+	$query="insert into iscritti (nominativo, datanascita, luogonascita, via, cap, citta, email, telefono, sangue, scadenza_visita, codicefiscale) values ('$nome', '$datanascita', '$luogonascita', '$via', '$cap', '$citta', '$email', '$telefono', '$varie', '$scadenza', '$codicefiscale')";
 	$result=mysql_query($query, $conn) or die('Errore, iscrizione fallita: ' . mysql_error());
 
 
@@ -58,7 +60,7 @@ if($funzione=="salva"){
 }
 else{
 	$id=$iscritto->{'id'};
-	$query = "UPDATE iscritti SET nominativo='$nome', datanascita='$datanascita', luogonascita='$luogonascita', via='$via', cap='$cap', citta='$citta', email='$email', telefono='$telefono', sangue='$varie', scadenza_visita='$scadenza' WHERE id='$id'";
+	$query = "UPDATE iscritti SET nominativo='$nome', datanascita='$datanascita', luogonascita='$luogonascita', via='$via', cap='$cap', citta='$citta', email='$email', telefono='$telefono', sangue='$varie', scadenza_visita='$scadenza', codicefiscale = '$codicefiscale' WHERE id='$id'";
 	$result = mysql_query($query, $conn) or die('Errore, modifica fallita: ' . mysql_error());
 
 	$query_lendinara = "UPDATE lendinara SET tesserael = '$tessera_el', datael = '$data_el', tesseracsen = '$tessera_csen', datacsen = '$data_csen' WHERE id='$id'";

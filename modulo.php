@@ -175,17 +175,22 @@ mysql_close();
 				<tr>
 					<td>Nome</td><td><input type="text" id="nominativo" placeholder="Nome e Cognome" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
 					<td>Data nascita</td><td><input type="date" ng-model="iscritto.datanascita"/></td>
-					<td>Luogo nascita</td><td><input type="text" placeholder="Luogo di nascita" ng-model="iscritto.luogonascita" /></td>
+					<td>Luogo nascita</td><td><input type="text" placeholder="Luogo di nascita" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | filter:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
 				</tr>
 				<tr>
 					<td>Via</td><td><input type="text" placeholder="Via" ng-model="iscritto.via" /></td>
-					<td>CAP</td><td><input type="number" placeholder="CAP" min="10000" max="99999" ng-model="iscritto.cap" /></td>
-					<td>Città</td><td><input type="text" placeholder="Città" ng-model="iscritto.citta" /></td>
+					<td>Città</td><td><input type="text" placeholder="Città" ng-model="iscritto.citta" typeahead="city.comune for city in cities | filter:$viewValue | limitTo:4" ng-blur="findCap()"/></td>
+					<td>CAP</td><td><input type="text" placeholder="CAP" ng-model="iscritto.cap" readonly="readonly" /></td>
 				</tr>
 				<tr>
 					<td>Email</td><td><input type="email" placeholder="Email" ng-model="iscritto.email"/></td>
 					<td>Numero telefono</td><td><input type="text" placeholder="Numero telefono" ng-model="iscritto.telefono"/></td>
 					<td>Scadenza certificato</td><td><input type="date" placeholder="Scadenza certificato" ng-model="iscritto.scadenza"/></td>
+				</tr><tr>
+					<td>Codice FIscale</td><td> <input type="text" placeholder="Codice fiscale" ng-model="iscritto.codicefiscale"/></td>
+					<td><label style="display:inline" for="m">M</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="M">
+						<label style="display:inline" for="f">F</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="F"></td>
+					<td><button class="btn" ng-click="calcolaCodiceFiscale();">Ricalcola</button></td>
 				</tr><tr>
 					<td>Varie</td><td colspan="3" ><input type="text" placeholder="Varie" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
 				</tr>
@@ -198,7 +203,7 @@ mysql_close();
 						<td>Data </td><td width="130"><input type="date" name="datatesserael" ng-model="iscritto.data_el" /></td>
 					</tr><tr>
 						<td>Tessera Csen</td><td><input type="text" name="tesseracsen" ng-model="iscritto.tessera_csen" /></td>
-						<td>Data</td><td><input type="date" name="datatesseracsen" ng-model="iscritto.data_csen" /></td>
+						<td>Data</td><td><input type="date" name="datatesseracsen" ng-model="iscritto.data_csen"  /></td>
 					</tr>
 					<tr>
 						<td>Tessera FMI</td><td><input type="text" name="tesserafmi" ng-model="iscritto.tessera_fmi" /></td>
