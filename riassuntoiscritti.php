@@ -52,6 +52,8 @@
 				<tr><td>A</td><td><input type="date" class="input-medium" ng-model="filtro.fine" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>
 			</table>
 			 Visualizza solo tesserati <input type="checkbox" ng-model="filtro.tesserati" ng-change="filtra()">
+			 <br /><br />
+			 <button class="btn btn-default" ng-click="esporta();">ESPORTA IN EXCEL</button>
 		</div>
 		Totale tesserati: {{iscritti.length}}
 		<div class="tabella" ng-grid="gridOptions">
