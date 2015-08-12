@@ -124,7 +124,8 @@ angular.module('riassuntoControllers').controller('RiassuntoIscrittiCtrl', ['$sc
                 displayName: 'Nome e cognome'
             }, {
                 field: 'datanascita',
-                displayName: 'Data nascita'
+                displayName: 'Data nascita',
+                sortFn: dateSort
             }, {
                 field: 'luogonascita',
                 displayName: 'Luogo nascita'
@@ -133,7 +134,8 @@ angular.module('riassuntoControllers').controller('RiassuntoIscrittiCtrl', ['$sc
                 displayName: 'Tessera'
             }, {
                 field: 'data',
-                displayName: 'Data di rilascio'
+                displayName: 'Data di rilascio',
+                sortFn: dateSort
             }, {
                 field: 'telefono',
                 displayName: 'Telefono'
