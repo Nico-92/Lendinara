@@ -1,4 +1,23 @@
-function JSONToCSVConvertor(e,r,t){var a="object"!=typeof e?JSON.parse(e):e,n="";if(n+=r+"\r\n\n",t){var o="";for(var i in a[0])o+=i+";";o=o.slice(0,-1),n+=o+"\r\n"}for(var c=0;c<a.length;c++){var o="";for(var i in a[c])o+='"'+a[c][i]+'";';o.slice(0,o.length-1),n+=o+"\r\n"}if(""==n)return void alert("Invalid data");var d="Elenco iscritto ";d+=r.replace(/ /g,"_");var l="data:text/csv;charset=utf-8,"+escape(n),v=document.createElement("a");v.href=l,v.style="visibility:hidden",v.download=d+".csv",document.body.appendChild(v),v.click(),document.body.removeChild(v)}
+function JSONToCSVConvertor(e, r, t) {
+    var a = "object" != typeof e ? JSON.parse(e) : e,
+        n = "";
+    if (n += r + "\r\n\n", t) {
+        var o = "";
+        for (var i in a[0]) o += i + ";";
+        o = o.slice(0, -1), n += o + "\r\n"
+    }
+    for (var c = 0; c < a.length; c++) {
+        var o = "";
+        for (var i in a[c]) o += '"' + a[c][i] + '";';
+        o.slice(0, o.length - 1), n += o + "\r\n"
+    }
+    if ("" == n) return void alert("Invalid data");
+    var d = "Elenco iscritto ";
+    d += r.replace(/ /g, "_");
+    var l = "data:text/csv;charset=utf-8," + escape(n),
+        v = document.createElement("a");
+    v.href = l, v.style = "visibility:hidden", v.download = d + ".csv", document.body.appendChild(v), v.click(), document.body.removeChild(v)
+}
 
 angular.module('riassuntoControllers').controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'tesseratiService',
     function($scope, $http, $rootScope, tesseratiService) {
@@ -62,6 +81,20 @@ angular.module('riassuntoControllers').controller('RiassuntoIscrittiCtrl', ['$sc
                 $scope.iscritti = tesserati;
             } else {
                 $scope.tesserati();
+            }
+        }
+
+        function dateSort(dataUno, dataDue) {
+            var arrayUno = dataUno.split('-');
+            var arrayDue = dataDue.split('-');
+            dataUno = new Date(arrayUno[2], arrayUno[1]-1, arrayUno[0]);
+            dataDue = new Date(arrayDue[2], arrayDue[1]-1, arrayDue[0]);
+            if (dataUno < dataDue) {
+                return -1;
+            } else if (dataUno > dataDue) {
+                return 1;
+            } else {
+                return 0;
             }
         }
         $scope.gridOptions = {

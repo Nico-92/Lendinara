@@ -1,3 +1,5 @@
+function JSONToCSVConvertor(e,r,t){var a="object"!=typeof e?JSON.parse(e):e,n="";if(n+=r+"\r\n\n",t){var o="";for(var i in a[0])o+=i+";";o=o.slice(0,-1),n+=o+"\r\n"}for(var c=0;c<a.length;c++){var o="";for(var i in a[c])o+='"'+a[c][i]+'";';o.slice(0,o.length-1),n+=o+"\r\n"}if(""==n)return void alert("Invalid data");var d="Elenco iscritto ";d+=r.replace(/ /g,"_");var l="data:text/csv;charset=utf-8,"+escape(n),v=document.createElement("a");v.href=l,v.style="visibility:hidden",v.download=d+".csv",document.body.appendChild(v),v.click(),document.body.removeChild(v)}
+
 var lendinara = angular.module('lendinara', ['ngResource'], function($locationProvider) {
       $locationProvider.html5Mode(true);
     });
@@ -67,10 +69,7 @@ lendinara.controller('stampaIscritti', function ($scope, $http, $location) {
         });
     $scope.formato = 'csv';
     $scope.esporta = function(){
-        if($scope.formato == 'csv')
-            $scope.formato = 'lettura';
-        else
-            $scope.formato = 'csv';
+        JSONToCSVConvertor($scope.iscritti, "Iscritti gara ", true);
     };
     $scope.stampa = function(){
         window.print();

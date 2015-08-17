@@ -590,6 +590,7 @@ angular.module('moduloControllers').controller('IscrizioneLendinaraCtrl', ['$sco
             iscritto.luogonascita = iscritto.luogonascita.toUpperCase();
             iscritto.citta = iscritto.citta.toUpperCase();
             iscritto.varie = iscritto.varie.toUpperCase();
+            iscritto.codicefiscale = iscritto.codicefiscale.toUpperCase();
             controlloMinorenni(iscritto);
             $http({
                     url: 'iscrivi.php',
