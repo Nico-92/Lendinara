@@ -233,6 +233,8 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
         });
     };
 
+    $scope.numeriDisponibili
+
     $scope.getCategoria = function(val) {
       var categorie = [];
       return eventiService.getCategorie($scope.selezionaEvento.nome, val)
@@ -244,17 +246,27 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
         });
     };
 
-    $scope.selezionato = function() {
-      var numeriDisponibili = [];
+    function getNumeriDisponibili() {
+      var numeriOccupati = [];
+      $scope.numeriDisponibili = [];
       eventiService.getNumeri($scope.selezionaEvento)
         .success(function(data) {
+          console.log(data)
           for (var i = 0; i < data.risultato.length; i++) {
-            if (i != data.risultato[i].numero) {
-              numeriDisponibili.push(i);
-            }
+            numeriOccupati.push(data.risultato[i].numero);
           };
-          console.log(numeriDisponibili)
+          var i = 2;
+          for (var i = 1; i <= 200; i++) {
+            if (numeriOccupati.indexOf(i.toString()) === -1) {
+              $scope.numeriDisponibili.push(i);
+            }
+          }
+
         });
+    }
+
+    $scope.selezionato = function() {
+      getNumeriDisponibili();
       eventiService.get($scope.selezionaEvento)
         .success(function(data) {
           $scope.datievento = data;
@@ -374,6 +386,7 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
           }
         }).success(function(data) {
           if (data == 'true') {
+            getNumeriDisponibili();
             $scope.risultato = true;
             $scope.messaggio = 'Concorrente iscritto con successo';
             if ($scope.vuoi_stampare === true) {
@@ -412,10 +425,12 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
 
     $scope.reset = function(val) {
       $scope.errore1 = false;
+      $scope.numeriDisponibili = "";
       $scope.numero_in_uso = false;
+      $scope.grandeNumero = "";
+      getNumeriDisponibili();
       if (val == 1) {
         $timeout(function() {
-          $scope.grandeNumero = "";
           $scope.iscritto = {};
           $scope.messaggio = "";
           $scope.risultato = undefined;

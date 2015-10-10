@@ -101,7 +101,7 @@ mysql_close();
 							<tr><td>Varie</td><td><input type="text" placeholder="Varie" ng-model="iscritto.varie" /></td></tr>
 							<tr><td colspan="2"><input type="submit" class="btn btn-success unstamp" ng-if="selezionaEvento" ng-click="iscrivi(iscritto)" value="Iscrivi a {{selezionaEvento.nome}}" />
 									<button class="btn btn-danger unstamp" ng-if="!selezionaEvento"  disabled >Seleziona evento</button>
-									<input type="reset" value="Pulisci form" class="unstamp" ng-click="reset()"/>
+									<input type="reset" value="Pulisci form" class="unstamp" ng-click="reset(1)"/>
 							</td></tr>
 						</table>
 				    </tab>
@@ -113,6 +113,10 @@ mysql_close();
 		        	<tr><th style="font-size:20px;"> Numero</th></tr>
 		        	<tr><td><input tabindex="3" type="text" id="grandeNumero" ng-model="grandeNumero" class="input-small unstamp" ng-change="checkNumero();" required />
 		        		<p class="alert alert-danger alert-dismissable" ng-if="numero_in_uso==true">Attenzione, numero già in uso</p></td></tr>
+		        	<tr><td>
+		        		<select ng-model="numeriDisponibili" ng-click="grandeNumero = numeriDisponibili">
+      						<option ng-repeat="numero in numeriDisponibili" value="{{numero}}">{{numero}}</option>
+      				</td></tr>
 		        	<tr><td>&nbsp</td></tr>
 		        	<tr><td>&nbsp</td></tr>
 		        	<tr><td>&nbsp</td></tr>
