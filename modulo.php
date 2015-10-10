@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="UTF-8">
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">/>
 <title>Modulo Iscrizione</title>
 <link rel="stylesheet" type="text/css" href="css/stile.css" />
 <?php 
@@ -175,7 +176,7 @@ mysql_close();
 				<tr>
 					<td>Nome</td><td><input type="text" id="nominativo" placeholder="Nome e Cognome" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
 					<td>Data nascita</td><td><input type="date" ng-model="iscritto.datanascita"/></td>
-					<td>Luogo nascita</td><td><input type="text" placeholder="Luogo di nascita" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | filter:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
+					<td>Luogo nascita</td><td><input type="text" placeholder="Luogo di nascita" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
 				</tr>
 				<tr>
 					<td>Via</td><td><input type="text" placeholder="Via" ng-model="iscritto.via" /></td>

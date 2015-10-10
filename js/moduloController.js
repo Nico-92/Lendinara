@@ -154,6 +154,8 @@ angular.module('moduloControllers').run(function($rootScope, $http) {
         $rootScope.eventi = data;
     })
 });
+
+
 angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscrittiService', 'eventiService', 'mySharedService',
     function($scope, $http, $timeout, iscrittiService, eventiService, sharedService) {
         $scope.classeStampa = 'hide';
