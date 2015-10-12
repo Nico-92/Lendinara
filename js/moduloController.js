@@ -233,8 +233,6 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
         });
     };
 
-    $scope.numeriDisponibili
-
     $scope.getCategoria = function(val) {
       var categorie = [];
       return eventiService.getCategorie($scope.selezionaEvento.nome, val)
@@ -249,20 +247,22 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
     function getNumeriDisponibili() {
       var numeriOccupati = [];
       $scope.numeriDisponibili = [];
-      eventiService.getNumeri($scope.selezionaEvento)
-        .success(function(data) {
-          console.log(data)
-          for (var i = 0; i < data.risultato.length; i++) {
-            numeriOccupati.push(data.risultato[i].numero);
-          };
-          var i = 2;
-          for (var i = 1; i <= 200; i++) {
-            if (numeriOccupati.indexOf(i.toString()) === -1) {
-              $scope.numeriDisponibili.push(i);
+      if ($scope.selezionaEvento !== undefined) {
+        eventiService.getNumeri($scope.selezionaEvento)
+          .success(function(data) {
+            for (var i = 0; i < data.risultato.length; i++) {
+              numeriOccupati.push(data.risultato[i].numero);
+            };
+            var i = 2;
+            for (var i = 1; i <= 200; i++) {
+              if (numeriOccupati.indexOf(i.toString()) === -1) {
+                $scope.numeriDisponibili.push(i);
+              }
             }
-          }
 
-        });
+          });
+      }
+
     }
 
     $scope.selezionato = function() {
