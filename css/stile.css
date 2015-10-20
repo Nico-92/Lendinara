@@ -120,4 +120,15 @@ div.campo{
       cursor:pointer;
       border-bottom:1px solid #888;
     }/* CSS Document */
-
+.tessera{
+	/*width: 4.7cm !important;*/
+	font-size: 10px;
+	padding-top: 5px;
+	padding-left: 20px;
+}
+.tessera p{
+	margin: 5px;
+}
+.tessera .nome{
+		margin-bottom: 2px !important;
+}

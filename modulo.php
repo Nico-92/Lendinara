@@ -232,6 +232,9 @@ mysql_close();
 			    	<td><input type="reset" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></td><td><!--<input type="button" value="Modifica Moto Club" onclick="modificamotorclub();" />--></td><td><!--<input type="button" value="Salva Moto club" onclick="salvamotorclub();" class="unstamp" /> --></td>
 			    	<td><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></td>
 			    	<td><button class="unstamp btn btn-info" ng-click="stampa();" >Stampa</button></td>
+			    	<td><a ng-href="tessera.php?nome={{iscritto.nome}}&nascita={{iscritto.datanascita}}">
+			    			<button class="unstamp btn btn-info" >Stampa tessera</button>
+			    		</a></td>
 			    </tr>
 			
 			<br />
