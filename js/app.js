@@ -1,6 +1,6 @@
 "use strict"
 
-angular.module('moduloServices', ['ngResource']);
+angular.module('moduloServices', []);
 angular.module('moduloControllers', ['ngResource', 'ui.bootstrap', 'moduloServices']);
 angular.module('riassuntoControllers', ['ngResource', 'ui.bootstrap', 'ngGrid', 'moduloServices']);
 var lendinara = angular.module('lendinara', ['moduloControllers']);

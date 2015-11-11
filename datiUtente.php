@@ -36,6 +36,7 @@
 			$ris = $ris.'"scadenza": "'.$array['scadenza_visita'].'",';
 			$ris = $ris.'"codicefiscale": "'.$array['codicefiscale'].'",';
 			$ris = $ris.'"varie": "'.$array['sangue'].'",';
+			$ris = $ris.'"barcode": "'.$array['barcode'].'",';
 			$ris = $ris.'"tessera_el": "'.$array_lendinara['tesserael'].'",';
 			$ris = $ris.'"data_el": "'.$array_lendinara['datael'].'",';
 			$ris = $ris.'"tessera_csen": "'.$array_lendinara['tesseracsen'].'",';

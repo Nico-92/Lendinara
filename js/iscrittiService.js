@@ -1,88 +1,117 @@
 angular.module('moduloServices')
-.factory('iscrittiService', ['$http',
-	function($http){
-		return {
-			get: function(name){
-				return 	$http({
-			            url: 'datiUtente.php',
-			            method: 'GET',
-			            params: { iscritto: name }
-			        })
-			},
-			query: function(val){
-				return 	$http({
+	.factory('iscrittiService', ['$http',
+		function($http) {
+			return {
+				get: function(name) {
+					return $http({
+						url: 'datiUtente.php',
+						method: 'GET',
+						params: {
+							iscritto: name
+						}
+					})
+				},
+				query: function(val) {
+					return $http({
 						url: 'listaNomi.php',
-			            method: 'GET',
-			            params: { nome: val }
-		      		})
-			},
-			del: function(id){
-				return $http({
-			            url: 'elimina_definitivamente.php',
-			            method: 'GET',
-			            params: { id: id }
-						})
+						method: 'GET',
+						params: {
+							nome: val
+						}
+					})
+				},
+				del: function(id) {
+					return $http({
+						url: 'elimina_definitivamente.php',
+						method: 'GET',
+						params: {
+							id: id
+						}
+					})
+				},
+				updateField: function(table, field, value, whereField, whereValue) {
+					return $http({
+						url: 'update_field.php',
+						method: 'GET',
+						params: {
+							data: {
+								table: table,
+								field: field,
+								value: value,
+								whereField: whereField,
+								whereValue: whereValue
+							}
+						}
+					})
+				}
 			}
 		}
-}]);
+	]);
 
 angular.module('moduloServices')
-.factory('eventiService', ['$http',
-	function($http){
-		return {
-			get: function(evento){
-				return $http({
-		            url: 'ricerca_eventi.php',
-		            method: 'GET',
-		            params: { evento: evento }
-				})
-			},
-			getNumeri: function(evento){
-				return $http({
-		            url: 'ricerca_numeri.php',
-		            method: 'GET',
-		            params: { evento: evento }
-				})
-			},
-			getCategorie: function(evento, categoria){
-				return $http({
-		            url: 'ricerca_classi.php',
-		            method: 'GET',
-		            params: { 	evento: evento,
-		            			categoria: categoria
-		            		}
-				})
+	.factory('eventiService', ['$http',
+		function($http) {
+			return {
+				get: function(evento) {
+					return $http({
+						url: 'ricerca_eventi.php',
+						method: 'GET',
+						params: {
+							evento: evento
+						}
+					})
+				},
+				getNumeri: function(evento) {
+					return $http({
+						url: 'ricerca_numeri.php',
+						method: 'GET',
+						params: {
+							evento: evento
+						}
+					})
+				},
+				getCategorie: function(evento, categoria) {
+					return $http({
+						url: 'ricerca_classi.php',
+						method: 'GET',
+						params: {
+							evento: evento,
+							categoria: categoria
+						}
+					})
+				}
 			}
 		}
-}]);
+	]);
 
 angular.module('moduloServices')
-.factory('mySharedService', function($rootScope) {
-    var sharedService = {};
-    
-    sharedService.iscritto = '';
+	.factory('mySharedService', function($rootScope) {
+		var sharedService = {};
 
-    sharedService.prepareBroadcast = function(msg) {
-        this.iscritto = msg;
-        this.broadcastItem();
-    };
+		sharedService.iscritto = '';
 
-    sharedService.broadcastItem = function() {
-        $rootScope.$broadcast('handleBroadcast');
-    };
+		sharedService.prepareBroadcast = function(msg) {
+			this.iscritto = msg;
+			this.broadcastItem();
+		};
 
-    return sharedService;
-});
+		sharedService.broadcastItem = function() {
+			$rootScope.$broadcast('handleBroadcast');
+		};
+
+		return sharedService;
+	});
 
 angular.module('moduloServices')
-.factory('tesseratiService', ['$http',
-	function($http){
-		return {
-			query: function(){
-				return $http({
-					url: 'listaIscritti.php',
-					method: 'GET',
-				})
+	.factory('tesseratiService', ['$http',
+		function($http) {
+			return {
+				query: function() {
+					return $http({
+						url: 'listaIscritti.php',
+						method: 'GET',
+					})
+				}
 			}
 		}
-}]);
+	]);

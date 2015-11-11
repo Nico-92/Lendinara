@@ -515,6 +515,7 @@ angular.module('moduloControllers').controller('IscrizioneLendinaraCtrl', ['$sco
     $scope.loadData = function(val) {
       iscrittiService.get(val).then(function(res) {
         var data = res.data;
+         console.log(data)
         if (data == 'false') {
           $scope.nuovoIscritto = true;
         } else {
