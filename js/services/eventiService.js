@@ -3,7 +3,25 @@ moduloServices.factory('eventiService', ['$http',
 		return {
 			post: function(evento) {
 				return $http({
-					url: 'crea_evento.php',
+					url: 'backend/eventi/crea_evento.php',
+					method: 'GET',
+					params: {
+						evento: evento
+					}
+				});
+			},
+			put: function(evento) {
+				return $http({
+					url: 'backend/eventi/modifica_evento.php',
+					method: 'GET',
+					params: {
+						evento: evento
+					}
+				});
+			},
+			delete: function(evento) {
+				return $http({
+					url: 'backend/eventi/elimina_evento.php',
 					method: 'GET',
 					params: {
 						evento: evento
@@ -12,7 +30,7 @@ moduloServices.factory('eventiService', ['$http',
 			},
 			get: function(evento) {
 				return $http({
-					url: 'ricerca_eventi.php',
+					url: 'backend/eventi/ricerca_eventi.php',
 					method: 'GET',
 					params: {
 						evento: evento
@@ -28,7 +46,7 @@ moduloServices.factory('eventiService', ['$http',
 					}
 				});
 			},
-			getCategorie: function(evento, categoria) {
+			getClassi: function(evento, categoria) {
 				return $http({
 					url: 'ricerca_classi.php',
 					method: 'GET',

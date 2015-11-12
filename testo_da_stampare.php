@@ -51,6 +51,5 @@ if((isset($_GET['testo']))&&(isset($_GET['posizione']))&&(isset($_GET['azione'])
 }else{
 	echo "Dati mancanti";
 }
-
-
+mysql_close();
 ?>

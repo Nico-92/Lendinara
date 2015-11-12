@@ -1,4 +1,4 @@
-lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
+lendinara.controller('GestioneTestoCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.nuovo = false;
     $http.get('ricerca_biglietti.php').success(function (data){
         $scope.bigliettodx = data.bigliettodx;
@@ -103,4 +103,4 @@ lendinara.controller('GestioneTestoCtrl', function ($scope, $http) {
             }
         });
     };
-});
+}]);

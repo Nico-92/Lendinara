@@ -1,4 +1,4 @@
-lendinara.controller('CreaEventoCtrl',  ['$scope', function ($scope) {
+lendinara.controller('CreaEventoCtrl',  ['$scope', 'eventiService', function ($scope, eventiService) {
     $scope.crea = function(evento){
         $scope.risultato=null;
         if(!evento.hasOwnProperty('altro')){
@@ -12,11 +12,7 @@ lendinara.controller('CreaEventoCtrl',  ['$scope', function ($scope) {
         }
         if($scope.creaevento.$valid){
             /* EVENTUALI CONTROLLI */
-            $http({
-                url: 'crea_evento.php',
-                method: 'GET',
-                params: { evento: evento }
-            }).success(function (data){
+            eventiService.post(evento).success(function (data){
                 if(data == 'true'){
                     $scope.risultato = true;
                     $scope.messaggio = 'Evento inserito con successo';

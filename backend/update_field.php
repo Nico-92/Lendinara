@@ -20,5 +20,4 @@ $query = "UPDATE $table SET $field='$value' WHERE $whereField='$whereValue'";
 $result = mysql_query($query, $conn) or die('Errore, modifica fallita: ' . mysql_error());
 echo $result;
 mysql_close();
-
 ?>
