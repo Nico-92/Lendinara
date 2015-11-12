@@ -3,7 +3,7 @@ moduloServices.factory('iscrittiService', ['$http',
 		return {
 			get: function(name) {
 				return $http({
-					url: 'datiUtente.php',
+					url: 'backend/iscritti/ricerca_iscritti.php',
 					method: 'GET',
 					params: {
 						iscritto: name
@@ -12,7 +12,7 @@ moduloServices.factory('iscrittiService', ['$http',
 			},
 			query: function(val) {
 				return $http({
-					url: 'listaNomi.php',
+					url: 'backend/iscritti/lista_nomi.php',
 					method: 'GET',
 					params: {
 						nome: val
@@ -21,7 +21,7 @@ moduloServices.factory('iscrittiService', ['$http',
 			},
 			del: function(id) {
 				return $http({
-					url: 'elimina_definitivamente.php',
+					url: 'backend/iscritti/elimina_iscritto.php',
 					method: 'GET',
 					params: {
 						id: id
@@ -72,8 +72,8 @@ angular.module('moduloServices')
 					return $http({
 						url: 'listaIscritti.php',
 						method: 'GET',
-					})
+					});
 				}
-			}
+			};
 		}
 	]);

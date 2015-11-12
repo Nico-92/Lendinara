@@ -25,6 +25,7 @@ mysql_close();
 <script type="text/javascript" src="js/services/iscrittiService.js"></script>
 <script type="text/javascript" src="js/services/eventiService.js"></script>
 <script type="text/javascript" src="js/moduloController.js"></script>
+<script type="text/javascript" src="js/iscrizioneGaraController.js"></script>
 
 <script type="text/javascript" src="script.js"></script>
 <script type="text/javascript" src="ajax/prototype.js" ></script>
