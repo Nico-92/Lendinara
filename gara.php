@@ -5,7 +5,7 @@
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
 <title>Pannello di controllo</title>
 
-<link rel="stylesheet" type="text/css" href="stile.css" />
+<link rel="stylesheet" type="text/css" href="css/stile.css" />
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
 
 

@@ -27,7 +27,7 @@
 	<script type="text/javascript" src="js/riassuntoController.js"></script>
 
 	<style type="text/css">
-		@import url("stilistampa.css") print;
+		@import url("css/stilistampa.css") print;
 	</style>
 </head>
 

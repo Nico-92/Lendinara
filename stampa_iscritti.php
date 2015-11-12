@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Riassunto iscritti evento</title>
-<link rel="stylesheet" type="text/css" href="stile.css" />
+<link rel="stylesheet" type="text/css" href="css/stile.css" />
 
 
 <!-- bower:js -->
@@ -25,7 +25,7 @@
 <script src="ajax/prototype.js" type="text/javascript"></script>
 <script src="ajax/effects.js" type="text/javascript"></script>
 <script src="ajax/controls.js" type="text/javascript"></script>
-<style type="text/css"> @import url("stilistampa.css") print;</style>
+<style type="text/css"> @import url("css/stilistampa.css") print;</style>
 
 </head>
 <body ng-app="lendinara" >

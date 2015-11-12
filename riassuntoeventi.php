@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Riassunto eventi</title>
-<link rel="stylesheet" type="text/css" href="stile.css" />
+<link rel="stylesheet" type="text/css" href="css/stile.css" />
 <script type="text/javascript" src="script.js"></script>
 <?php 
 require dirname(__FILE__) . '/' . 'dbconfig.php';

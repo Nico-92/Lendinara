@@ -17,7 +17,7 @@ location.href = "modulo.php";
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Assenso minori</title>
 <style>
-@import url("stilistampa.css") print;
+@import url("css/stilistampa.css") print;
 #content{
 	width:900px;
 	height:1000px;
