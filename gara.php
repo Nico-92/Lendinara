@@ -14,6 +14,7 @@
 <script src="bootstrap/js/bootstrap-ui.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/services/eventiService.js"></script>
+<script type="text/javascript" src="js/services/testiService.js"></script>
 <script type="text/javascript" src="js/GestioneEventoController.js"></script>
 <script type="text/javascript" src="js/CreaEventoController.js"></script>
 <script type="text/javascript" src="js/GestioneTestoController.js"></script>

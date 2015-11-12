@@ -256,7 +256,7 @@ lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscr
         };
         getTesto = function(posizione) {
             $http({
-                url: 'ricerca_testi.php',
+                url: 'backend/testi/ricerca_testi.php',
                 method: 'GET',
                 params: {
                     tipo: posizione
@@ -506,7 +506,7 @@ lendinara.controller('IscrizioneLendinaraCtrl', ['$scope', '$http', '$timeout', 
         };
         getTesto2 = function(posizione) {
             $http({
-                url: 'ricerca_testi.php',
+                url: 'backend/testi/ricerca_testi.php',
                 method: 'GET',
                 params: {
                     tipo: posizione
