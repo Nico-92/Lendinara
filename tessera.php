@@ -2,21 +2,15 @@
 <html>
 	<head>
 		<title>Tessera</title>
-		<!-- bower:js -->
-		<script src="js/jquery.js"></script>
-		<script src="js/angular/angular.js"></script>
-		<script src="js/angular/angular-cookie.min.js"></script>
-		<script type="text/javascript" src="js/moment.js"></script>
-		<!-- endbower -->
+		<script src="js/vendor.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap3.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/stile.css" />
 		<link rel="stylesheet" href="css/barcode.css" type="text/css"/>
 		<style type="text/css"> @import url("css/stilistampa.css") print;</style>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
-		<script type="text/javascript" src="js/iscrittiService.js"></script>
+		<script type="text/javascript" src="js/services/iscrittiService.js"></script>
 		<script type="text/javascript" src="js/tesseraController.js"></script>
-    	<script type="text/javascript" src="js/barcodeGenerator.js"></script>
 	</head>
 	<body ng-app="tessera">
 		<div ng-controller="tesseraController">

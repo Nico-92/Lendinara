@@ -207,7 +207,7 @@ function PlaySound() {
 /**
     Execute the operation before load controller
 */
-angular.module('moduloControllers').run(function($rootScope, $http) {
+lendinara.run(function($rootScope, $http) {
   // Carica tendina eventi e relativi dati
   $http.get('ricerca_eventi.php').success(function(data) {
     $rootScope.eventi = data;
@@ -215,7 +215,7 @@ angular.module('moduloControllers').run(function($rootScope, $http) {
 });
 
 
-angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscrittiService', 'eventiService', 'mySharedService',
+lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscrittiService', 'eventiService', 'mySharedService',
   function($scope, $http, $timeout, iscrittiService, eventiService, sharedService) {
     $scope.classeStampa = 'hide';
     $scope.printable = 'unstamp';
@@ -445,7 +445,7 @@ angular.module('moduloControllers').controller('IscrizioneGaraCtrl', ['$scope', 
 ]);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-angular.module('moduloControllers').controller('IscrizioneLendinaraCtrl', ['$scope', '$http', '$timeout', '$rootScope', 'iscrittiService', 'mySharedService',
+lendinara.controller('IscrizioneLendinaraCtrl', ['$scope', '$http', '$timeout', '$rootScope', 'iscrittiService', 'mySharedService',
   function($scope, $http, $timeout, $rootScope, iscrittiService, sharedService) {
     $http.get('files/city.json')
       .then(function(res) {

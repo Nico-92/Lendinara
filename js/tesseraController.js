@@ -1,5 +1,3 @@
-var tessera = angular.module('tessera', ['barcodeGenerator', 'moduloServices', 'ipCookie']);
-
 tessera.config(['$locationProvider', function($locationProvider) {
 	$locationProvider.html5Mode(true);
 }])

@@ -9,18 +9,14 @@
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
 
 
- <!-- bower:js -->
-    <script src="js/jquery.js"></script>
-    <script src="js/angular/angular.js"></script>
-    <script src="js/angular/angular-resource.js"></script>
-    <script src="js/angular/angular-cookies.js"></script>
-    <script src="js/angular/angular-sanitize.js"></script>
-    <script src="js/angular/angular-route.js"></script>
-<!-- endbower -->
-
-
+<script src="js/vendor.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<script src="bootstrap/js/bootstrap-ui.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/gara.js"></script>
+<script type="text/javascript" src="js/services/eventiService.js"></script>
+<script type="text/javascript" src="js/GestioneEventoController.js"></script>
+<script type="text/javascript" src="js/CreaEventoController.js"></script>
+<script type="text/javascript" src="js/GestioneTestoController.js"></script>
 <script type="text/javascript" src="script.js"></script>
 <script src="ajax/prototype.js" type="text/javascript"></script>
 <script src="ajax/effects.js" type="text/javascript"></script>

@@ -15,28 +15,21 @@ $control=mysql_fetch_array($result);
 mysql_close();
 ?>
 
+<script src="js/vendor.min.js"></script>
 
- <!-- bower:js -->
-    <script src="js/jquery.js"></script>
-    <script src="js/angular/angular.js"></script>
-    <script src="js/angular/angular-resource.js"></script>
-    <script src="js/angular/angular-cookies.js"></script>
-    <script src="js/angular/angular-sanitize.js"></script>
-    <script src="js/angular/angular-route.js"></script>
-    <script src="js/angular/matchmedia-ng.js"></script>
-<!-- endbower -->
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
 <script src="bootstrap/js/bootstrap-ui.js"></script>
 
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/iscrittiService.js"></script>
+<script type="text/javascript" src="js/services/iscrittiService.js"></script>
+<script type="text/javascript" src="js/services/eventiService.js"></script>
 <script type="text/javascript" src="js/moduloController.js"></script>
 
 <script type="text/javascript" src="script.js"></script>
-<script src="ajax/prototype.js" type="text/javascript"></script>
-<script src="ajax/effects.js" type="text/javascript"></script>
-<script src="ajax/controls.js" type="text/javascript"></script>
+<script type="text/javascript" src="ajax/prototype.js" ></script>
+<script type="text/javascript" src="ajax/effects.js" ></script>
+<script type="text/javascript" src="ajax/controls.js" ></script>
 <style type="text/css"> @import url("css/stilistampa.css") print;</style>
 </head>
 <body ng-app="lendinara">

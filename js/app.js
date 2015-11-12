@@ -1,10 +1,6 @@
-"use strict"
-
-angular.module('moduloServices', []);
-angular.module('moduloControllers', ['ngResource', 'ui.bootstrap', 'moduloServices']);
-angular.module('riassuntoControllers', ['ngResource', 'ui.bootstrap', 'ngGrid', 'moduloServices']);
-var lendinara = angular.module('lendinara', ['moduloControllers']);
-angular.module('tesserati', ['riassuntoControllers']);
+var moduloServices = angular.module('moduloServices', []);
+var lendinara = angular.module('lendinara', ['ngResource', 'ui.bootstrap', 'ngGrid', 'moduloServices']);
+var tessera = angular.module('tessera', ['barcodeGenerator', 'moduloServices', 'ipCookie']);
 
 lendinara.filter('startsWith', function() {
 	return function(array, search) {
