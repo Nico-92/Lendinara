@@ -1,8 +1,8 @@
 <?php
 /*CONNESSIONE AL DATABASE */
-require dirname(__FILE__) . '/' . 'dbconfig.php';
-$conn = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die ("Connessione impossibile"/* . mysql_error()*/);
-mysql_select_db(DB_NAME, $conn) or die ("Database non presente"/* . mysql_error()*/);
+require '../' . 'dbconfig.php';
+$conn = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die("Connessione impossibile");
+mysql_select_db(DB_NAME, $conn) or die("Database non presente");
 
 /* RECUPERO IL PARAMETRO IN FORMATO JSON, LO DECODIFICO */
 $evento = $_GET['evento'];
@@ -20,7 +20,7 @@ for($i=0; $i< count($iscritti); $i++){
 	$motoclub = $iscritti[$i]->motoclub;
 	$varie = $iscritti[$i]->varie;
 	$categoria = $iscritti[$i]->categoria;
-	$query="UPDATE r1 set numero = '$numero', nominativo1 = '$nome2', nominativo2 = '$nome3', moto = '$moto', categoria = '$categoria', motorclub = '$motoclub', varie = '$varie' where nomeevento = '$evento' and nominativo = '$nome'";
+	$query="UPDATE r1 SET numero = '$numero', nominativo1 = '$nome2', nominativo2 = '$nome3', moto = '$moto', categoria = '$categoria', motorclub = '$motoclub', varie = '$varie' where nomeevento = '$evento' and nominativo = '$nome'";
 	$result=mysql_query($query, $conn) or die('Error, update query failed' . mysql_error());
 }
 echo $result;

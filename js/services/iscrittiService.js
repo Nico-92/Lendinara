@@ -72,17 +72,3 @@ moduloServices.factory('mySharedService', function($rootScope) {
 
 		return sharedService;
 	});
-
-angular.module('moduloServices')
-	.factory('tesseratiService', ['$http',
-		function($http) {
-			return {
-				query: function() {
-					return $http({
-						url: 'listaIscritti.php',
-						method: 'GET',
-					});
-				}
-			};
-		}
-	]);

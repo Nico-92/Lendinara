@@ -21,7 +21,7 @@ moduloServices.factory('gareService', ['$http',
                 });
             },
             checkNumero: function(numero, evento) {
-                $http({
+                return $http({
                     url: 'backend/gare/controllo_numero.php',
                     method: 'GET',
                     params: {
@@ -30,14 +30,30 @@ moduloServices.factory('gareService', ['$http',
                     }
                 });
             },
-            post: function(iscritto, doppioni){
-                return  $http({
+            post: function(iscritto, doppioni) {
+                return $http({
                     url: 'backend/gare/iscrivi.php',
                     method: 'GET',
                     params: {
                         iscritto: iscritto,
                         doppioni: doppioni
                     }
+                });
+            },
+            put: function(iscritti, evento) {
+                return $http({
+                    url: 'backend/gare/modifica_iscritto.php',
+                    method: 'GET',
+                    params: {
+                        iscritti: JSON.stringify(iscritti),
+                        evento: evento
+                    }
+                });
+            },
+            getIscritti: function() {
+                return $http({
+                    url: 'ricerca_iscritti.php',
+                    method: 'GET',
                 });
             }
         };

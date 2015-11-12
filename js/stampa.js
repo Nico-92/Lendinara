@@ -3,7 +3,7 @@ function JSONToCSVConvertor(e,r,t){var a="object"!=typeof e?JSON.parse(e):e,n=""
 var lendinara = angular.module('lendinara', ['ngResource'], function($locationProvider) {
       $locationProvider.html5Mode(true);
     });
-lendinara.controller('stampaIscritti', function ($scope, $http, $location) {
+lendinara.controller('stampaIscritti', ['$scope', '$http', '$location', function ($scope, $http, $location) {
     $scope.deleteColumn = function(indice){
         $scope.properties.splice(indice, 1);
         
@@ -74,4 +74,4 @@ lendinara.controller('stampaIscritti', function ($scope, $http, $location) {
     $scope.stampa = function(){
         window.print();
     };
-});
+}]);

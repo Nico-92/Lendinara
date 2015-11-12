@@ -28,10 +28,10 @@ $moto = mysql_escape_string($moto);
 $motoclub = mysql_escape_string($motoclub);
 $grandeNumero = mysql_escape_string($grandeNumero);
 
-$controllo = "select numero from r1 where numero='$grandeNumero' and nomeevento='$evento'";
+$controllo = "SELECT numero FROM r1 WHERE numero='$grandeNumero' AND nomeevento='$evento'";
 $result_controllo = mysql_query($controllo, $conn) or die('Error, check query failed ' . mysql_error());
 if( (mysql_num_rows($result_controllo) == 0) || ($grandeNumero == 0) ){
-	$query = "insert into r1 (nomeevento, nominativo, moto, motorclub, categoria, varie, numero, nominativo1, nominativo2) values ('$evento','$nome','$moto','$motoclub', '$categoria', '$varie', '$grandeNumero', '$nome2', '$nome3')";
+	$query = "INSERT INTO r1 (nomeevento, nominativo, moto, motorclub, categoria, varie, numero, nominativo1, nominativo2) VALUES ('$evento','$nome','$moto','$motoclub', '$categoria', '$varie', '$grandeNumero', '$nome2', '$nome3')";
 	$result = mysql_query($query, $conn) or die('Error, insert query failed ' . mysql_error());
 	if($result){
 		echo 'true';
@@ -70,8 +70,4 @@ if( (mysql_num_rows($result_controllo) == 0) || ($grandeNumero == 0) ){
 else{
 	echo "Numero già assegnato";
 }
-
-
-
-
 ?>

@@ -9,8 +9,6 @@
 	<link rel="stylesheet" type="text/css" href="css/stile.css" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="bootstrap/js/bootstrap-ui.js"></script>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>-->
-	<script type="text/javascript" src="js/ng-grid.debug.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/ng-grid.min.css" />
 
 	<script type="text/javascript" src="js/app.js"></script>
