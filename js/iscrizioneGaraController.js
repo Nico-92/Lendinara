@@ -16,15 +16,15 @@ function PlaySound() {
 }
 
 // Esegui le operazioni prima di caricare il controller
-lendinara.run(function($rootScope, $http, eventiService) {
+lendinara.run(function($rootScope, eventiService) {
     // Carica tendina eventi e relativi dati
     eventiService.get().success(function(data) {
         $rootScope.eventi = data;
     })
 });
 
-lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscrittiService', 'eventiService', 'mySharedService',
-    function($scope, $http, $timeout, iscrittiService, eventiService, sharedService) {
+lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$timeout', 'iscrittiService', 'gareService', 'eventiService', 'testiService', 'mySharedService',
+    function($scope, $timeout, iscrittiService, gareService, eventiService, testiService, sharedService) {
         $scope.classeStampa = 'hide';
         $scope.printable = 'unstamp';
         $scope.vuoi_stampare = false;
@@ -40,7 +40,7 @@ lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscr
         };
         $scope.getCategoria = function(val) {
             var categorie = [];
-            return eventiService.getClassi($scope.selezionaEvento.nome, val).then(function(res) {
+            return gareService.getClassi($scope.selezionaEvento.nome, val).then(function(res) {
                 angular.forEach(res.data.risultato, function(item) {
                     categorie.push(item.categoria);
                 });
@@ -52,7 +52,7 @@ lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscr
             var numeriOccupati = [];
             $scope.numeriDisponibili = [];
             if ($scope.selezionaEvento !== undefined) {
-                eventiService.getNumeri($scope.selezionaEvento).success(function(data) {
+                gareService.getNumeri($scope.selezionaEvento).success(function(data) {
                     for (var i = 0; i < data.risultato.length; i++) {
                         numeriOccupati.push(data.risultato[i].numero);
                     };
@@ -75,14 +75,7 @@ lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscr
         $scope.checkNumero = function() {
             if ($scope.selezionaEvento != undefined) {
                 if ($scope.grandeNumero != 0) {
-                    $http({
-                        url: 'controllo_numero.php',
-                        method: 'GET',
-                        params: {
-                            numero: $scope.grandeNumero,
-                            evento: $scope.selezionaEvento.nome
-                        }
-                    }).success(function(data) {
+                    gareService.checkNumero($scope.grandeNumero, $scope.selezionaEvento.nome).success(function(data) {
                         if (data == false) {
                             $scope.numero_in_uso = true;
                         } else {
@@ -93,13 +86,7 @@ lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscr
             }
         };
         getTesto = function(posizione) {
-            $http({
-                url: 'backend/testi/ricerca_testi.php',
-                method: 'GET',
-                params: {
-                    tipo: posizione
-                }
-            }).success(function(data) {
+            testiService.getTesti(posizione).success(function(data) {
                 $scope.testi = data;
                 console.log($scope.testi);
             }).error(function(data) {
@@ -170,14 +157,7 @@ lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$http', '$timeout', 'iscr
                     iscritto.nome3 = '';
                 }
                 console.log(iscritto)
-                $http({
-                    url: 'iscrivi_concorrente.php',
-                    method: 'GET',
-                    params: {
-                        iscritto: iscritto,
-                        doppioni: $scope.numeri_doppi
-                    }
-                }).success(function(data) {
+                gareService.post(iscritto, $scope.numeri_doppi).success(function(data) {
                     if (data == 'true') {
                         getNumeriDisponibili();
                         $scope.risultato = true;

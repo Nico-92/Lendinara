@@ -1,13 +1,16 @@
 moduloServices.factory('testiService', ['$http',
     function($http) {
         return {
-            getTesti: function(evento) {
+            getTesti: function(tipo) {
                 return $http({
                     url: 'backend/testi/ricerca_testi.php',
                     method: 'GET',
+                    params: {
+                        tipo: tipo
+                    }
                 });
             },
-            getTestiBiglietti: function(evento) {
+            getTestiBiglietti: function() {
                 return $http({
                     url: 'backend/testi/ricerca_biglietti.php',
                     method: 'GET'

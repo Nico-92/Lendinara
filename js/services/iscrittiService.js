@@ -28,6 +28,15 @@ moduloServices.factory('iscrittiService', ['$http',
 					}
 				});
 			},
+			post: function(iscritto){
+				return  $http({
+                    url: 'backend/iscritti/iscrivi.php',
+                    method: 'GET',
+                    params: {
+                        iscritto: iscritto
+                    }
+                });
+			},
 			updateField: function(table, field, value, whereField, whereValue) {
 				return $http({
 					url: 'backend/update_field.php',

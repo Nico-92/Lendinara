@@ -4,15 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Riassunto iscritti</title>
-	<!-- bower:js -->
-	<script src="js/jquery.js"></script>
-	<script src="js/angular/angular.js"></script>
-	<script src="js/angular/angular-resource.js"></script>
-	<script src="js/angular/angular-cookies.js"></script>
-	<script src="js/angular/angular-sanitize.js"></script>
-	<script src="js/angular/angular-route.js"></script>
-	<script src="js/angular/ngAutocomplete.js"></script>
-	<!-- endbower -->
+	<script src="js/vendor.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="css/stile.css" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -23,7 +15,7 @@
 
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/iscrittiService.js"></script>
+	<script type="text/javascript" src="js/services/iscrittiService.js"></script>
 	<script type="text/javascript" src="js/riassuntoController.js"></script>
 
 	<style type="text/css">
@@ -31,7 +23,7 @@
 	</style>
 </head>
 
-<body ng-app="tesserati">
+<body ng-app="lendinara">
 	<a href="modulo.php"><input type="button" value="Vai a Modulo" class="btn btn-primary unstamp" /></a>
 	<table cellpadding="5" cellspacing="5">
 		<tr>

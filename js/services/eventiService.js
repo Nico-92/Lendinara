@@ -36,25 +36,6 @@ moduloServices.factory('eventiService', ['$http',
 						evento: evento
 					}
 				});
-			},
-			getNumeri: function(evento) {
-				return $http({
-					url: 'ricerca_numeri.php',
-					method: 'GET',
-					params: {
-						evento: evento
-					}
-				});
-			},
-			getClassi: function(evento, categoria) {
-				return $http({
-					url: 'ricerca_classi.php',
-					method: 'GET',
-					params: {
-						evento: evento,
-						categoria: categoria
-					}
-				});
 			}
 		};
 	}

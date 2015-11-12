@@ -24,7 +24,9 @@ mysql_close();
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/services/iscrittiService.js"></script>
 <script type="text/javascript" src="js/services/eventiService.js"></script>
-<script type="text/javascript" src="js/moduloController.js"></script>
+<script type="text/javascript" src="js/services/gareService.js"></script>
+<script type="text/javascript" src="js/services/testiService.js"></script>
+<script type="text/javascript" src="js/tesseramentoController.js"></script>
 <script type="text/javascript" src="js/iscrizioneGaraController.js"></script>
 
 <script type="text/javascript" src="script.js"></script>
@@ -166,7 +168,7 @@ mysql_close();
 
 
 
-<div class="panel panel-default {{printable}}" id="iscrizioneLendinara" ng-controller="IscrizioneLendinaraCtrl">
+<div class="panel panel-default {{printable}}" id="iscrizioneLendinara" ng-controller="tesseramentoCtrl">
 	<div class="panel-heading">Iscrizione a Enduro Lendinara</div>
 	<div class="panel-body" >
 		<form name="nuovaIscrizione" id="nuovaIscrizione">

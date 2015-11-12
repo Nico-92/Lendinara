@@ -6,15 +6,7 @@
 <link rel="stylesheet" type="text/css" href="css/stile.css" />
 
 
-<!-- bower:js -->
-    <script src="js/jquery.js"></script>
-    <script src="js/angular/angular.js"></script>
-    <script src="js/angular/angular-resource.js"></script>
-    <script src="js/angular/angular-cookies.js"></script>
-    <script src="js/angular/angular-sanitize.js"></script>
-    <script src="js/angular/angular-route.js"></script>
-    <script src="js/angular/ngAutocomplete.js"></script>
-<!-- endbower -->
+<script src="js/vendor.min.js"></script>
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <script src="bootstrap/js/bootstrap-ui.js"></script>
