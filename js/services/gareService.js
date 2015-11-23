@@ -52,7 +52,7 @@ moduloServices.factory('gareService', ['$http',
             },
             getIscritti: function() {
                 return $http({
-                    url: 'ricerca_iscritti.php',
+                    url: 'backend/gare/ricerca_iscritti.php',
                     method: 'GET',
                 });
             }

@@ -38,13 +38,14 @@ while ($array = mysql_fetch_array($result)) {
     }
     
     $ris = $ris . '{ "nome": "' . trim($array['nominativo']) . '",';
-    $ris = $ris . '"datanascita": "' . trim($datanascita) . '",';
+   /* $ris = $ris . '"datanascita": "' . trim($datanascita) . '",';
     $ris = $ris . '"luogonascita": "' . trim($array['luogonascita']) . '",';
     $ris = $ris . '"via": "' . trim($array['via']) . '",';
     $ris = $ris . '"cap": "' . trim($array['cap']) . '",';
     $ris = $ris . '"citta": "' . trim($array['citta']) . '",';
     $ris = $ris . '"email": "' . trim($array['email']) . '",';
-    $ris = $ris . '"telefono": "' . trim($array['telefono']) . '",';
+    $ris = $ris . '"telefono": "' . trim($array['telefono']) . '",';*/
+    $ris = $ris . '"codicefiscale": "' . trim($array['codicefiscale']) . '",';
     
     //$ris = $ris . '"varie": "'.trim ($array['sangue'] ).'",';
     if ($array_lendinara['tesserael'] != '') {

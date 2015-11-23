@@ -120,6 +120,9 @@ div.campo{
       cursor:pointer;
       border-bottom:1px solid #888;
     }/* CSS Document */
+.riga-tessere{
+	position: relative;
+}
 .tessera{
 	height: 4.7cm !important;
 	font-size: 10px;
@@ -127,12 +130,21 @@ div.campo{
 	padding-left: 5px;
 	/*height:130px;*/
 }
+.tessera-prima-riga{
+	margin-top: 0.7cm;
+}
 .tessera p{
 	margin: 5px;
 }
 .tessera .nome{
-		margin-bottom: 2px !important;
+	margin-bottom: 2px !important;
 }
 .row {
 	margin: 0px;
+}
+.left-sidebar{
+	float: left;
+	background-color: red;
+	position: fixed;
+	height: 100%
 }

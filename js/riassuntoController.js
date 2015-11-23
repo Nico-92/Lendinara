@@ -18,14 +18,13 @@ function JSONToCSVConvertor(e, r, t) {
         v = document.createElement("a");
     v.href = l, v.style = "visibility:hidden", v.download = d + ".csv", document.body.appendChild(v), v.click(), document.body.removeChild(v)
 }
-
 lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'gareService',
     function($scope, $http, $rootScope, gareService) {
         $scope.tesserati = function() {
-            return gareService.getIscritti()
-                .success(function(data) {
-                    $scope.iscritti = data.risultato;
-                });
+            return gareService.getIscritti().success(function(data) {
+                console.log(data)
+                $scope.iscritti = data.risultato;
+            });
         }
         $scope.esporta = function() {
             JSONToCSVConvertor($scope.iscritti, "Iscritti lendinara", true);
@@ -87,8 +86,8 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
         function dateSort(dataUno, dataDue) {
             var arrayUno = dataUno.split('-');
             var arrayDue = dataDue.split('-');
-            dataUno = new Date(arrayUno[2], arrayUno[1]-1, arrayUno[0]);
-            dataDue = new Date(arrayDue[2], arrayDue[1]-1, arrayDue[0]);
+            dataUno = new Date(arrayUno[2], arrayUno[1] - 1, arrayUno[0]);
+            dataDue = new Date(arrayDue[2], arrayDue[1] - 1, arrayDue[0]);
             if (dataUno < dataDue) {
                 return -1;
             } else if (dataUno > dataDue) {
@@ -100,30 +99,42 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
         $scope.gridOptions = {
             data: 'iscritti',
             columnDefs: [{
-                field: 'nome',
-                displayName: 'Nome e cognome'
-            }, {
-                field: 'datanascita',
-                displayName: 'Data nascita',
-                sortFn: dateSort
-            }, {
-                field: 'luogonascita',
-                displayName: 'Luogo nascita'
-            }, {
-                field: 'tessera',
-                displayName: 'Tessera'
-            }, {
-                field: 'data',
-                displayName: 'Data di rilascio',
-                sortFn: dateSort
-            }, {
-                field: 'telefono',
-                displayName: 'Telefono'
-            }, {
-                field: 'email',
-                displayName: 'Email'
-            }]
+                    field: 'nome',
+                    displayName: 'Nome e cognome'
+                },
+                /* {
+                                field: 'datanascita',
+                                displayName: 'Data nascita',
+                                sortFn: dateSort
+                            }, {
+                                field: 'luogonascita',
+                                displayName: 'Luogo nascita'
+                            }, {
+                                field: 'tessera',
+                                displayName: 'Tessera'
+                            }, {
+                                field: 'data',
+                                displayName: 'Data di rilascio',
+                                sortFn: dateSort
+                            }, {
+                                field: 'telefono',
+                                displayName: 'Telefono'
+                            }, {
+                                field: 'email',
+                                displayName: 'Email'
+                            }*/
+                {
+                    field: 'codicefiscale',
+                    displayName: 'Codice Fiscale'
+                }, {
+                    field: 'tessera',
+                    displayName: 'Tessera'
+                }, {
+                    field: 'data',
+                    displayName: 'Data di rilascio',
+                    sortFn: dateSort
+                }
+            ]
         };
-
     }
 ]);
