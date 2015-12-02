@@ -94,8 +94,10 @@ lendinara.controller('IscrizioneGaraCtrl', ['$scope', '$timeout', 'iscrittiServi
             })
         };
         $scope.checkIscritto = function(iscritto) {
+            console.log(iscritto)
             iscrittiService.get(iscritto).success(function(data) {
                 // Necessario usando l'autocomplete
+                console.log(data)
                 if (data != 'false') {
                     sharedService.prepareBroadcast(iscritto);
                     // Controllo se la tessera enduro lendinara è valida

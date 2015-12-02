@@ -28,7 +28,8 @@ mysql_close();
 <script type="text/javascript" src="js/services/testiService.js"></script>
 <script type="text/javascript" src="js/tesseramentoController.js"></script>
 <script type="text/javascript" src="js/iscrizioneGaraController.js"></script>
-
+<script type="text/javascript" src="js/scannerDetector.js"></script>
+		
 <script type="text/javascript" src="script.js"></script>
 <script type="text/javascript" src="ajax/prototype.js" ></script>
 <script type="text/javascript" src="ajax/effects.js" ></script>
@@ -72,7 +73,7 @@ mysql_close();
 			    	<tab heading="Dati Persona" select="reset()">
 
 			    		<table class="table">
-							<tr><td>Nome</td><td><input tabindex="1" type="text" ng-model="iscritto.nome" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" ng-blur="checkIscritto(iscritto.nome)" />
+							<tr><td>Nome</td><td><input id="nominativoGara" tabindex="1" type="text" ng-model="iscritto.nome" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" ng-blur="checkIscritto(iscritto.nome)" />
 								<p class="error unstamp" ng-show="errore1">{{errore1}}</p></td></tr>
 							<tr><td>Categoria</td><td><input tabindex="2" type="text" ng-model="iscritto.categoria" placeholder="Categoria" typeahead="categoria for categoria in getCategoria($viewValue) | filter:$viewValue | limitTo:4"/></td></tr>
 							<tr><td>Moto</td><td><input tabindex="4" type="text" placeholder="Moto" ng-model="iscritto.moto" /></td></tr>
