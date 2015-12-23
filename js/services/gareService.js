@@ -50,10 +50,24 @@ moduloServices.factory('gareService', ['$http',
                     }
                 });
             },
-            getIscritti: function() {
+            getIscritti: function(evento) {
                 return $http({
                     url: 'backend/gare/ricerca_iscritti.php',
                     method: 'GET',
+                    params: {
+                        evento: evento
+                    }
+                });
+            },
+            delete: function(nome, numero, evento) {
+                return $http({
+                    url: 'backend/gare/elimina_iscritto.php',
+                    method: 'GET',
+                    params: {
+                        numero: numero,
+                        evento: evento,
+                        nome: nome
+                    }
                 });
             }
         };

@@ -182,7 +182,7 @@ mysql_close();
 				<tr>
 					<td>Via</td><td><input type="text" placeholder="Via" ng-model="iscritto.via" /></td>
 					<td>Città</td><td><input type="text" placeholder="Città" ng-model="iscritto.citta" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="findCap()"/></td>
-					<td>CAP</td><td><input type="text" placeholder="CAP" ng-model="iscritto.cap" readonly="readonly" /></td>
+					<td>CAP</td><td><input type="text" placeholder="CAP" ng-model="iscritto.cap" /></td>
 				</tr>
 				<tr>
 					<td>Email</td><td><input type="email" placeholder="Email" ng-model="iscritto.email"/></td>

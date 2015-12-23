@@ -18,10 +18,10 @@ function JSONToCSVConvertor(e, r, t) {
         v = document.createElement("a");
     v.href = l, v.style = "visibility:hidden", v.download = d + ".csv", document.body.appendChild(v), v.click(), document.body.removeChild(v)
 }
-lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'gareService',
-    function($scope, $http, $rootScope, gareService) {
+lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'iscrittiService',
+    function($scope, $http, $rootScope, iscrittiService) {
         $scope.tesserati = function() {
-            return gareService.getIscritti().success(function(data) {
+            return iscrittiService.getIscritti().success(function(data) {
                 console.log(data)
                 $scope.iscritti = data.risultato;
             });

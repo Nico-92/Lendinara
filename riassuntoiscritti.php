@@ -14,7 +14,6 @@
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/services/iscrittiService.js"></script>
-	<script type="text/javascript" src="js/services/gareService.js"></script>
 	<script type="text/javascript" src="js/riassuntoController.js"></script>
 
 	<style type="text/css">

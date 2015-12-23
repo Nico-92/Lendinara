@@ -45,9 +45,9 @@
 						
 						<div class="col-xs-3 tessera" ng-repeat="i in arrayEtichette track by $index">
 							<div ng-show="$index +1 == etichette.stampaIn">
+								<p>Enduro Lendinara</p>
 								<div barcode-generator="{{iscritto.barcode}}" style="height:20px;" ng-show="iscritto.barcode"></div>
 								<div ng-shoW="!iscritto.barcode"><button class="btn btn-default" ng-click="setBarcode()">Genera codice</button></div>
-								<br />
 								<p class="nome">Nome: {{iscritto.nome | uppercase}}</p>
 								<p>Data di nascita: {{iscritto.dataNascita}}</p>
 								<p>Data di rilascio: {{iscritto.dataRilascio}}</p>

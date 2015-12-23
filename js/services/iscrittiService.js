@@ -3,13 +3,19 @@ moduloServices.factory('iscrittiService', ['$http',
 		return {
 			get: function(name) {
 				return $http({
-					url: 'backend/iscritti/ricerca_iscritti.php',
+					url: 'backend/iscritti/ricerca_iscritto.php',
 					method: 'GET',
 					params: {
 						iscritto: name
 					}
 				});
 			},
+			getIscritti: function() {
+                return $http({
+                    url: 'backend/iscritti/ricerca_iscritti.php',
+                    method: 'GET',
+                });
+            },
 			query: function(val) {
 				return $http({
 					url: 'backend/iscritti/lista_nomi.php',
