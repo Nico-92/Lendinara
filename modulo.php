@@ -7,17 +7,16 @@
 <link rel="stylesheet" type="text/css" href="css/stile.css" />
 <?php 
 require dirname(__FILE__) . '/' . 'dbconfig.php';
-$conn = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die ("connessione impossibile"/* . mysql_error()*/);
-mysql_select_db(DB_NAME, $conn) or die ("no database"/* . mysql_error()*/);
 $query="select * from varie";
 $result=mysql_query($query, $conn) or die('Error, insert query failed' . mysql_error());
 $control=mysql_fetch_array($result); 
 mysql_close();
 ?>
 
-<script src="js/vendor.min.js"></script>
+<script src="js/vendor.js"></script>
 
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
+<!-- <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap3.min.css" /> -->
 <script src="bootstrap/js/bootstrap-ui.js"></script>
 
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -25,7 +24,9 @@ mysql_close();
 <script type="text/javascript" src="js/services/iscrittiService.js"></script>
 <script type="text/javascript" src="js/services/eventiService.js"></script>
 <script type="text/javascript" src="js/services/gareService.js"></script>
+<script type="text/javascript" src="js/services/translationService.js"></script>
 <script type="text/javascript" src="js/services/testiService.js"></script>
+<script type="text/javascript" src="js/translationController.js"></script>
 <script type="text/javascript" src="js/tesseramentoController.js"></script>
 <script type="text/javascript" src="js/iscrizioneGaraController.js"></script>
 <script type="text/javascript" src="js/scannerDetector.js"></script>
@@ -37,32 +38,40 @@ mysql_close();
 <style type="text/css"> @import url("css/stilistampa.css") print;</style>
 </head>
 <body ng-app="lendinara">
+ <div class="col-md-12 languageNavbar" ng-controller="translationController">
+    <span class="language" ng-click="changeLanguage('en')">
+        ENGLISH
+    </span>
+    <span class="language" ng-click="changeLanguage('it')">
+        ITALIAN
+    </span>
+    <a href="gara.php"><input tabindex="-1" type="button" value="Pannello di controllo" class="btn btn-default unstamp" /></a>
+	<a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a>
+	<a href="riassuntoiscritti.php?on=1"><input tabindex="-1" type="button" value="Elenco tesserati" class="btn btn-default unstamp" /></a>
+</div>
 <div align="center">
-<a href="gara.php"><input tabindex="-1" type="button" value="Pannello di controllo" class="btn btn-default unstamp" /></a>
-<a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a>
-<a href="riassuntoiscritti.php?on=1"><input tabindex="-1" type="button" value="Elenco tesserati" class="btn btn-default unstamp" /></a>
 <!-- <input type="button" onclick="PlaySound();"/> -->
 
 <div id="corpo">
 	
 	<div class="panel panel-default {{printable}}" class="printable" ng-controller="IscrizioneGaraCtrl">
-		<div class="panel-heading">Iscrizione a gara<!--<span class="stampacheckbox unstamp"> <input type="checkbox" ng-model="numeri_doppi">Salva numeri doppi</span> --> <span class="stampacheckbox unstamp"><input type="checkbox" ng-model="vuoi_stampare"> Stampa iscrizione a gara</span></div>
+		<div class="panel-heading">{{translation.SUBSCRIBE_TO_MATCH}}<!--<span class="stampacheckbox unstamp"> <input type="checkbox" ng-model="numeri_doppi">Salva numeri doppi</span> --> <span class="stampacheckbox unstamp"><input type="checkbox" ng-model="vuoi_stampare"> {{translation.PRINT_SUBSCRIPTION}}</span></div>
 		<div class="panel-body">
 			<table border="1">
 				<tr><td>
 					<form name="evento" method="GET">
 						<table class="table">
-							<tr><th colspan="2">Dati Evento</th></tr>
+							<tr><th colspan="2">{{translation.EVENT_INFO}}</th></tr>
 							<tr><td colspan="2">
 							<select tabindex="-1" ng-model="selezionaEvento" ng-options="evento.nome for evento in eventi" ng-change="selezionato()">
-						    		<option value="">Seleziona Evento</option>
+						    		<option value="">{{translation.SELECT_EVENT}}</option>
 							</select>
 						</td></tr>
-							<tr><td>Costo</td><td><input tabindex="-1" type="text" ng-model="datievento.costo" class="input-small" disabled/></td></tr>
-							<tr><td>Data</td><td><input tabindex="-1" type="date" ng-model="datievento.data" style="width:125px;" disabled /></td></tr>
-							<tr><td>Luogo</td><td><input tabindex="-1" type="text" ng-model="datievento.luogo" class="input-small" disabled /></td></tr>
-							<tr><td>Altro</td><td><input tabindex="-1" type="text" ng-model="datievento.altro" class="input-small" disabled /></td></tr>
-							<tr><td colspan="2"><a tabindex="-1" href="gara.php" class="unstamp"><button type="button" class="btn btn-link unstamp" tooltip="Clicca per andare alla pagina di modifica evento"  tooltip-trigger="mouseenter" tooltip-placement="right">Modifica evento</button></a></td></tr>
+							<tr><td>{{translation.PRICE}}</td><td><input tabindex="-1" type="text" ng-model="datievento.costo" class="input-small" disabled/></td></tr>
+							<tr><td>{{translation.DATE}}</td><td><input tabindex="-1" type="date" ng-model="datievento.data" style="width:125px;" disabled /></td></tr>
+							<tr><td>{{translation.PLACE}}</td><td><input tabindex="-1" type="text" ng-model="datievento.luogo" class="input-small" disabled /></td></tr>
+							<tr><td>{{translation.MISC}}</td><td><input tabindex="-1" type="text" ng-model="datievento.altro" class="input-small" disabled /></td></tr>
+							<tr><td colspan="2"><a tabindex="-1" href="gara.php" class="unstamp"><button type="button" class="btn btn-link unstamp" tooltip="Clicca per andare alla pagina di modifica evento"  tooltip-trigger="mouseenter" tooltip-placement="right">{{translation.MODIFY_EVENT}}</button></a></td></tr>
 							<tr><td colspan="2"><a tabindex="-1" href="stampa_iscritti.php?evento={{selezionaEvento.nome}}" class="unstamp" target="_blank"><button type="button" class="btn btn-link unstamp" ng-if="selezionaEvento"  >Stampa lista iscritti evento</button></a></td></tr>
 						</table>
 					</form>
@@ -70,35 +79,35 @@ mysql_close();
 				<td>
 				<form name="iscrizione">
 				<tabset justified="true" >
-			    	<tab heading="Dati Persona" select="reset()">
+			    	<tab heading="{{translation.USER_DATA}}" select="reset()">
 
 			    		<table class="table">
-							<tr><td>Nome</td><td><input id="nominativoGara" tabindex="1" type="text" ng-model="iscritto.nome" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" ng-blur="checkIscritto(iscritto.nome)" />
+							<tr><!-- <td>{{translation.NAME}}</td> --><td><input id="nominativoGara" tabindex="1" type="text" ng-model="iscritto.nome" placeholder="{{translation.NAME}}" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" ng-blur="checkIscritto(iscritto.nome)" />
 								<p class="error unstamp" ng-show="errore1">{{errore1}}</p></td></tr>
-							<tr><td>Categoria</td><td><input tabindex="2" type="text" ng-model="iscritto.categoria" placeholder="Categoria" typeahead="categoria for categoria in getCategoria($viewValue) | filter:$viewValue | limitTo:4"/></td></tr>
-							<tr><td>Moto</td><td><input tabindex="4" type="text" placeholder="Moto" ng-model="iscritto.moto" /></td></tr>
-							<tr><td>M.C.</td><td><input tabindex="5"type="text" placeholder="Moto club" ng-model="iscritto.motoclub" /></td></tr>
-							<tr><td>Varie</td><td><input tabindex="6"type="text" placeholder="Varie" ng-model="iscritto.varie" /></td></tr>
+							<tr><!-- <td>{{translation.CATEGORY}}</td> --><td><input tabindex="2" type="text" ng-model="iscritto.categoria" placeholder="{{translation.CATEGORY}}" typeahead="categoria for categoria in getCategoria($viewValue) | filter:$viewValue | limitTo:4"/></td></tr>
+							<tr><!-- <td>{{translation.VEHICLE}}</td> --><td><input tabindex="4" type="text" placeholder="{{translation.VEHICLE}}" ng-model="iscritto.moto" /></td></tr>
+							<tr><!-- <td>{{translation.MOTOCLUB}}</td> --><td><input tabindex="5"type="text" placeholder="{{translation.MOTOCLUB}}" ng-model="iscritto.motoclub" /></td></tr>
+							<tr><!-- <td>{{translation.MISC}}</td> --><td><input tabindex="6"type="text" placeholder="{{translation.MISC}}" ng-model="iscritto.varie" /></td></tr>
 							<tr><td colspan="2"><button tabindex="7" type="submit" class="btn btn-success unstamp" ng-if="selezionaEvento" ng-click="iscrivi(iscritto)" >Iscrivi a {{selezionaEvento.nome}}</button>
 									<button class="btn btn-danger unstamp" ng-if="!selezionaEvento"  disabled >Seleziona evento</button>
 									<input type="reset" value="Pulisci form" class="unstamp" ng-click="reset()"/>
 							</td></tr>
 						</table>
 			    	</tab>
-				    <tab heading="Dati Squadra" select="reset()">
+				    <tab heading="{{translation.TEAM_DATA}}" select="reset()">
 
 				    	<table class="table">
 							<tr><td>Primo iscritto</td><td><input type="text" ng-model="iscritto.nome1" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" ng-blur="checkIscritto(iscritto.nome1)"/>
 								<p class="error unstamp" ng-show="errore1">{{errore1}}</p></td></tr>
 							<tr><td>Secondo iscritto</td><td><input type="text" ng-model="iscritto.nome2" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4"  /></td></tr>
 							<tr><td>Terzo iscritto</td><td><input type="text" ng-model="iscritto.nome3" placeholder="Nome e cognome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" /></td></tr>
-							<tr><td>Categoria</td><td><input type="text" placeholder="Categoria" ng-model="iscritto.categoria" /></td></tr>
-							<tr><td>Moto</td><td><input type="text" placeholder="Moto" ng-model="iscritto.moto" /></td></tr>
-							<tr><td>M.C.</td><td><input type="text" placeholder="Moto club" ng-model="iscritto.motoclub" /></td></tr>
-							<tr><td>Varie</td><td><input type="text" placeholder="Varie" ng-model="iscritto.varie" /></td></tr>
+							<tr><td>{{translation.CATEGORY}}</td><td><input type="text" placeholder="Categoria" ng-model="iscritto.categoria" /></td></tr>
+							<tr><td>{{translation.VEHICLE}}</td><td><input type="text" placeholder="Moto" ng-model="iscritto.moto" /></td></tr>
+							<tr><td>{{translation.MOTOCLUB}}</td><td><input type="text" placeholder="Moto club" ng-model="iscritto.motoclub" /></td></tr>
+							<tr><td>{{translation.MISC}}</td><td><input type="text" placeholder="Varie" ng-model="iscritto.varie" /></td></tr>
 							<tr><td colspan="2"><input type="submit" class="btn btn-success unstamp" ng-if="selezionaEvento" ng-click="iscrivi(iscritto)" value="Iscrivi a {{selezionaEvento.nome}}" />
-									<button class="btn btn-danger unstamp" ng-if="!selezionaEvento"  disabled >Seleziona evento</button>
-									<input type="reset" value="Pulisci form" class="unstamp" ng-click="reset(1)"/>
+									<button class="btn btn-danger unstamp" ng-if="!selezionaEvento"  disabled >{{translation.SELECT_EVENT}}</button>
+									<input type="reset" value="{{translation.CLEAR_FORM}}" class="unstamp" ng-click="reset(1)"/>
 							</td></tr>
 						</table>
 				    </tab>
@@ -107,7 +116,7 @@ mysql_close();
 				</td>
 				<td>
 		        <table>
-		        	<tr><th style="font-size:20px;"> Numero</th></tr>
+		        	<tr><th style="font-size:20px;"> {{translation.NUMBER}}</th></tr>
 		        	<tr><td><input tabindex="3" type="text" id="grandeNumero" ng-model="grandeNumero" class="input-small unstamp" ng-change="checkNumero();" required />
 		        		<p class="alert alert-danger alert-dismissable" ng-if="numero_in_uso==true">Attenzione, numero già in uso</p></td></tr>
 		        	<tr><td>
@@ -187,13 +196,16 @@ mysql_close();
 				<tr>
 					<td>Email</td><td><input type="email" placeholder="Email" ng-model="iscritto.email"/></td>
 					<td>Numero telefono</td><td><input type="text" placeholder="Numero telefono" ng-model="iscritto.telefono"/></td>
-					<td>Scadenza certificato</td><td><input type="date" placeholder="Scadenza certificato" ng-model="iscritto.scadenza"/></td>
-				</tr><tr>
-					<td>Codice FIscale</td><td> <input type="text" placeholder="Codice fiscale" ng-model="iscritto.codicefiscale"/></td>
+					<td ng-show="options.certificato == true">Scadenza certificato</td><td><input type="date" placeholder="Scadenza certificato" ng-model="iscritto.scadenza"/></td>
+				</tr><tr ng-show="options.codicefiscale == true">
+					<td>Codice Fiscale</td><td> <input type="text" placeholder="Codice fiscale" ng-model="iscritto.codicefiscale"/></td>
 					<td><label style="display:inline" for="m">M</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="M">
 						<label style="display:inline" for="f">F</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="F"></td>
 					<td><button class="btn" ng-click="calcolaCodiceFiscale();">Ricalcola</button></td>
-				</tr><tr>
+				</tr>
+				<tr><td>Acconto</td><td><input type="text" ng-model="iscritto.acconto"/><input type="date" ng-model="iscritto.dataacconto"/></td>
+				<td>Cauzione</td><td><input type="text" ng-model="iscritto.cauzione"/><input type="date" ng-model="iscritto.datacauzione"/></td></tr>
+				<tr>
 					<td>Varie</td><td colspan="3" ><input type="text" placeholder="Varie" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
 				</tr>
 			</table>

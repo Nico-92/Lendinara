@@ -12,13 +12,13 @@ module.exports = function(grunt) {
       },
       distVendor: {
         src: ['js/vendor/jquery/jquery.js', 'js/vendor/angular/angular.js', 'js/vendor/angular/angular-lib/*.js', 'js/vendor/*.js'],
-        dest: 'js/vendor.min.js'
+        dest: 'js/vendor.js'
       }
     },
     uglify: {
       dist: {
         files: {
-          'js/vendor.min.js': ['js/vendor.min.js']
+          'js/vendor.min.js': ['js/vendor.js']
         }
       }
     }

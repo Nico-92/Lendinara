@@ -37,6 +37,21 @@ moduloServices.factory('testiService', ['$http',
                         azione: azione
                     }
                 })
+            },
+            changeOptions: function(options) {
+                return $http({
+                    url: 'backend/testi/salva_opzioni.php',
+                    method: 'GET',
+                    params: {
+                        options: options
+                    }
+                })
+            },
+            getOptions: function() {
+                return $http({
+                    url: 'backend/testi/get_opzioni.php',
+                    method: 'GET'
+                })
             }
         };
     }

@@ -1,5 +1,20 @@
 lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', function($scope, testiService) {
     $scope.nuovo = false;
+    $scope.options = {
+        certificato: false,
+        cauzione: false,
+        acconto: false,
+        codicefiscale: false
+    };
+    testiService.getOptions().success(function(data) {
+        for (var key in data) {
+            if(data[key] === '1'){
+                console.log(data[key])
+                data[key] = true;
+            }
+        }
+        $scope.options = data;
+    });
     testiService.getTestiBiglietti().success(function(data) {
         $scope.bigliettodx = data.bigliettodx;
         $scope.bigliettosx = data.bigliettosx;
@@ -80,6 +95,16 @@ lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', function($s
             } else {
                 $scope.risultatoBiglietti = false;
                 $scope.messaggio = data;
+            }
+        });
+    };
+    $scope.changeOptions = function() {
+        console.log($scope.options);
+        testiService.changeOptions($scope.options).success(function(data) {
+            if (data === 'true') {
+                $scope.optionsMessage = true;
+            } else {
+                //qualcosa
             }
         });
     };

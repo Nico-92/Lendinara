@@ -1,8 +1,6 @@
 <?php
 /*CONNESSIONE AL DATABASE */
 require '../' . 'dbconfig.php';
-$conn = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die("Connessione impossibile");
-mysql_select_db(DB_NAME, $conn) or die("Database non presente");
 
 /* RECUPERO IL PARAMETRO IN FORMATO JSON, LO DECODIFICO */
 if(isset($_GET['evento'])){

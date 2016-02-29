@@ -1,5 +1,5 @@
-lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootScope', 'iscrittiService', 'mySharedService',
-    function($scope, $http, $timeout, $rootScope, iscrittiService, sharedService) {
+lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootScope', 'iscrittiService', 'mySharedService', 'testiService',
+    function($scope, $http, $timeout, $rootScope, iscrittiService, sharedService, testiService) {
         $http.get('files/city.json').then(function(res) {
             $scope.cities = res.data;
         });
@@ -16,6 +16,16 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         $scope.nuovoIscritto = undefined;
         $scope.iscritto = {};
         $scope.iscritto.sesso = 'M';
+
+        testiService.getOptions().success(function(data) {
+            for (var key in data) {
+                if (data[key] === '1') {
+                    data[key] = true;
+                }
+            }
+            
+            $scope.options = data;
+        });
         $scope.getCommonVarie = function(val) {
             return $http.get('listaCommonVarie.php', {
                 params: {
@@ -247,7 +257,6 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         }
     }
 ]);
-
 var CFisc = {}
 CFisc.tavola_mesi = ['A', 'B', 'C', 'D', 'E', 'H', 'L', 'M', 'P', 'R', 'S', 'T']
 CFisc.tavola_omocodie = ['L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V']

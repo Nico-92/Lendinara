@@ -6,7 +6,7 @@
 		<title>Pannello di controllo</title>
 		<link rel="stylesheet" type="text/css" href="css/stile.css" />
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
-		<script src="js/vendor.min.js"></script>
+		<script src="js/vendor.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script src="bootstrap/js/bootstrap-ui.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
@@ -110,6 +110,25 @@
 						</tr>
 					</table>
 				</fieldset>
+				<fieldset>
+				<legend>Elenco campi iscrizione</legend>
+					<div class="row text-left">
+						<div class="span3">
+							<input type="checkbox" ng-model="options.codicefiscale" ng-change="changeOptions()" /> Codice fiscale
+						</div>
+						<div class="span3">
+							<input type="checkbox" ng-model="options.certificato" ng-change="changeOptions()" /> Certificato medico
+						</div>
+						<div class="span3">
+							<input type="checkbox" ng-model="options.acconto" ng-change="changeOptions()" /> Acconto
+						</div>
+						<div class="span3">
+							<input type="checkbox" ng-model="options.cauzione" ng-change="changeOptions()" /> Cauzione
+						</div>
+					</div>
+					<div ng-if="optionsMessage==true" class="alert alert-success alert-dismissable">Opzioni salvate</div>
+				</fieldset>
+				<br /><br /><br /><br /><br />
 			</div>
 		</div>
 	</div>

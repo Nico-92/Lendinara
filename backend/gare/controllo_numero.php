@@ -2,8 +2,6 @@
 
 /*CONNESSIONE AL DATABASE */
 require '../' . 'dbconfig.php';
-$conn = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD) or die("Connessione impossibile");
-mysql_select_db(DB_NAME, $conn) or die("Database non presente");
 
 /* SE È PRESENTE UN PARAMETRO GET VOGLIO I DATI DELL'EVENTO PASSATO*/
 if ((isset($_GET['numero'])) && (isset($_GET['evento']))) {

@@ -17,6 +17,8 @@
 <script type="text/javascript" src="js/services/gareService.js"></script>
 <script type="text/javascript" src="js/scannerDetector.js"></script>
 <script type="text/javascript" src="js/stampa.js"></script>
+<script type="text/javascript" src="js/scannerDetector.js"></script>
+
 <script src="ajax/prototype.js" type="text/javascript"></script>
 <script src="ajax/effects.js" type="text/javascript"></script>
 <script src="ajax/controls.js" type="text/javascript"></script>
@@ -31,7 +33,8 @@
 	      	<h4><small>Totale: {{numero_iscritti}}</small></h4>
 	    </div>
 
-    	 <button class="btn unstamp" ng-click="modifica();">{{condizione_modifica}}</button>
+	    <button class="btn unstamp" ng-click="formaggiunta = true">Aggiungi</button>
+    	<button class="btn unstamp" ng-click="modifica();">{{condizione_modifica}}</button>
 		<button class="btn unstamp" ng-click="esporta();">Formato {{formato}}</button>
 		<button class="btn unstamp" ng-click="stampa();">Stampa</button><br /><br />
 		<span ng-repeat="iscritto in iscritti track by $index" ng-if="formato=='lettura'">
@@ -49,12 +52,24 @@
 		        </th>
 	      	</tr>
 			<tr ng-repeat="iscritto in iscritti | orderBy:predicato:reverse track by $index">
-				<td><span class="glyphicon glyphicon-remove" ng-click="elimina(iscritto)"></span></td>
+				<td><span class="glyphicon glyphicon-remove pointer" ng-click="elimina(iscritto)"></span></td>
 				<td ng-repeat="property in properties">
 					<span ng-if="modifica_attiva==false">{{iscritto[property]}}</span>
 					<span ng-if="modifica_attiva==true"><input class="input-small" type="text" ng-model="iscritto[property]" /></span>
 				</td>
 			</tr>
+			<tr ng-show="formaggiunta">
+				<td><span class="glyphicon glyphicon-remove pointer" ng-click="formaggiunta = false"></span></td>
+				<td><input class="input-small" type="text" ng-model="nuovoiscritto." /></td>
+				<td><input class="input-small" type="text" ng-model="nuovoiscritto." /></td>
+				<td><input class="input-small" type="text" ng-model="nuovoiscritto." /></td>
+				<td><input class="input-small" type="text" ng-model="nuovoiscritto." /></td>
+				<td><input class="input-small" type="text" ng-model="nuovoiscritto." /></td>
+				<td><input class="input-small" type="text" ng-model="nuovoiscritto." /></td>
+				<td><input class="input-small" type="text" ng-model="nuovoiscritto." /></td>
+				<td><input class="input-small" type="text" ng-model="nuovoiscritto." /></td>
+			</tr>
+			
 		</table>
 	</div>
 </body>
