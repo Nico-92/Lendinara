@@ -12,7 +12,8 @@
     "CONTROL_PANEL": "Pannello di controllo",
     "EVENTS_SUMMARY": "Riassunto eventi",
     "USERS_SUMMARY": "Riassunto tesserati",
-    "PRINT_SUBSCRIPTION": "Stampa iscrizione a gara",
+    "SUBSCRIPTION": "Iscrizione",
+    "PRINT": "Stampa",
     "USER_DATA": "Dati persona",
     "TEAM_DATA": "Dati squadra",
     "NUMBER": "Numero",
@@ -26,5 +27,9 @@
     "CATEGORY": "Categoria",
     "VEHICLE": "Veicolo",
     "MOTOCLUB": "MotoClub",
-    "CLEAR_FORM": "Pulisci form"
+    "CLEAR_FORM": "Pulisci form",
+    "BIRTH_DATE": "Data di nascita",
+    "BIRTH_PLACE": "Luogo di nascita",
+    "CAP": "CAP",
+    "CITY": "Città"
 }

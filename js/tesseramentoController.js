@@ -1,5 +1,5 @@
-lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootScope', 'iscrittiService', 'mySharedService', 'testiService',
-    function($scope, $http, $timeout, $rootScope, iscrittiService, sharedService, testiService) {
+lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootScope', 'iscrittiService', 'mySharedService', 'testiService', 'translationService',
+    function($scope, $http, $timeout, $rootScope, iscrittiService, sharedService, testiService, translationService) {
         $http.get('files/city.json').then(function(res) {
             $scope.cities = res.data;
         });
@@ -16,6 +16,10 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         $scope.nuovoIscritto = undefined;
         $scope.iscritto = {};
         $scope.iscritto.sesso = 'M';
+
+         $scope.$on('translationBroadcast', function() {
+            $scope.translation = translationService.translation;
+        });
 
         testiService.getOptions().success(function(data) {
             for (var key in data) {
@@ -176,7 +180,19 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             if (!iscritto.hasOwnProperty('cap')) {
                 iscritto.cap = '';
             }
-            if (!iscritto.hasOwnProperty('codicefiscale')) {
+            if (!iscritto.hasOwnProperty('acconto')) {
+                iscritto.acconto = '';
+            }
+             if (!iscritto.hasOwnProperty('dataacconto')) {
+                iscritto.dataacconto = '';
+            }
+             if (!iscritto.hasOwnProperty('cauzione')) {
+                iscritto.cauzione = '';
+            }
+             if (!iscritto.hasOwnProperty('datacauzione')) {
+                iscritto.datacauzione = '';
+            }
+             if (!iscritto.hasOwnProperty('codicefiscale')) {
                 iscritto.codicefiscale = '';
             }
             if (!iscritto.hasOwnProperty('tessera_el')) {

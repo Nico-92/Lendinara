@@ -197,3 +197,7 @@ div.boxsuggerimenti ul li {
 .panel-body .row{
 	margin: 10px;
 }
+.form-control{
+    width: 70% !important;
+    display: inline !important;
+}

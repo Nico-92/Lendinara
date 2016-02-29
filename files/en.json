@@ -12,7 +12,8 @@
     "CONTROL_PANEL": "Control panel",
     "EVENTS_SUMMARY": "Events summary",
     "USERS_SUMMARY": "Users summarty",
-    "PRINT_SUBSCRIPTION": "Print subscription",
+    "SUBSCRIPTION": "Subscription",
+    "PRINT": "Print",
     "USER_DATA": "User data",
     "TEAM_DATA": "Team data",
     "NUMBER": "Number",
@@ -26,5 +27,9 @@
     "CATEGORY": "Category",
     "VEHICLE": "Vehicle",
     "MOTOCLUB": "MotoClub",
-    "CLEAR_FORM": "Clear form"
+    "CLEAR_FORM": "Clear form",
+    "BIRTH_DATE": "Birth date",
+    "BIRTH_PLACE": "Birth place",
+    "CAP": "CAP",
+    "CITY": "City"
 }

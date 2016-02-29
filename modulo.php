@@ -55,7 +55,7 @@ mysql_close();
 <div id="corpo">
 	
 	<div class="panel panel-default {{printable}}" class="printable" ng-controller="IscrizioneGaraCtrl">
-		<div class="panel-heading">{{translation.SUBSCRIBE_TO_MATCH}}<!--<span class="stampacheckbox unstamp"> <input type="checkbox" ng-model="numeri_doppi">Salva numeri doppi</span> --> <span class="stampacheckbox unstamp"><input type="checkbox" ng-model="vuoi_stampare"> {{translation.PRINT_SUBSCRIPTION}}</span></div>
+		<div class="panel-heading">{{translation.SUBSCRIBE_TO_MATCH}}<!--<span class="stampacheckbox unstamp"> <input type="checkbox" ng-model="numeri_doppi">Salva numeri doppi</span> --> <span class="stampacheckbox unstamp"><input type="checkbox" ng-model="vuoi_stampare"> {{translation.PRINT}} {{translation.SUBSCRIPTION}}</span></div>
 		<div class="panel-body">
 			<table border="1">
 				<tr><td>
@@ -179,32 +179,43 @@ mysql_close();
 
 
 <div class="panel panel-default {{printable}}" id="iscrizioneLendinara" ng-controller="tesseramentoCtrl">
-	<div class="panel-heading">Iscrizione a Enduro Lendinara</div>
+	<div class="panel-heading">{{translation.SUBSCRIPTION}}</div>
 	<div class="panel-body" >
 		<form name="nuovaIscrizione" id="nuovaIscrizione">
 			<table class="table larger-font">
 				<tr>
-					<td>Nome</td><td><input type="text" id="nominativo" placeholder="Nome e Cognome" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
-					<td>Data nascita</td><td><input type="date" ng-model="iscritto.datanascita"/></td>
-					<td>Luogo nascita</td><td><input type="text" placeholder="Luogo di nascita" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
+					<td>{{translation.NAME}}</td><td><input type="text" id="nominativo" placeholder="{{translation.NAME}}" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
+					<td>{{translation.BIRTH_DATE}}</td><td><input type="date" ng-model="iscritto.datanascita"/></td>
+					<td>{{translation.BIRTH_PLACE}}</td><td><input type="text" placeholder="Luogo di nascita" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
 				</tr>
 				<tr>
 					<td>Via</td><td><input type="text" placeholder="Via" ng-model="iscritto.via" /></td>
-					<td>Città</td><td><input type="text" placeholder="Città" ng-model="iscritto.citta" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="findCap()"/></td>
+					<td>{{translation.CITY}}</td><td><input type="text" placeholder="{{translation.CITY}}" ng-model="iscritto.citta" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="findCap()"/></td>
 					<td>CAP</td><td><input type="text" placeholder="CAP" ng-model="iscritto.cap" /></td>
 				</tr>
 				<tr>
 					<td>Email</td><td><input type="email" placeholder="Email" ng-model="iscritto.email"/></td>
 					<td>Numero telefono</td><td><input type="text" placeholder="Numero telefono" ng-model="iscritto.telefono"/></td>
 					<td ng-show="options.certificato == true">Scadenza certificato</td><td><input type="date" placeholder="Scadenza certificato" ng-model="iscritto.scadenza"/></td>
-				</tr><tr ng-show="options.codicefiscale == true">
+				</tr>
+				<tr ng-show="options.codicefiscale == true">
 					<td>Codice Fiscale</td><td> <input type="text" placeholder="Codice fiscale" ng-model="iscritto.codicefiscale"/></td>
 					<td><label style="display:inline" for="m">M</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="M">
 						<label style="display:inline" for="f">F</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="F"></td>
 					<td><button class="btn" ng-click="calcolaCodiceFiscale();">Ricalcola</button></td>
 				</tr>
-				<tr><td>Acconto</td><td><input type="text" ng-model="iscritto.acconto"/><input type="date" ng-model="iscritto.dataacconto"/></td>
-				<td>Cauzione</td><td><input type="text" ng-model="iscritto.cauzione"/><input type="date" ng-model="iscritto.datacauzione"/></td></tr>
+				<tr ng-show="options.acconto == true">
+					<td>Acconto</td>
+					<td><input type="text" ng-model="iscritto.acconto"/></td>
+					<td>Data Acconto</td>
+					<td><input type="date" ng-model="iscritto.dataacconto"/></td>
+				</tr>
+				<tr ng-show="options.cauzione == true">
+					<td>Cauzione</td>
+					<td><input type="text" ng-model="iscritto.cauzione"/></td>
+					<td>Data Cauzione</td>
+					<td><input type="date" ng-model="iscritto.datacauzione"/></td>
+				</tr>
 				<tr>
 					<td>Varie</td><td colspan="3" ><input type="text" placeholder="Varie" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
 				</tr>

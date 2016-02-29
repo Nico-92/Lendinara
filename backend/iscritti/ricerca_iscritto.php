@@ -38,6 +38,10 @@ if (isset($_GET['iscritto'])) {
         $ris = $ris . '"telefono": "' . $array['telefono'] . '",';
         $ris = $ris . '"scadenza": "' . $array['scadenza_visita'] . '",';
         $ris = $ris . '"codicefiscale": "' . $array['codicefiscale'] . '",';
+        $ris = $ris . '"cauzione": "' . $array['cauzione'] . '",';
+        $ris = $ris . '"datacauzione": "' . $array['datacauzione'] . '",';
+        $ris = $ris . '"acconto": "' . $array['acconto'] . '",';
+        $ris = $ris . '"dataacconto": "' . $array['dataacconto'] . '",';
         $ris = $ris . '"varie": "' . $array['sangue'] . '",';
         $ris = $ris . '"barcode": "' . $array['barcode'] . '",';
         $ris = $ris . '"tessera_el": "' . $array_lendinara['tesserael'] . '",';

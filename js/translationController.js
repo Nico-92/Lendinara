@@ -4,6 +4,7 @@ lendinara.controller('translationController', ['$scope', 'translationService',
 
         function getTranslation(language) {
             translationService.getTranslation(language).success(function(data) {
+                console.log(data)
                 translationService.prepareBroadcast(data);
             });
         }
