@@ -20,6 +20,7 @@ function JSONToCSVConvertor(e, r, t) {
 }
 lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'iscrittiService',
     function($scope, $http, $rootScope, iscrittiService) {
+        $scope.showMore = false;
         $scope.tesserati = function() {
             return iscrittiService.getIscritti().success(function(data) {
                 console.log(data)
@@ -27,6 +28,9 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             });
         }
         $scope.esporta = function() {
+            JSONToCSVConvertor($scope.iscritti, "Iscritti lendinara", true);
+        }
+         $scope.esportaPerCsen = function() {
             JSONToCSVConvertor($scope.iscritti, "Iscritti lendinara", true);
         }
         $scope.tesserati();
@@ -100,7 +104,11 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             data: 'iscritti',
             columnDefs: [{
                     field: 'nome',
-                    displayName: 'Nome e cognome'
+                    displayName: 'Nome'
+                },
+                 {
+                    field: 'cognome',
+                    displayName: 'Cognome'
                 },
                 /* {
                                 field: 'datanascita',

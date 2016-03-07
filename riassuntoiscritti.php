@@ -6,8 +6,8 @@
 	<title>Riassunto iscritti</title>
 	<script src="js/vendor.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap3.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/stile.css" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<script src="bootstrap/js/bootstrap-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/ng-grid.min.css" />
 
@@ -35,18 +35,31 @@
 	</table>
 	<div ng-controller="RiassuntoIscrittiCtrl" style="height:100%">
 		<br />
-		<div class = "filtri unstamp">
-			<h1><small>Filtri</small></h1>
-			<table>
-				<tr><td>Da</td><td><input type="date" class="input-medium" ng-model="filtro.inizio" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>
-				<tr><td>A</td><td><input type="date" class="input-medium" ng-model="filtro.fine" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>
-			</table>
-			 Visualizza solo tesserati <input type="checkbox" ng-model="filtro.tesserati" ng-change="filtra()">
-			 <br /><br />
-			 <button class="btn btn-default" ng-click="esporta();">ESPORTA IN EXCEL</button>
-		</div>
-		Totale tesserati: {{iscritti.length}}
-		<div class="tabella" ng-grid="gridOptions">
+		<div class="row">
+			<div class="col-md-3">
+				<h1><small>Filtri</small></h1>
+				<table>
+					<tr><td>Da</td><td><input type="date" class="input-medium" ng-model="filtro.inizio" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>
+					<tr><td>A</td><td><input type="date" class="input-medium" ng-model="filtro.fine" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>
+				</table>
+				 Visualizza solo tesserati <input type="checkbox" ng-model="filtro.tesserati" ng-change="filtra()">
+				 <br /><br />
+				 <button class="btn btn-default" ng-click="esporta();">ESPORTA IN EXCEL</button> 
+				 <!-- <span ng-click="showMore=true">Scegli campi</span>
+				 <div ng-show"showMore == true">
+				 	Csen Veneto
+				 	asdasd
+				 	adasd
+				 </div> -->
+			</div>
+			<div class="col-md-9">
+				<div class="row">
+					Totale tesserati: {{iscritti.length}}
+				</div>
+				<div class="row">
+					<div class="tabella" ng-grid="gridOptions"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

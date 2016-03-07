@@ -21,21 +21,31 @@ while ($array = mysql_fetch_array($result)) {
     $result_tessere_lendinara = mysql_query($query_tessere_lendinara, $conn) or die('Error, select query_tessere_motorclub failed' . mysql_error());
     $array_lendinara = mysql_fetch_array($result_tessere_lendinara);
     
-    $datanascita = date('d-m-Y', strtotime($array['datanascita']));
+    $datanascita = date('d/m/Y', strtotime($array['datanascita']));
     if ($array_lendinara['datael'] == '0000-00-00' || !$array_lendinara['datael']) {
         $data_el = '';
     } 
     else {
-        $data_el = date('d-m-Y', strtotime($array_lendinara['datael']));
+        $data_el = date('d/m/Y', strtotime($array_lendinara['datael']));
     }
     if ($array_lendinara['datacsen'] == '0000-00-00' || !$array_lendinara['datacsen']) {
         $data_csen = '';
     } 
     else {
-        $data_csen = date('d-m-Y', strtotime($array_lendinara['datacsen']));
+        $data_csen = date('d/m/Y', strtotime($array_lendinara['datacsen']));
     }
-    
-    $ris = $ris . '{ "nome": "' . trim($array['nominativo']) . '",';
+    $nominativo = explode(" ", preg_replace('!\s+!', ' ', trim($array['nominativo'])));
+    if(count($nominativo) == 2){
+        $ris = $ris . '{ "cognome": "' . $nominativo[0] . '",';
+        $ris = $ris . '"nome": "' . $nominativo[1] . '",';
+    }else{
+        if(count($nominativo) == 3){
+            $ris = $ris . '{ "cognome": "' . $nominativo[0] . " " . $nominativo[1] . '",';
+            $ris = $ris . '"nome": "' . $nominativo[2] . '",';
+        }else{
+            $ris = $ris . '{"nome": "' . trim($array['nominativo']) . '",';
+        }
+    }    
    /* $ris = $ris . '"datanascita": "' . trim($datanascita) . '",';
     $ris = $ris . '"luogonascita": "' . trim($array['luogonascita']) . '",';
     $ris = $ris . '"via": "' . trim($array['via']) . '",';
@@ -44,6 +54,7 @@ while ($array = mysql_fetch_array($result)) {
     $ris = $ris . '"email": "' . trim($array['email']) . '",';
     $ris = $ris . '"telefono": "' . trim($array['telefono']) . '",';*/
     $ris = $ris . '"codicefiscale": "' . trim($array['codicefiscale']) . '",';
+    $ris = $ris . '"assicurazione": "' . 'B' . '",';
     
     //$ris = $ris . '"varie": "'.trim ($array['sangue'] ).'",';
     if ($array_lendinara['tesserael'] != '') {
