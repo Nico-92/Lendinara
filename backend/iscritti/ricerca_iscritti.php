@@ -54,7 +54,7 @@ while ($array = mysql_fetch_array($result)) {
     $ris = $ris . '"email": "' . trim($array['email']) . '",';
     $ris = $ris . '"telefono": "' . trim($array['telefono']) . '",';*/
     $ris = $ris . '"Codice fiscale": "' . trim($array['codicefiscale']) . '",';
-    $ris = $ris . '"Tipo assicurazione": "' . 'B' . '",';
+    $ris = $ris . '"Tipo assicurazione": "' . 'Base' . '",';
     
     //$ris = $ris . '"varie": "'.trim ($array['sangue'] ).'",';
     if ($array_lendinara['tesserael'] != '') {

@@ -1,12 +1,13 @@
 function JSONToCSVConvertor(e, r, t) {
     for(var i = 0; i< e.length; i++){
         delete e[i].fields.id;
+        e[i].fields['Cod.Aff.Societa'] = '30119';
         e[i] = e[i].fields
     }
     console.log(e)
     var a = "object" != typeof e ? JSON.parse(e) : e,
         n = "";
-    if (n += r + "\r\n\n", t) {
+    if (n += r, t) {
         var o = "";
         for (var i in a[0]) o += i + ";";
         o = o.slice(0, -1), n += o + "\r\n"
@@ -38,6 +39,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
         }
         $scope.tesseratiOggi = function() {
             $scope.filtro.inizio = moment().format("YYYY-MM-DD");
+            // $scope.filtro.fine = moment().format("YYYY-MM-DD");
             $scope.filtraDate();
         }
         $scope.tesserati();
