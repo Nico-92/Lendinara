@@ -42,6 +42,7 @@ if (isset($_GET['iscritto'])) {
         $ris = $ris . '"datacauzione": "' . $array['datacauzione'] . '",';
         $ris = $ris . '"acconto": "' . $array['acconto'] . '",';
         $ris = $ris . '"dataacconto": "' . $array['dataacconto'] . '",';
+        $ris = $ris . '"assicurazione": "' . $array['assicurazione'] . '",';
         $ris = $ris . '"varie": "' . $array['sangue'] . '",';
         $ris = $ris . '"barcode": "' . $array['barcode'] . '",';
         $ris = $ris . '"tessera_el": "' . $array_lendinara['tesserael'] . '",';

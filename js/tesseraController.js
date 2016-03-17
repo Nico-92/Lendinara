@@ -32,6 +32,7 @@ tessera.controller('tesseraController', ['$scope', '$location', 'iscrittiService
             barcode: data.barcode,
             id: data.id
         }
+        $scope.datarilascio = moment().format("YYYY-MM-DD");
     });
     $scope.arrayEtichette = new Array($scope.etichette.numeroEtichette);
     $scope.setNumeroEtichette = function() {
@@ -52,6 +53,10 @@ tessera.controller('tesseraController', ['$scope', '$location', 'iscrittiService
             }
         });
     };
+    // Cambio data rilascio tessera
+    $scope.changeDate = function(){
+        $scope.iscritto.dataRilascio = moment($scope.datarilascio).format('DD / MM / YYYY');
+    }
     // Aggiorna il cookie dei margini quando vengono modificati
     $scope.updateMargins = function() {
         ipCookie.remove('marginiStampaTessere');

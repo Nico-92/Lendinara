@@ -131,6 +131,8 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         $scope.stampa = function() {
             if (!$scope.nuovoIscritto) {
                 $scope.salva($scope.iscritto, 'modifica');
+            }else{
+                $scope.salva($scope.iscritto, 'salva');
             }
             getTesto2('tesseramento');
             var mediaQueryList2 = window.matchMedia('print');

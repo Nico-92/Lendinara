@@ -1,4 +1,9 @@
 function JSONToCSVConvertor(e, r, t) {
+    for(var i = 0; i< e.length; i++){
+        delete e[i].fields.id;
+        e[i] = e[i].fields
+    }
+    console.log(e)
     var a = "object" != typeof e ? JSON.parse(e) : e,
         n = "";
     if (n += r + "\r\n\n", t) {
@@ -21,6 +26,7 @@ function JSONToCSVConvertor(e, r, t) {
 lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'iscrittiService',
     function($scope, $http, $rootScope, iscrittiService) {
         $scope.showMore = false;
+        $scope.filtro = {};
         $scope.tesserati = function() {
             return iscrittiService.getIscritti().success(function(data) {
                 console.log(data)
@@ -28,10 +34,11 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             });
         }
         $scope.esporta = function() {
-            JSONToCSVConvertor($scope.iscritti, "Iscritti lendinara", true);
+            JSONToCSVConvertor($scope.iscritti, "", true);
         }
-         $scope.esportaPerCsen = function() {
-            JSONToCSVConvertor($scope.iscritti, "Iscritti lendinara", true);
+        $scope.tesseratiOggi = function() {
+            $scope.filtro.inizio = moment().format("YYYY-MM-DD");
+            $scope.filtraDate();
         }
         $scope.tesserati();
         $scope.filtraDate = function() {
@@ -39,15 +46,14 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             if ($scope.filtro.inizio) {
                 var inizio = new Date($scope.filtro.inizio);
                 inizio = inizio.getTime();
-                console.log($scope.filtro.inizio + ' ' + inizio)
                 var datatessera;
                 var arrayData = [];
                 for (i = 0; i < $scope.iscritti.length; i++) {
-                    if ($scope.iscritti[i].data) {
-                        arrayData = $scope.iscritti[i].data.split('-');
+                    console.log()
+                    if ($scope.iscritti[i].fields['Data emissione']) {
+                        arrayData = $scope.iscritti[i].fields['Data emissione'].split('-');
                         datatessera = new Date(arrayData[2] + '-' + arrayData[1] + '-' + arrayData[0]);
                         datatessera = datatessera.getTime();
-                        console.log($scope.iscritti[i].nome + ' ' + $scope.iscritti[i].data + ' ' + datatessera)
                         if (datatessera >= inizio) {
                             tesserati.push($scope.iscritti[i]);
                         }
@@ -61,8 +67,8 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                 var datatessera;
                 var arrayData = [];
                 for (i = 0; i < $scope.iscritti.length; i++) {
-                    if ($scope.iscritti[i].data) {
-                        arrayData = $scope.iscritti[i].data.split('-');
+                    if ($scope.iscritti[i].fields['Data emissione']) {
+                        arrayData = $scope.iscritti[i].fields['Data emissione'].split('-');
                         datatessera = new Date(arrayData[2] + '-' + arrayData[1] + '-' + arrayData[0]);
                         datatessera = datatessera.getTime();
                         if (datatessera <= fine) {
@@ -102,13 +108,14 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
         }
         $scope.gridOptions = {
             data: 'iscritti',
-            columnDefs: [{
-                    field: 'nome',
-                    displayName: 'Nome'
-                },
+            columnDefs: [
                  {
-                    field: 'cognome',
+                    field: "fields['Cognome']",
                     displayName: 'Cognome'
+                },
+                {
+                    field: "fields['Nome']",
+                    displayName: 'Nome'
                 },
                 /* {
                                 field: 'datanascita',
@@ -132,15 +139,25 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                                 displayName: 'Email'
                             }*/
                 {
-                    field: 'codicefiscale',
-                    displayName: 'Codice Fiscale'
-                }, {
-                    field: 'tessera',
-                    displayName: 'Tessera'
-                }, {
-                    field: 'data',
-                    displayName: 'Data di rilascio',
+                    field: "fields['Codice fiscale']",
+                    displayName: 'Codice fiscale'
+                }, 
+                {
+                    field: "fields['Tipo assicurazione']",
+                    displayName: 'Tipo assicurazione'
+                },
+                 {
+                    field: "fields['Data emissione']",
+                    displayName: 'Data Emissione',
                     sortFn: dateSort
+                },
+                 {
+                    field: "fields['Data scadenza']",
+                    displayName: 'Data Scadenza'
+                },
+                {
+                    field: "fields['Numero Tessera']",
+                    displayName: 'Numero Tessera'
                 }
             ]
         };

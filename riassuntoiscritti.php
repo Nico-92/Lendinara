@@ -11,10 +11,14 @@
 	<script src="bootstrap/js/bootstrap-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/ng-grid.min.css" />
 
+	<script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/services/iscrittiService.js"></script>
+	<script type="text/javascript" src="js/services/translationService.js"></script>
 	<script type="text/javascript" src="js/riassuntoController.js"></script>
+	<script type="text/javascript" src="js/translationController.js"></script>
+
 
 	<style type="text/css">
 		@import url("css/stilistampa.css") print;
@@ -22,6 +26,17 @@
 </head>
 
 <body ng-app="lendinara">
+	<div class="col-md-12 languageNavbar" ng-controller="translationController">
+	    <span class="language" ng-click="changeLanguage('en')">
+	        ENGLISH
+	    </span>
+	    <span class="language" ng-click="changeLanguage('it')">
+	        ITALIAN
+	    </span>
+		<a href="modulo.php"><input tabindex="-1" type="button" value="Modulo" class="btn btn-default unstamp" /></a>
+	    <a href="gara.php"><input tabindex="-1" type="button" value="Pannello di controllo" class="btn btn-default unstamp" /></a>
+		<a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a>
+	</div>
 	<a href="modulo.php"><input type="button" value="Vai a Modulo" class="btn btn-primary unstamp" /></a>
 	<table cellpadding="5" cellspacing="5">
 		<tr>
@@ -44,7 +59,11 @@
 				</table>
 				 Visualizza solo tesserati <input type="checkbox" ng-model="filtro.tesserati" ng-change="filtra()">
 				 <br /><br />
-				 <button class="btn btn-default" ng-click="esporta();">ESPORTA IN EXCEL</button> 
+				 <button class="btn btn-default" ng-click="tesseratiOggi();">TESSERATI OGGI</button> 
+				 <br />
+				 <hr />
+				 <button class="btn btn-default" ng-click="esporta();">ESPORTA IN EXCEL</button>
+				 
 				 <!-- <span ng-click="showMore=true">Scegli campi</span>
 				 <div ng-show"showMore == true">
 				 	Csen Veneto

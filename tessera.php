@@ -35,6 +35,10 @@
 										<p>Margine sinistro</p>
 										<input type="text" ng-model="margine.sinistro" ng-change="updateMargin()">
 									</div>
+									<div class="col-md-3">
+										<p>Data rilascio tessera</p>
+										<input type="date" class="input-medium" ng-model="datarilascio" ng-blur="changeDate()" />
+									</div>
 								</div>
 							</div>
 							
@@ -45,13 +49,13 @@
 						
 						<div class="col-xs-3 tessera" ng-repeat="i in arrayEtichette track by $index">
 							<div ng-show="$index +1 == etichette.stampaIn">
-								<p>Enduro Lendinara</p>
+								<p><strong>Enduro Lendinara</strong></p>
 								<div barcode-generator="{{iscritto.barcode}}" style="height:20px;" ng-show="iscritto.barcode"></div>
 								<div ng-shoW="!iscritto.barcode"><button class="btn btn-default" ng-click="setBarcode()">Genera codice</button></div>
 								<p class="nome">Nome: {{iscritto.nome | uppercase}}</p>
 								<p>Data di nascita: {{iscritto.dataNascita}}</p>
 								<p>Data di rilascio: {{iscritto.dataRilascio}}</p>
-								<p>Qualifica: SOCIO</p>
+								<p>Qual.: socio - Sport: Moto</p>
 								<p>Comitato provinciale: PD</p>
 							</div>
 						</div>
