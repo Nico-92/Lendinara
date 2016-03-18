@@ -4,7 +4,8 @@ lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', function($s
         certificato: false,
         cauzione: false,
         acconto: false,
-        codicefiscale: false
+        codicefiscale: false,
+        assicurazione: false
     };
     testiService.getOptions().success(function(data) {
         for (var key in data) {

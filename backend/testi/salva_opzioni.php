@@ -8,8 +8,9 @@ $certificato = $options->{'certificato'};
 $acconto = $options->{'acconto'};
 $cauzione = $options->{'cauzione'};
 $codicefiscale = $options->{'codicefiscale'};
+$assicurazione = $options->{'assicurazione'};
 //INSERISCI IL TESTO
-$insert_query = "UPDATE varie SET cauzione = '$cauzione', certificato = '$certificato', acconto = '$acconto', codicefiscale = '$codicefiscale'";
+$insert_query = "UPDATE varie SET cauzione = '$cauzione', certificato = '$certificato', acconto = '$acconto', codicefiscale = '$codicefiscale', assicurazione = '$assicurazione'";
 $result = mysql_query($insert_query, $conn) or die('Error, update query failed ' . mysql_error());
 if ($result) {
     echo "true";

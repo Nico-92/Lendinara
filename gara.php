@@ -12,16 +12,29 @@
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/services/eventiService.js"></script>
 		<script type="text/javascript" src="js/services/testiService.js"></script>
+		<script type="text/javascript" src="js/services/translationService.js"></script>
 		<script type="text/javascript" src="js/GestioneEventoController.js"></script>
 		<script type="text/javascript" src="js/CreaEventoController.js"></script>
 		<script type="text/javascript" src="js/GestioneTestoController.js"></script>
+		<script type="text/javascript" src="js/translationController.js"></script>
 		<script type="text/javascript" src="script.js"></script>
 		<script src="ajax/prototype.js" type="text/javascript"></script>
 		<script src="ajax/effects.js" type="text/javascript"></script>
 		<script src="ajax/controls.js" type="text/javascript"></script>
 	</head>
 	<body ng-app="lendinara">
-		<a href="modulo.php"><input type="button" value="Vai a Modulo" class="btn btn-primary unstamp" /></a>
+	<div class="col-md-12 languageNavbar" ng-controller="translationController">
+	    <span class="language" ng-click="changeLanguage('en')">
+	        ENGLISH
+	    </span>
+	    <span class="language" ng-click="changeLanguage('it')">
+	        ITALIAN
+	    </span>
+	    <a href="modulo.php"><input type="button" value="Vai a Modulo" class="btn btn-default unstamp" /></a>
+		<a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a>
+		<a href="riassuntoiscritti.php?on=1"><input tabindex="-1" type="button" value="Elenco tesserati" class="btn btn-default unstamp" /></a>
+	</div>
+		
 		<div align="center">
 			<div id="corpo">
 				<h1>Pannello di controllo</h1>
@@ -124,6 +137,9 @@
 						</div>
 						<div class="span3">
 							<input type="checkbox" ng-model="options.cauzione" ng-change="changeOptions()" /> Cauzione
+						</div>
+						<div class="span3">
+							<input type="checkbox" ng-model="options.assicurazione" ng-change="changeOptions()" /> Assicurazione
 						</div>
 					</div>
 					<div ng-if="optionsMessage==true" class="alert alert-success alert-dismissable">Opzioni salvate</div>

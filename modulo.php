@@ -209,6 +209,16 @@ mysql_close();
 					<td><input type="text" ng-model="iscritto.acconto"/></td>
 					<td>Data Acconto</td>
 					<td><input type="date" ng-model="iscritto.dataacconto"/></td>
+					<td>Assicurazione</td>
+					<td>
+						<select ng-model="iscritto.assicurazione">
+							<option value="Base" selected="selected">Base</option>
+							<option value="A">Integrativa A</option>
+							<option value="B">Integrativa B</option>
+							<option value="C">RCT Integrativa C</option>
+							<option value="CSEN">RCT Istruttori Csen</option>
+						</select>
+					</td>
 				</tr>
 				<tr ng-show="options.cauzione == true">
 					<td>Cauzione</td>

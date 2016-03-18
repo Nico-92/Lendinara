@@ -20,6 +20,7 @@ $codicefiscale=$iscritto->{'codicefiscale'};
 $cauzione=$iscritto->{'cauzione'};
 $datacauzione=$iscritto->{'datacauzione'};
 $acconto=$iscritto->{'acconto'};
+$assicurazione=$iscritto->{'assicurazione'};
 $dataacconto=$iscritto->{'dataacconto'};
 $varie=$iscritto->{'varie'};
 $tessera_el=$iscritto->{'tessera_el'};
@@ -49,7 +50,7 @@ $varie=mysql_escape_string($varie);
 
 /* VERIFICO SE DEVO SALVARE O MODIFICARE*/
 if($funzione=="salva"){
-	$query="insert into iscritti (nominativo, datanascita, luogonascita, via, cap, citta, email, telefono, sangue, scadenza_visita, codicefiscale, acconto, dataacconto, cauzione, datacauzione) values ('$nome', '$datanascita', '$luogonascita', '$via', '$cap', '$citta', '$email', '$telefono', '$varie', '$scadenza', '$codicefiscale', '$acconto', '$dataacconto', '$cauzione', '$datacauzione')";
+	$query="insert into iscritti (nominativo, datanascita, luogonascita, via, cap, citta, email, telefono, sangue, scadenza_visita, codicefiscale, acconto, dataacconto, cauzione, datacauzione, assicurazione) values ('$nome', '$datanascita', '$luogonascita', '$via', '$cap', '$citta', '$email', '$telefono', '$varie', '$scadenza', '$codicefiscale', '$acconto', '$dataacconto', '$cauzione', '$datacauzione', '$assicurazione')";
 	$result=mysql_query($query, $conn) or die('Errore, iscrizione fallita: ' . mysql_error());
 
 
@@ -64,7 +65,7 @@ if($funzione=="salva"){
 }
 else{
 	$id=$iscritto->{'id'};
-	$query = "UPDATE iscritti SET nominativo='$nome', datanascita='$datanascita', luogonascita='$luogonascita', via='$via', cap='$cap', citta='$citta', email='$email', telefono='$telefono', sangue='$varie', scadenza_visita='$scadenza', codicefiscale = '$codicefiscale', acconto = '$acconto', dataacconto = '$dataacconto', cauzione = '$cauzione', datacauzione = '$datacauzione' WHERE id='$id'";
+	$query = "UPDATE iscritti SET nominativo='$nome', datanascita='$datanascita', luogonascita='$luogonascita', via='$via', cap='$cap', citta='$citta', email='$email', telefono='$telefono', sangue='$varie', scadenza_visita='$scadenza', codicefiscale = '$codicefiscale', acconto = '$acconto', dataacconto = '$dataacconto', cauzione = '$cauzione', datacauzione = '$datacauzione', assicurazione = '$assicurazione' WHERE id='$id'";
 	$result = mysql_query($query, $conn) or die('Errore, modifica fallita: ' . mysql_error());
 	$query_lendinara = "UPDATE lendinara SET tesserael = '$tessera_el', datael = '$data_el', tesseracsen = '$tessera_csen', datacsen = '$data_csen' WHERE id='$id'";
 	$result_lendinara=mysql_query($query_lendinara, $conn) or die('Errore, modifica tessere lendinara fallita: ' . mysql_error());

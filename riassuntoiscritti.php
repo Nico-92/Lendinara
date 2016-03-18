@@ -37,8 +37,7 @@
 	    <a href="gara.php"><input tabindex="-1" type="button" value="Pannello di controllo" class="btn btn-default unstamp" /></a>
 		<a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a>
 	</div>
-	<a href="modulo.php"><input type="button" value="Vai a Modulo" class="btn btn-primary unstamp" /></a>
-	<table cellpadding="5" cellspacing="5">
+	<!-- <table cellpadding="5" cellspacing="5">
 		<tr>
 			<td><img src="images/csen.png" />
 			</td>
@@ -47,29 +46,44 @@
 				<br /> ENTE NAZIONALE CON FINALITA’ ASSISTENZIALI RICONOSCIUTO DAL
 				<br /> MINISTERO DELL’INTERNO (D.M. 559/C. 3206.12000.A. [101] DEL 29 FEBBRAIO 92)</td>
 		</tr>
-	</table>
+	</table> -->
 	<div ng-controller="RiassuntoIscrittiCtrl" style="height:100%">
+		<div class="row text-center">
+			<h1>Riassunto tesserati</h1>
+		</div>
 		<br />
 		<div class="row">
 			<div class="col-md-3">
-				<h1><small>Filtri</small></h1>
-				<table>
-					<tr><td>Da</td><td><input type="date" class="input-medium" ng-model="filtro.inizio" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>
-					<tr><td>A</td><td><input type="date" class="input-medium" ng-model="filtro.fine" ng-blur="filtraDate()" ng-click="tesserati()" /></td></tr>
-				</table>
-				 Visualizza solo tesserati <input type="checkbox" ng-model="filtro.tesserati" ng-change="filtra()">
-				 <br /><br />
-				 <button class="btn btn-default" ng-click="tesseratiOggi();">TESSERATI OGGI</button> 
-				 <br />
-				 <hr />
-				 <button class="btn btn-default" ng-click="esporta();">ESPORTA IN EXCEL</button>
-				 
-				 <!-- <span ng-click="showMore=true">Scegli campi</span>
-				 <div ng-show"showMore == true">
-				 	Csen Veneto
-				 	asdasd
-				 	adasd
-				 </div> -->
+				<div class="row">
+					<div class="col-md-12">
+						<h1><small>Filtri</small></h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-sm-6">
+					<div class="row">
+						<div class="col-md-2">Da</div>
+						<div class="col-md-10"><input type="date" class="input-medium" ng-model="filtro.inizio" ng-blur="filtraDate()" ng-click="tesserati()" /></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">A</div>
+						<div class="col-md-10"><input type="date" class="input-medium" ng-model="filtro.fine" ng-blur="filtraDate()" ng-click="tesserati()" /></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							Visualizza solo tesserati <input type="checkbox" ng-model="filtro.tesserati" ng-change="filtra()">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<br />
+							<button class="btn btn-default" ng-click="tesseratiOggi();">TESSERATI OGGI</button> 
+						</div>
+					</div>
+					 <hr />
+					 <button class="btn btn-default" ng-click="esporta();">ESPORTA IN EXCEL</button>
+					</div>
+				</div>				
 			</div>
 			<div class="col-md-9">
 				<div class="row">

@@ -194,8 +194,11 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
              if (!iscritto.hasOwnProperty('datacauzione')) {
                 iscritto.datacauzione = '';
             }
-             if (!iscritto.hasOwnProperty('codicefiscale')) {
+            if (!iscritto.hasOwnProperty('codicefiscale')) {
                 iscritto.codicefiscale = '';
+            }
+            if (!iscritto.hasOwnProperty('assicurazione')) {
+                iscritto.assicurazione = 'Base';
             }
             if (!iscritto.hasOwnProperty('tessera_el')) {
                 iscritto.tessera_el = '';
