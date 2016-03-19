@@ -13,13 +13,12 @@ $control=mysql_fetch_array($result);
 mysql_close();
 ?>
 
-<script src="js/vendor.js"></script>
+<script src="js/vendor.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
 <!-- <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap3.min.css" /> -->
 <script src="bootstrap/js/bootstrap-ui.js"></script>
 
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/services/iscrittiService.js"></script>
 <script type="text/javascript" src="js/services/eventiService.js"></script>

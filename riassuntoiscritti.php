@@ -11,9 +11,7 @@
 	<script src="bootstrap/js/bootstrap-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/ng-grid.min.css" />
 
-	<script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
-	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/services/iscrittiService.js"></script>
 	<script type="text/javascript" src="js/services/translationService.js"></script>
 	<script type="text/javascript" src="js/riassuntoController.js"></script>

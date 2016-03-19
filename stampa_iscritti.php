@@ -12,7 +12,6 @@
 <script src="bootstrap/js/bootstrap-ui.js"></script>
 
 
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/services/gareService.js"></script>
 <script type="text/javascript" src="js/scannerDetector.js"></script>

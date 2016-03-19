@@ -10,7 +10,6 @@
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap3.min.css" />
         <link rel="stylesheet" type="text/css" href="css/stile.css" />
         <link rel="stylesheet" href="css/barcode.css" type="text/css"/>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
         </script>
         <script type="text/javascript" src="js/app.js">
         </script>
