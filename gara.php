@@ -8,7 +8,6 @@
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
 		<script src="js/vendor.min.js"></script>
 		<script type="text/javascript" src="js/app.js"></script>
-		<script src="bootstrap/js/bootstrap-ui.js"></script>
 		<script type="text/javascript" src="js/services/eventiService.js"></script>
 		<script type="text/javascript" src="js/services/testiService.js"></script>
 		<script type="text/javascript" src="js/services/translationService.js"></script>
@@ -16,10 +15,10 @@
 		<script type="text/javascript" src="js/CreaEventoController.js"></script>
 		<script type="text/javascript" src="js/GestioneTestoController.js"></script>
 		<script type="text/javascript" src="js/translationController.js"></script>
-		<script type="text/javascript" src="script.js"></script>
-		<script src="ajax/prototype.js" type="text/javascript"></script>
-		<script src="ajax/effects.js" type="text/javascript"></script>
-		<script src="ajax/controls.js" type="text/javascript"></script>
+		<!-- <script type="text/javascript" src="script.js"></script> -->
+		<!-- <script src="ajax/prototype.js" type="text/javascript"></script> -->
+		<!-- <script src="ajax/effects.js" type="text/javascript"></script> -->
+		<!-- <script src="ajax/controls.js" type="text/javascript"></script> -->
 	</head>
 	<body ng-app="lendinara">
 	<div class="col-md-12 languageNavbar" ng-controller="translationController">

@@ -10,11 +10,11 @@ module.exports = function(grunt) {
                 dest: 'js/lib.js'
             },
             distVendor: {
-                src: ['js/vendor/jquery/jquery.js', 'js/vendor/angular/angular.js', 'js/vendor/angular/angular-lib/*.js', 'js/vendor/*.js'],
+                src: ['js/vendor/jquery/jquery.js', 'js/vendor/angular/angular.js', 'js/vendor/angular/angular-lib/*.js', 'js/vendor/bootstrap/*.js', 'js/vendor/*.js'],
                 dest: 'js/vendor.js'
             },
             css: {
-                src: ['css/*.css'],
+                src: ['css/*.css', 'css/vendor/*css'],
                 dest: 'css/index.css'
             }
         },
@@ -26,13 +26,13 @@ module.exports = function(grunt) {
             }
         },
         cssmin: {
-            target: {
+            minify: {
                 files: [{
                     // expand: true,
-                    cwd: 'css',
-                    src: ['index.css'],
-                    dest: 'css',
-                    ext: 'index.min.css'
+                    // cwd: '/css',
+                    src: ['css/index.css'],
+                    dest: 'css/index.min.css',
+                    // ext: '.min.css'
                 }]
             }
         }
@@ -41,6 +41,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.registerTask('vendor', ['concat:distVendor', 'uglify']);
-    grunt.registerTask('css', ['concat:css', 'cssmin']);
+    grunt.registerTask('css', ['concat:css', 'cssmin:minify']);
     grunt.registerTask('default', ['concat:dist']);
 };

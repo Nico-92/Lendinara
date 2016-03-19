@@ -5,11 +5,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Riassunto iscritti</title>
 	<script src="js/vendor.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap3.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/stile.css" />
-	<script src="bootstrap/js/bootstrap-ui.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/ng-grid.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap3.min.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/stile.css" /> -->
+	<!-- <script src="bootstrap/js/bootstrap-ui.js"></script> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/ng-grid.min.css" /> -->
 
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/services/iscrittiService.js"></script>
