@@ -41,6 +41,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.registerTask('vendor', ['concat:distVendor', 'uglify']);
-    grunt.registerTask('css', ['concat:css', 'cssmin:minify']);
+    grunt.registerTask('css', ['concat:css'/*, 'cssmin:minify'*/]);
     grunt.registerTask('default', ['concat:dist']);
 };

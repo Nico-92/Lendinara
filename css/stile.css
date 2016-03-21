@@ -191,10 +191,16 @@ div.boxsuggerimenti ul li {
     margin: 5px;
     color: #3c763d;
 }
-.panel-body .row{
-	margin: 10px;
+
+.panel-body .row {
+    margin: 10px;
 }
-.form-control{
+
+.form-control {
     width: 70% !important;
     display: inline !important;
+}
+
+.panel {
+    max-width: 1200px !important;
 }

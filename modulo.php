@@ -45,6 +45,7 @@ mysql_close();
     <a href="gara.php"><input tabindex="-1" type="button" value="Pannello di controllo" class="btn btn-default unstamp" /></a>
 	<a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a>
 	<a href="riassuntoiscritti.php?on=1"><input tabindex="-1" type="button" value="Elenco tesserati" class="btn btn-default unstamp" /></a>
+	<button class="btn btn-success" id="startDemo">DEMO</button>
 </div>
 <div align="center">
 <div class="panel panel-default {{printable}}" id="iscrizioneLendinara" ng-controller="tesseramentoCtrl">
@@ -175,7 +176,7 @@ mysql_close();
 
 
 <div id="corpo">
-	<div class="panel panel-default {{printable}}" class="printable" ng-controller="IscrizioneGaraCtrl">
+	<div class="panel panel-default {{printable}}" class="printable" id="iscrizioneGara" ng-controller="IscrizioneGaraCtrl">
 		<div class="panel-heading">{{translation.SUBSCRIBE_TO_MATCH}}<!--<span class="stampacheckbox unstamp"> <input type="checkbox" ng-model="numeri_doppi">Salva numeri doppi</span> --> <span class="stampacheckbox unstamp"><input type="checkbox" ng-model="vuoi_stampare"> {{translation.PRINT}} {{translation.SUBSCRIPTION}}</span></div>
 		<div class="panel-body">
 			<table border="1">
