@@ -19,6 +19,7 @@
         </script>
         <script type="text/javascript" src="js/loginController.js">
         </script>
+        <script type="text/javascript" src="//fast.eager.io/c2PMTMaiw7.js"></script>
     </head>
     <body ng-app="lendinara">
         <div class="row" ng-controller="loginController">

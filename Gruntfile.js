@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                 dest: 'js/vendor.js'
             },
             css: {
-                src: ['css/*.css', 'css/vendor/*css'],
+                src: ['!css/stilistampa.css', 'css/*.css', 'css/vendor/*css'],
                 dest: 'css/index.css'
             }
         },

@@ -15,7 +15,7 @@ mysql_close();
 
 <script src="js/vendor.min.js"></script>
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css" />
-
+<script type="text/javascript" src="js/vendor/bootstrap/bootstrap-ui.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/services/iscrittiService.js"></script>
 <script type="text/javascript" src="js/services/eventiService.js"></script>
@@ -32,9 +32,10 @@ mysql_close();
 <script type="text/javascript" src="ajax/effects.js" ></script>
 <script type="text/javascript" src="ajax/controls.js" ></script>
 <style type="text/css"> @import url("css/stilistampa.css") print;</style>
+<script type="text/javascript" src="//fast.eager.io/c2PMTMaiw7.js"></script>
 </head>
 <body ng-app="lendinara">
- <div class="col-md-12 languageNavbar" ng-controller="translationController">
+ <div class="col-md-12 languageNavbar" id="main-menu" ng-controller="translationController">
     <span class="language" ng-click="changeLanguage('en')">
         ENGLISH
     </span>
@@ -46,10 +47,134 @@ mysql_close();
 	<a href="riassuntoiscritti.php?on=1"><input tabindex="-1" type="button" value="Elenco tesserati" class="btn btn-default unstamp" /></a>
 </div>
 <div align="center">
-<!-- <input type="button" onclick="PlaySound();"/> -->
+<div class="panel panel-default {{printable}}" id="iscrizioneLendinara" ng-controller="tesseramentoCtrl">
+	<div class="panel-heading">{{translation.SUBSCRIPTION}}</div>
+	<div class="panel-body" >
+		<form name="nuovaIscrizione" id="nuovaIscrizione">
+			<table class="table larger-font">
+				<tr>
+					<td>{{translation.NAME}}</td><td><input type="text" id="nominativo" placeholder="{{translation.NAME}}" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
+					<td>{{translation.BIRTH_DATE}}</td><td><input type="date" ng-model="iscritto.datanascita"/></td>
+					<td>{{translation.BIRTH_PLACE}}</td><td><input type="text" placeholder="Luogo di nascita" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
+				</tr>
+				<tr>
+					<td>Via</td><td><input type="text" placeholder="Via" ng-model="iscritto.via" /></td>
+					<td>{{translation.CITY}}</td><td><input type="text" placeholder="{{translation.CITY}}" ng-model="iscritto.citta" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="findCap()"/></td>
+					<td>CAP</td><td><input type="text" placeholder="CAP" ng-model="iscritto.cap" /></td>
+				</tr>
+				<tr>
+					<td>Email</td><td><input type="email" placeholder="Email" ng-model="iscritto.email"/></td>
+					<td>Numero telefono</td><td><input type="text" placeholder="Numero telefono" ng-model="iscritto.telefono"/></td>
+					<td ng-show="options.certificato == true">Scadenza certificato</td><td><input type="date" placeholder="Scadenza certificato" ng-model="iscritto.scadenza"/></td>
+				</tr>
+				<tr>
+					<td>Varie</td><td colspan="3" ><input type="text" placeholder="Varie" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
+				</tr>
+				<tr><td colspan="2" ng-show="options.avanzate == undefined" ng-click="options.avanzate = true">
+				 	<button class="btn btn-link">Mostra avanzate</button>
+				</td></tr>
+				<tr><td colspan="2" ng-show="options.avanzate == true" ng-click="options.avanzate = undefined">
+				 	<button class="btn btn-link">Nascondi avanzate</button>
+				</td></tr>
+				<tr ng-show="options.avanzate == true && options.codicefiscale == true">
+					<td>Codice Fiscale</td><td> <input type="text" placeholder="Codice fiscale" ng-model="iscritto.codicefiscale"/></td>
+					<td><label style="display:inline" for="m">M</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="M">
+						<label style="display:inline" for="f">F</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="F"></td>
+					<td><button class="btn" ng-click="calcolaCodiceFiscale();">Ricalcola</button></td>
+				</tr>
+				<tr ng-show="options.avanzate == true && options.acconto == true">
+					<td>Acconto</td>
+					<td><input type="text" ng-model="iscritto.acconto"/></td>
+					<td>Data Acconto</td>
+					<td><input type="date" ng-model="iscritto.dataacconto"/></td>
+				</tr>
+				<tr ng-show="options.avanzate == true">
+					<td>Ass.</td>
+					<td>
+						<select ng-model="iscritto.assicurazione">
+							<option value="Base" selected="selected">Base</option>
+							<option value="A">Integrativa A</option>
+							<option value="B">Integrativa B</option>
+							<option value="C">RCT Integrativa C</option>
+							<option value="CSEN">RCT Istruttori Csen</option>
+						</select>
+					</td>
+				</tr>
+				<tr ng-show="options.avanzate == true && options.cauzione == true">
+					<td>Cauzione</td>
+					<td><input type="text" ng-model="iscritto.cauzione"/></td>
+					<td>Data Cauzione</td>
+					<td><input type="date" ng-model="iscritto.datacauzione"/></td>
+				</tr>
+			</table>
+			  	
+			  	<div class="panel-body" ng-show="stato=='Nascondi'">
+			    	<table>
+			      	<tr>
+						<td>Tessera E.L.</td><td><input type="text" name="tesserael" ng-model="iscritto.tessera_el" /></td>
+						<td>Data </td><td width="130"><input type="date" name="datatesserael" ng-model="iscritto.data_el" /></td>
+					</tr><tr>
+						<td>Tessera Csen</td><td><input type="text" name="tesseracsen" ng-model="iscritto.tessera_csen" /></td>
+						<td>Data</td><td><input type="date" name="datatesseracsen" ng-model="iscritto.data_csen"  /></td>
+					</tr>
+					<tr>
+						<td>Tessera FMI</td><td><input type="text" name="tesserafmi" ng-model="iscritto.tessera_fmi" /></td>
+					    <td>Data</td><td><input type="date" name="datatesserafmi" ng-model="iscritto.data_fmi" /></td>
+					</tr>
+					<tr>
+						<td>Tessera Sport</td><td><input type="text" name="tesserasport" ng-model="iscritto.tessera_sport" /></td>
+					    <td>Data</td><td><input type="date" name="datasport" ng-model="iscritto.data_sport" /></td>
+					</tr><tr>
+					    <td>Licenza FMI</td><td><input type="text" name="licenzafmi" ng-model="iscritto.licenza" /></td>
+					    <td>Data</td><td><input type="date" name="datalicenzafmi" ng-model="iscritto.data_licenza" /></td>
+					</tr>
+					</table>
+			  	</div>
+		
+			  	<table class="table">
+			    <tr>
+			    	<td><input type="submit" value="Modifica" ng-click="salva(iscritto, 'modifica');" class="unstamp btn btn-warning" ng-show="iscritto.nome && iscritto.id"/></td>
+			    	<td><input type="submit" value="Salva" ng-click="salva(iscritto, 'salva');" class="unstamp btn btn-success" ng-show="iscritto.nome && nuovoIscritto && !iscritto.id"/></td>
+			   		<td><input type="button" value="Elimina" ng-click="elimina(iscritto);" class="unstamp btn btn-danger" ng-if="iscritto.nome"/></td>
+			    	<td><input type="reset" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></td><td><!--<input type="button" value="Modifica Moto Club" onclick="modificamotorclub();" />--></td><td><!--<input type="button" value="Salva Moto club" onclick="salvamotorclub();" class="unstamp" /> --></td>
+			    	<td><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></td>
+			    	<td><button class="unstamp btn btn-info" ng-click="stampa();" >Stampa</button></td>
+			    	<td><a href="tessera.php?nome={{iscritto.nome}}" target="_blank" class="unstamp btn btn-info">
+			    			Stampa tessera
+			    		</a></td>
+			    </tr>
+			
+			<br />
+			</table>
+			<br />
+			<div ng-if="risultato==true" class="alert alert-success alert-dismissable unstamp">{{messaggio}}</div>
+			<div ng-if="risultato==false" class="alert alert-danger alert-dismissable unstamp">{{messaggio}}</div>
+		</form>
+		<div id="testo2" class="{{classeStampa}}" ng-repeat="testo in testi">
+				<p class="list-group-item-text">{{testo.testo}}</p>
+		</div>
+		<!-- BOX FIRME -->
+		<br /><br /><br />
+ 		<div class="{{classeStampa}}" id="firma1">
+		  	<div class="panel-heading">Firma</div>
+		  	<div class="panel-body">
+		    	Il sottoscritto: ...............................................................
+		  	</div>
+		</div>
+
+		<div class="{{classeStampa}}" id="firma2">
+		  	<div class="panel-heading">Consenso per il trattamento dei dati personali</div>
+		  	<div class="panel-body">
+		    	Il sottoscritto: ..............................................................
+		  	</div>
+		</div>	 
+</div> </div><!-- CHIUDO IL PANEL DI ISCRIZIONE A LENDINARA -->
+
+
+<br /><br />
+
 
 <div id="corpo">
-	
 	<div class="panel panel-default {{printable}}" class="printable" ng-controller="IscrizioneGaraCtrl">
 		<div class="panel-heading">{{translation.SUBSCRIBE_TO_MATCH}}<!--<span class="stampacheckbox unstamp"> <input type="checkbox" ng-model="numeri_doppi">Salva numeri doppi</span> --> <span class="stampacheckbox unstamp"><input type="checkbox" ng-model="vuoi_stampare"> {{translation.PRINT}} {{translation.SUBSCRIPTION}}</span></div>
 		<div class="panel-body">
@@ -168,127 +293,6 @@ mysql_close();
  			</div>
 
 	</div> <!-- CHIUDO IL PANEL DI ISCRIZIONE A GARA -->
-
-
-<br /><br />
-
-
-
-<div class="panel panel-default {{printable}}" id="iscrizioneLendinara" ng-controller="tesseramentoCtrl">
-	<div class="panel-heading">{{translation.SUBSCRIPTION}}</div>
-	<div class="panel-body" >
-		<form name="nuovaIscrizione" id="nuovaIscrizione">
-			<table class="table larger-font">
-				<tr>
-					<td>{{translation.NAME}}</td><td><input type="text" id="nominativo" placeholder="{{translation.NAME}}" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
-					<td>{{translation.BIRTH_DATE}}</td><td><input type="date" ng-model="iscritto.datanascita"/></td>
-					<td>{{translation.BIRTH_PLACE}}</td><td><input type="text" placeholder="Luogo di nascita" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
-				</tr>
-				<tr>
-					<td>Via</td><td><input type="text" placeholder="Via" ng-model="iscritto.via" /></td>
-					<td>{{translation.CITY}}</td><td><input type="text" placeholder="{{translation.CITY}}" ng-model="iscritto.citta" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="findCap()"/></td>
-					<td>CAP</td><td><input type="text" placeholder="CAP" ng-model="iscritto.cap" /></td>
-				</tr>
-				<tr>
-					<td>Email</td><td><input type="email" placeholder="Email" ng-model="iscritto.email"/></td>
-					<td>Numero telefono</td><td><input type="text" placeholder="Numero telefono" ng-model="iscritto.telefono"/></td>
-					<td ng-show="options.certificato == true">Scadenza certificato</td><td><input type="date" placeholder="Scadenza certificato" ng-model="iscritto.scadenza"/></td>
-				</tr>
-				<tr ng-show="options.codicefiscale == true">
-					<td>Codice Fiscale</td><td> <input type="text" placeholder="Codice fiscale" ng-model="iscritto.codicefiscale"/></td>
-					<td><label style="display:inline" for="m">M</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="M">
-						<label style="display:inline" for="f">F</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="F"></td>
-					<td><button class="btn" ng-click="calcolaCodiceFiscale();">Ricalcola</button></td>
-				</tr>
-				<tr ng-show="options.acconto == true">
-					<td>Acconto</td>
-					<td><input type="text" ng-model="iscritto.acconto"/></td>
-					<td>Data Acconto</td>
-					<td><input type="date" ng-model="iscritto.dataacconto"/></td>
-					<td>Assicurazione</td>
-					<td>
-						<select ng-model="iscritto.assicurazione">
-							<option value="Base" selected="selected">Base</option>
-							<option value="A">Integrativa A</option>
-							<option value="B">Integrativa B</option>
-							<option value="C">RCT Integrativa C</option>
-							<option value="CSEN">RCT Istruttori Csen</option>
-						</select>
-					</td>
-				</tr>
-				<tr ng-show="options.cauzione == true">
-					<td>Cauzione</td>
-					<td><input type="text" ng-model="iscritto.cauzione"/></td>
-					<td>Data Cauzione</td>
-					<td><input type="date" ng-model="iscritto.datacauzione"/></td>
-				</tr>
-				<tr>
-					<td>Varie</td><td colspan="3" ><input type="text" placeholder="Varie" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
-				</tr>
-			</table>
-			  	
-			  	<div class="panel-body" ng-show="stato=='Nascondi'">
-			    	<table>
-			      	<tr>
-						<td>Tessera E.L.</td><td><input type="text" name="tesserael" ng-model="iscritto.tessera_el" /></td>
-						<td>Data </td><td width="130"><input type="date" name="datatesserael" ng-model="iscritto.data_el" /></td>
-					</tr><tr>
-						<td>Tessera Csen</td><td><input type="text" name="tesseracsen" ng-model="iscritto.tessera_csen" /></td>
-						<td>Data</td><td><input type="date" name="datatesseracsen" ng-model="iscritto.data_csen"  /></td>
-					</tr>
-					<tr>
-						<td>Tessera FMI</td><td><input type="text" name="tesserafmi" ng-model="iscritto.tessera_fmi" /></td>
-					    <td>Data</td><td><input type="date" name="datatesserafmi" ng-model="iscritto.data_fmi" /></td>
-					</tr>
-					<tr>
-						<td>Tessera Sport</td><td><input type="text" name="tesserasport" ng-model="iscritto.tessera_sport" /></td>
-					    <td>Data</td><td><input type="date" name="datasport" ng-model="iscritto.data_sport" /></td>
-					</tr><tr>
-					    <td>Licenza FMI</td><td><input type="text" name="licenzafmi" ng-model="iscritto.licenza" /></td>
-					    <td>Data</td><td><input type="date" name="datalicenzafmi" ng-model="iscritto.data_licenza" /></td>
-					</tr>
-					</table>
-			  	</div>
-		
-			  	<table class="table">
-			    <tr>
-			    	<td><input type="submit" value="Modifica" ng-click="salva(iscritto, 'modifica');" class="unstamp btn btn-warning" ng-show="iscritto.nome && iscritto.id"/></td>
-			    	<td><input type="submit" value="Salva" ng-click="salva(iscritto, 'salva');" class="unstamp btn btn-success" ng-show="iscritto.nome && nuovoIscritto && !iscritto.id"/></td>
-			   		<td><input type="button" value="Elimina" ng-click="elimina(iscritto);" class="unstamp btn btn-danger" ng-if="iscritto.nome"/></td>
-			    	<td><input type="reset" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></td><td><!--<input type="button" value="Modifica Moto Club" onclick="modificamotorclub();" />--></td><td><!--<input type="button" value="Salva Moto club" onclick="salvamotorclub();" class="unstamp" /> --></td>
-			    	<td><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></td>
-			    	<td><button class="unstamp btn btn-info" ng-click="stampa();" >Stampa</button></td>
-			    	<td><a href="tessera.php?nome={{iscritto.nome}}" target="_blank" class="unstamp btn btn-info">
-			    			Stampa tessera
-			    		</a></td>
-			    </tr>
-			
-			<br />
-			</table>
-			<br />
-			<div ng-if="risultato==true" class="alert alert-success alert-dismissable unstamp">{{messaggio}}</div>
-			<div ng-if="risultato==false" class="alert alert-danger alert-dismissable unstamp">{{messaggio}}</div>
-		</form>
-		<div id="testo2" class="{{classeStampa}}" ng-repeat="testo in testi">
-				<p class="list-group-item-text">{{testo.testo}}</p>
-		</div>
-		<!-- BOX FIRME -->
-		<br /><br /><br />
- 		<div class="{{classeStampa}}" id="firma1">
-		  	<div class="panel-heading">Firma</div>
-		  	<div class="panel-body">
-		    	Il sottoscritto: ...............................................................
-		  	</div>
-		</div>
-
-		<div class="{{classeStampa}}" id="firma2">
-		  	<div class="panel-heading">Consenso per il trattamento dei dati personali</div>
-		  	<div class="panel-body">
-		    	Il sottoscritto: ..............................................................
-		  	</div>
-		</div>
-		 
-</div> </div><!-- CHIUDO IL PANEL DI ISCRIZIONE A LENDINARA -->
 
 
 </div>
