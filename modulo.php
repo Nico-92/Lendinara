@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8"/>
 <title>Modulo Iscrizione</title>
+<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap3.min.css" />
 <link rel="stylesheet" type="text/css" href="css/stile.css" />
 <?php 
 require dirname(__FILE__) . '/' . 'dbconfig.php';
@@ -54,22 +55,22 @@ mysql_close();
 		<form name="nuovaIscrizione" id="nuovaIscrizione">
 			<table class="table larger-font">
 				<tr>
-					<td>{{translation.NAME}}</td><td><input type="text" id="nominativo" placeholder="{{translation.NAME}}" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
+					<td>{{translation.NAME}}</td><td><input type="text" id="nominativo" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
 					<td>{{translation.BIRTH_DATE}}</td><td><input type="date" ng-model="iscritto.datanascita"/></td>
-					<td>{{translation.BIRTH_PLACE}}</td><td><input type="text" placeholder="Luogo di nascita" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
+					<td>{{translation.BIRTH_PLACE}}</td><td><input type="text" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
 				</tr>
 				<tr>
-					<td>Via</td><td><input type="text" placeholder="Via" ng-model="iscritto.via" /></td>
-					<td>{{translation.CITY}}</td><td><input type="text" placeholder="{{translation.CITY}}" ng-model="iscritto.citta" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="findCap()"/></td>
-					<td>CAP</td><td><input type="text" placeholder="CAP" ng-model="iscritto.cap" /></td>
+					<td>Via</td><td><input type="text" ng-model="iscritto.via" /></td>
+					<td>{{translation.CITY}}</td><td><input type="text" ng-model="iscritto.citta" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="findCap()"/></td>
+					<td>CAP</td><td><input type="text" ng-model="iscritto.cap" /></td>
 				</tr>
 				<tr>
-					<td>Email</td><td><input type="email" placeholder="Email" ng-model="iscritto.email"/></td>
-					<td>Numero telefono</td><td><input type="text" placeholder="Numero telefono" ng-model="iscritto.telefono"/></td>
-					<td ng-show="options.certificato == true">Scadenza certificato</td><td><input type="date" placeholder="Scadenza certificato" ng-model="iscritto.scadenza"/></td>
+					<td>Email</td><td><input type="email" ng-model="iscritto.email"/></td>
+					<td>Numero telefono</td><td><input type="text"  ng-model="iscritto.telefono"/></td>
+					<td ng-show="options.certificato == true">Scadenza certificato</td><td><input type="date"  ng-model="iscritto.scadenza"/></td>
 				</tr>
 				<tr>
-					<td>Varie</td><td colspan="3" ><input type="text" placeholder="Varie" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
+					<td>Varie</td><td colspan="3" ><input type="text" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
 				</tr>
 				<tr><td colspan="2" ng-show="options.avanzate == undefined" ng-click="options.avanzate = true">
 				 	<button class="btn btn-link">Mostra avanzate</button>
@@ -131,22 +132,18 @@ mysql_close();
 					</tr>
 					</table>
 			  	</div>
-		
-			  	<table class="table">
-			    <tr>
-			    	<td><input type="submit" value="Modifica" ng-click="salva(iscritto, 'modifica');" class="unstamp btn btn-warning" ng-show="iscritto.nome && iscritto.id"/></td>
-			    	<td><input type="submit" value="Salva" ng-click="salva(iscritto, 'salva');" class="unstamp btn btn-success" ng-show="iscritto.nome && nuovoIscritto && !iscritto.id"/></td>
-			   		<td><input type="button" value="Elimina" ng-click="elimina(iscritto);" class="unstamp btn btn-danger" ng-if="iscritto.nome"/></td>
-			    	<td><input type="reset" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></td><td><!--<input type="button" value="Modifica Moto Club" onclick="modificamotorclub();" />--></td><td><!--<input type="button" value="Salva Moto club" onclick="salvamotorclub();" class="unstamp" /> --></td>
-			    	<td><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></td>
-			    	<td><button class="unstamp btn btn-info" ng-click="stampa();" >Stampa</button></td>
-			    	<td><a href="tessera.php?nome={{iscritto.nome}}" target="_blank" class="unstamp btn btn-info">
+				<div class="row">
+					<div class="col-md-2" ng-show="iscritto.nome && iscritto.id"><input type="submit" value="Modifica" ng-click="salva(iscritto, 'modifica');" class="unstamp btn btn-warning" /></div>
+					<div class="col-md-2" ng-show="iscritto.nome && nuovoIscritto && !iscritto.id"><input type="submit" value="Salva" ng-click="salva(iscritto, 'salva');" class="unstamp btn btn-success" /></div>
+					<div class="col-md-2"  ng-show="iscritto.nome"><input type="button" value="Elimina" ng-click="elimina(iscritto);" class="unstamp btn btn-danger"/></div>
+					<div class="col-md-2"><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></div>
+					<div class="col-md-2"><button class="unstamp btn btn-info" ng-click="stampa();" >Stampa</button></div>
+					<div class="col-md-2" ng-show="iscritto.nome"><a href="tessera.php?nome={{iscritto.nome}}" target="_blank" class="unstamp btn btn-info"  >
 			    			Stampa tessera
-			    		</a></td>
-			    </tr>
-			
-			<br />
-			</table>
+			    		</a></div>
+			    	<div class="col-md-2"><input type="reset" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></div>
+				</div>
+			  	
 			<br />
 			<div ng-if="risultato==true" class="alert alert-success alert-dismissable unstamp">{{messaggio}}</div>
 			<div ng-if="risultato==false" class="alert alert-danger alert-dismissable unstamp">{{messaggio}}</div>

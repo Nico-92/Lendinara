@@ -68,11 +68,6 @@ body {
     width: 1000px;
 }
 
-#corpo {
-    width: 1000px;
-    margin-top: 3%;
-}
-
 #left {
     top: 15%;
     float: left;
@@ -203,4 +198,7 @@ div.boxsuggerimenti ul li {
 
 .panel {
     max-width: 1200px !important;
+}
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{
+    height: inherit !important;
 }
