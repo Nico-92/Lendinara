@@ -192,7 +192,7 @@ div.boxsuggerimenti ul li {
 }
 
 .form-control {
-    width: 70% !important;
+    width: 70%;
     display: inline !important;
 }
 
@@ -201,15 +201,17 @@ div.boxsuggerimenti ul li {
 }
 
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
-    height: inherit !important;
+    height: initial !important;
 }
 
+/*----------------PAGINA LAYOUTTESSERAMENTO ----------------------*/
 .layoutStampa {
-    top:200px;
+    position: absolute;
+    top: 2cm;
     width: 20cm;
     height: 28cm;
     background-color: antiquewhite;
-    position: absolute;
+    left: 1cm;
 }
 
 .blocco {
@@ -220,9 +222,10 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 .blocco-dati {
     border-style: solid;
-    background-color: grey;
+    background-color: LIGHTGRAY;
     height: 10cm;
     top: 6cm;
+    font-size: x-large;
 }
 
 .blocco-uno {
@@ -230,16 +233,18 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     height: 4cm;
 }
 .blocco-uno textarea, .blocco-due textarea{
-    position: absolute;
-    width: 100%;
+    width: 100% !important;
     height: 100% !important;
 }
 .blocco-due{
-    background-color: blue;
     height: 10cm;
     top: 17cm;
 }
 .control-panel{
-    height: 100px;
-    background-color: red;
+    left: 22cm;
+    position: absolute;
+    top: 2cm;
+}
+.control-panel .input-small{
+    width: 100px;
 }
