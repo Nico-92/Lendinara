@@ -3,7 +3,8 @@
 	<head>
 		<title>Tessera</title>
 		<script src="js/vendor.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/stile.css" />
+		<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap3.min..css" />
 		<style type="text/css"> @import url("css/stilistampa.css") print;</style>
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/services/iscrittiService.js"></script>

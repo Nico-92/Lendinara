@@ -85,8 +85,10 @@
 		</div>
 		<div id="gestioneTesto" ng-controller="GestioneTestoCtrl">
 			<fieldset>
-				<legend>Testo da stampare</legend>
-				<table class="table">
+				<legend>Layout di stampa</legend>
+				<a href="layoutTesseramento.php"><button class="btn btn-default">Tesseramento</button></a>
+				<a href="layoutGara.php"><button class="btn btn-default">Iscrizione gara</button></a>
+				<!-- <table class="table">
 					<tr><th><button class="btn" ng-click="cambia('precedente')">Indietro</button></th><th><button class="btn" ng-click="cambia('successivo')">Avanti</button></th></tr>
 					<tr><th>Testo</th><th>Stampa quando</th></tr>
 					<tr><td><textarea  style="width: 500px"; rows="10" placeholder="Inserisci testo" ng-model="testo"></textarea> </td>
@@ -106,7 +108,7 @@
 						<div ng-if="risultato==true" class="alert alert-success alert-dismissable">{{messaggio}}</div>
 						<div ng-if="risultato==false" class="alert alert-danger alert-dismissable">{{messaggio}}</div>
 					</td></tr>
-				</table>
+				</table> -->
 			</fieldset>
 			<fieldset>
 				<legend>Contenuto biglietti strattabili</legend>

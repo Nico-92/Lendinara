@@ -199,6 +199,47 @@ div.boxsuggerimenti ul li {
 .panel {
     max-width: 1200px !important;
 }
-select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
     height: inherit !important;
+}
+
+.layoutStampa {
+    top:200px;
+    width: 20cm;
+    height: 28cm;
+    background-color: antiquewhite;
+    position: absolute;
+}
+
+.blocco {
+    position: absolute;
+    left: 1cm;
+    width: 18cm;
+}
+
+.blocco-dati {
+    border-style: solid;
+    background-color: grey;
+    height: 10cm;
+    top: 6cm;
+}
+
+.blocco-uno {
+    top: 1cm;
+    height: 4cm;
+}
+.blocco-uno textarea, .blocco-due textarea{
+    position: absolute;
+    width: 100%;
+    height: 100% !important;
+}
+.blocco-due{
+    background-color: blue;
+    height: 10cm;
+    top: 17cm;
+}
+.control-panel{
+    height: 100px;
+    background-color: red;
 }
