@@ -26,15 +26,13 @@ moduloServices.factory('testiService', ['$http',
                     }
                 })
             },
-            postTesto: function(testo, posizione, id, azione) {
+            postTesto: function(file, blocchi) {
                 return $http({
                     url: 'backend/testi/salva_testi.php',
                     method: 'GET',
                     params: {
-                        testo: testo,
-                        posizione: posizione,
-                        id: id,
-                        azione: azione
+                        file: file,
+                        blocchi: blocchi
                     }
                 })
             },

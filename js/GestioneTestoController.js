@@ -20,7 +20,7 @@ lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', function($s
         $scope.bigliettodx = data.bigliettodx;
         $scope.bigliettosx = data.bigliettosx;
     });
-    $scope.modifica = function(testo, posizione, azione) {
+    /*$scope.modifica = function(testo, posizione, azione) {
         testiService.postTesto(testo, posizione, $scope.testi[$scope.indice_corrente].id, azione).success(function(data) {
             if (data == 'true') {
                 if ((azione == 'salva') || (azione == 'elimina')) {
@@ -51,7 +51,7 @@ lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', function($s
             console.log(data);
         });
     };
-    carica_testi();
+    carica_testi();*/
     $scope.cambia = function(direzione) {
         $scope.nuovo = false;
         console.log($scope.indice_corrente);
