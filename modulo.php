@@ -79,7 +79,7 @@ mysql_close();
 				 	<button class="btn btn-link">Nascondi avanzate</button>
 				</td></tr>
 				<tr ng-show="options.avanzate == true && options.codicefiscale == true">
-					<td>Codice Fiscale</td><td> <input type="text" placeholder="Codice fiscale" ng-model="iscritto.codicefiscale"/></td>
+					<td>Codice Fiscale</td><td> <input type="text" placeholder="Codice fiscale" id="codicefiscale" ng-model="iscritto.codicefiscale"/></td>
 					<td><label style="display:inline" for="m">M</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="M">
 						<label style="display:inline" for="f">F</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="F"></td>
 					<td><button class="btn" ng-click="calcolaCodiceFiscale();">Ricalcola</button></td>
@@ -113,7 +113,7 @@ mysql_close();
 			  	<div class="panel-body" ng-show="stato=='Nascondi'">
 			    	<table>
 			      	<tr>
-						<td>Tessera E.L.</td><td><input type="text" name="tesserael" ng-model="iscritto.tessera_el" /></td>
+						<td>Tessera E.L.</td><td><input type="text" name="tesserael" id="tesserael" ng-model="iscritto.tessera_el" /></td>
 						<td>Data </td><td width="130"><input type="date" name="datatesserael" ng-model="iscritto.data_el" /></td>
 					</tr><tr>
 						<td>Tessera Csen</td><td><input type="text" name="tesseracsen" ng-model="iscritto.tessera_csen" /></td>

@@ -248,3 +248,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 .control-panel .input-small{
     width: 100px;
 }
+/*----------------PAGINA TUTORIAL ----------------------*/
+.tutorial-box{
+    margin: 10px;
+}
