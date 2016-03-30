@@ -34,7 +34,7 @@
 	    </span>
 		<a href="modulo.php"><input tabindex="-1" type="button" value="Modulo" class="btn btn-default unstamp" /></a>
 	    <a href="gara.php"><input tabindex="-1" type="button" value="Pannello di controllo" class="btn btn-default unstamp" /></a>
-		<a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a>
+		<!-- <a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a> -->
 	</div>
 	<!-- <table cellpadding="5" cellspacing="5">
 		<tr>
@@ -56,6 +56,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						<h1><small>Filtri</small></h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 col-sm-6">
+						<button class="btn btn-default" ng-click="resetFiltri()">AZZERA FILTRI</button>
 					</div>
 				</div>
 				<div class="row">

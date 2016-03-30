@@ -2,56 +2,55 @@ function JSONToCSVConvertor(e, r, t) {
     for(var i = 0; i< e.length; i++){
         delete e[i].fields.id;
         e[i].fields['Cod.Aff.Societa'] = '30119';
-        e[i] = e[i].fields
+        e[i] = e[i].fields;
     }
-    console.log(e)
     var a = "object" != typeof e ? JSON.parse(e) : e,
         n = "";
     if (n += r, t) {
         var o = "";
         for (var i in a[0]) o += i + ";";
-        o = o.slice(0, -1), n += o + "\r\n"
+        o = o.slice(0, -1), n += o + "\r\n";
     }
     for (var c = 0; c < a.length; c++) {
         var o = "";
         for (var i in a[c]) o += '"' + a[c][i] + '";';
-        o.slice(0, o.length - 1), n += o + "\r\n"
+        o.slice(0, o.length - 1), n += o + "\r\n";
     }
     if ("" == n) return void alert("Invalid data");
     var d = "Elenco iscritto ";
     d += r.replace(/ /g, "_");
     var l = "data:text/csv;charset=utf-8," + escape(n),
         v = document.createElement("a");
-    v.href = l, v.style = "visibility:hidden", v.download = d + ".csv", document.body.appendChild(v), v.click(), document.body.removeChild(v)
+    v.href = l, v.style = "visibility:hidden", v.download = d + ".csv", document.body.appendChild(v), v.click(), document.body.removeChild(v);
 }
 lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'iscrittiService',
     function($scope, $http, $rootScope, iscrittiService) {
         $scope.showMore = false;
         $scope.filtro = {};
+        var iscritti;
         $scope.tesserati = function() {
             return iscrittiService.getIscritti().success(function(data) {
-                console.log(data)
                 $scope.iscritti = data.risultato;
+                iscritti = data.risultato;;
             });
-        }
+        };
         $scope.esporta = function() {
             JSONToCSVConvertor($scope.iscritti, "", true);
-        }
+        };
         $scope.tesseratiOggi = function() {
             $scope.filtro.inizio = moment().format("YYYY-MM-DD");
             // $scope.filtro.fine = moment().format("YYYY-MM-DD");
             $scope.filtraDate();
-        }
+        };
         $scope.tesserati();
         $scope.filtraDate = function() {
             var tesserati = [];
+            var arrayData = [];
+            var datatessera;
             if ($scope.filtro.inizio) {
                 var inizio = new Date($scope.filtro.inizio);
                 inizio = inizio.getTime();
-                var datatessera;
-                var arrayData = [];
                 for (i = 0; i < $scope.iscritti.length; i++) {
-                    console.log()
                     if ($scope.iscritti[i].fields['Data emissione']) {
                         arrayData = $scope.iscritti[i].fields['Data emissione'].split('-');
                         datatessera = new Date(arrayData[2] + '-' + arrayData[1] + '-' + arrayData[0]);
@@ -66,8 +65,6 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             if ($scope.filtro.fine) {
                 var fine = new Date($scope.filtro.fine);
                 fine = fine.getTime();
-                var datatessera;
-                var arrayData = [];
                 for (i = 0; i < $scope.iscritti.length; i++) {
                     if ($scope.iscritti[i].fields['Data emissione']) {
                         arrayData = $scope.iscritti[i].fields['Data emissione'].split('-');
@@ -80,12 +77,12 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                 }
                 $scope.iscritti = tesserati;
             }
-        }
+        };
         $scope.filtra = function() {
             var tesserati = [];
             if ($scope.filtro.tesserati) {
                 for (i = 0; i < $scope.iscritti.length; i++) {
-                    if ($scope.iscritti[i].tessera != '') {
+                    if ($scope.iscritti[i].tessera !== '') {
                         tesserati.push($scope.iscritti[i]);
                     }
                 }
@@ -93,7 +90,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             } else {
                 $scope.tesserati();
             }
-        }
+        };
 
         function dateSort(dataUno, dataDue) {
             var arrayUno = dataUno.split('-');
@@ -108,6 +105,11 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                 return 0;
             }
         }
+
+        $scope.resetFiltri = function(){
+            $scope.filtro = {};
+            $scope.iscritti = iscritti;
+        };
         $scope.gridOptions = {
             data: 'iscritti',
             columnDefs: [
