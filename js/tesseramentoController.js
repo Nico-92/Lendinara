@@ -21,9 +21,17 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             $scope.translation = translationService.translation;
         });
 
+         // Inzializzo tessera vuota
+         $scope.tessere = [{
+            tipo: 'Lendinara',
+            tessera: '',
+            assicurazione: 'Base',
+            dataemissione: moment().format("YYYY-MM-DD"),
+            datascadenza: moment().add(1, 'year').format("YYYY-MM-DD")
+         }];
+
         testiService.getOptions().success(function(data) {
             $scope.avanzatePresenti = false;
-            console.log(data)
             for (var key in data) {
                 if (data[key] === '1') {
                     data[key] = true;
@@ -72,10 +80,11 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         $scope.loadData = function(val) {
             iscrittiService.get(val).then(function(res) {
                 var data = res.data;
-                console.log(data)
                 if (data == 'false') {
                     $scope.nuovoIscritto = true;
                 } else {
+                    $scope.tessere = [];
+                    $scope.tessere.push(data.tessere);
                     $scope.nuovoIscritto = false;
                     $scope.id = data.id;
                     $scope.iscritto = data;
@@ -133,8 +142,6 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         $scope.stampa = function() {
             if (!$scope.nuovoIscritto) {
                 $scope.salva($scope.iscritto, 'modifica');
-            }else{
-                $scope.salva($scope.iscritto, 'salva');
             }
             getTesto2('tesseramento');
             var mediaQueryList2 = window.matchMedia('print');
@@ -199,10 +206,10 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             if (!iscritto.hasOwnProperty('codicefiscale')) {
                 iscritto.codicefiscale = '';
             }
-            if (!iscritto.hasOwnProperty('assicurazione')) {
-                iscritto.assicurazione = 'Base';
-            }
-            if (!iscritto.hasOwnProperty('tessera_el')) {
+            // if (!iscritto.hasOwnProperty('assicurazione')) {
+            //     iscritto.assicurazione = 'Base';
+            // }
+           /* if (!iscritto.hasOwnProperty('tessera_el')) {
                 iscritto.tessera_el = '';
             }
             if (!iscritto.hasOwnProperty('data_el')) {
@@ -231,7 +238,7 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             }
             if (!iscritto.hasOwnProperty('data_licenza')) {
                 iscritto.data_licenza = '';
-            }
+            }*/
             iscritto.nome = iscritto.nome.toUpperCase();
             iscritto.via = iscritto.via.toUpperCase();
             iscritto.luogonascita = iscritto.luogonascita.toUpperCase();
@@ -239,7 +246,9 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             iscritto.varie = iscritto.varie.toUpperCase();
             iscritto.codicefiscale = iscritto.codicefiscale.toUpperCase();
             controlloMinorenni(iscritto);
-            iscrittiService.post(iscritto).success(function(data) {
+            console.log($scope.tessere)
+            iscrittiService.post(iscritto, $scope.tessere).success(function(data) {
+                console.log(data)
                 if (data == 'true') {
                     $scope.risultato = true;
                     if (tipo == 'salva') {

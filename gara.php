@@ -138,9 +138,9 @@
 						<div class="span3">
 							<input type="checkbox" ng-model="options.cauzione" ng-change="changeOptions()" /> Cauzione
 						</div>
-						<div class="span3">
+						<!-- <div class="span3">
 							<input type="checkbox" ng-model="options.assicurazione" ng-change="changeOptions()" /> Assicurazione
-						</div>
+						</div> -->
 					</div>
 					<div ng-if="optionsMessage==true" class="alert alert-success alert-dismissable">Opzioni salvate</div>
 				</fieldset>

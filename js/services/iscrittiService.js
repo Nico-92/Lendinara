@@ -34,12 +34,14 @@ moduloServices.factory('iscrittiService', ['$http',
 					}
 				});
 			},
-			post: function(iscritto){
+			post: function(iscritto, tessere){
+				console.log('passo una volta')
 				return  $http({
                     url: 'backend/iscritti/iscrivi.php',
                     method: 'GET',
                     params: {
-                        iscritto: iscritto
+                        iscritto: iscritto,
+                        tessere: tessere
                     }
                 });
 			},

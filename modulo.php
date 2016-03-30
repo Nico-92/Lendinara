@@ -55,7 +55,7 @@ mysql_close();
 		<form name="nuovaIscrizione" id="nuovaIscrizione">
 			<table class="table larger-font">
 				<tr>
-					<td>{{translation.NAME}}</td><td><input type="text" id="nominativo" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
+					<td>{{translation.NAME}}</td><td><input type="text" autocomplete="off" id="nominativo" ng-model="iscritto.nome" typeahead="nome for nome in getIscritti($viewValue) | filter:$viewValue | limitTo:4" typeahead-on-select="loadData($item)" ng-change="nuovoIscritto=true" required/></td>
 					<td>{{translation.BIRTH_DATE}}</td><td><input type="date" ng-model="iscritto.datanascita"/></td>
 					<td>{{translation.BIRTH_PLACE}}</td><td><input type="text" ng-model="iscritto.luogonascita" typeahead="city.comune for city in cities | startsWith:$viewValue | limitTo:4" ng-blur="calcolaCodiceFiscale()"/></td>
 				</tr>
@@ -109,7 +109,39 @@ mysql_close();
 					<td><input type="date" ng-model="iscritto.datacauzione"/></td>
 				</tr>
 			</table>
-			  	
+			  	<div ng-repeat="tessera in tessere">
+				  	<table class="table larger-font">
+				  		<tr>
+				  			<td>Tipo:</td>
+				  			<td>
+						  		<select ng-model="tessera.tipo">
+						  			<option  value="Lendinara" selected="selected">Lendinara</option>
+						  			<option value="csen">CSEN</option>
+						  		</select>
+				  			</td>
+				  			<td>Numero:</td>
+				  			<td>
+				  				<input type="text" ng-model="tessera.tessera"></input>
+				  			</td>
+				  			<td>Ass.:</td>
+				  			<td>
+				  				<select ng-model="tessera.assicurazione">
+									<option value="Base" selected="selected">Base</option>
+									<option value="A">Integrativa A</option>
+									<option value="B">Integrativa B</option>
+									<option value="C">RCT Integrativa C</option>
+									<option value="CSEN">RCT Istruttori Csen</option>
+								</select>
+				  			</td>
+				  		</tr>
+				  		<tr>
+				  			<td>Emissione:</td>
+				  			<td><input type="date" ng-model="tessera.dataemissione" ></input></td>
+				  			<td>Scadenza:</td>
+				  			<td><input type="date" ng-model="tessera.datascadenza" ></input></td>
+				  		</tr>
+					</table>
+			  	</div>
 			  	<div class="panel-body" ng-show="stato=='Nascondi'">
 			    	<table>
 			      	<tr>
@@ -136,7 +168,7 @@ mysql_close();
 					<div class="col-md-2" ng-show="iscritto.nome && iscritto.id"><input type="submit" value="Modifica" ng-click="salva(iscritto, 'modifica');" class="unstamp btn btn-warning" /></div>
 					<div class="col-md-2" ng-show="iscritto.nome && nuovoIscritto && !iscritto.id"><input type="submit" value="Salva" ng-click="salva(iscritto, 'salva');" class="unstamp btn btn-success" /></div>
 					<div class="col-md-2"  ng-show="iscritto.nome"><input type="button" value="Elimina" ng-click="elimina(iscritto);" class="unstamp btn btn-danger"/></div>
-					<div class="col-md-2"><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></div>
+					<!-- <div class="col-md-2"><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></div> -->
 					<div class="col-md-2"><button class="unstamp btn btn-info" ng-click="stampa();" >Stampa</button></div>
 					<div class="col-md-2" ng-show="iscritto.nome"><a href="tessera.php?nome={{iscritto.nome}}" target="_blank" class="unstamp btn btn-info"  >
 			    			Stampa tessera

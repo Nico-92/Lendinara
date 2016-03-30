@@ -17,17 +17,28 @@ if (isset($_GET['iscritto'])) {
     else {
         $array = mysql_fetch_array($result);
         $id = $array['id'];
-        $query_tessere_lendinara = "SELECT * FROM lendinara where id = '$id'";
-        $result_tessere_lendinara = mysql_query($query_tessere_lendinara, $conn) or die('Error, select query_tessere_lendinara failed'
-         /* . mysql_error()*/
-        );
+        // $query_tessere_lendinara = "SELECT * FROM lendinara where id = '$id'";
+        // $result_tessere_lendinara = mysql_query($query_tessere_lendinara, $conn) or die('Error, select query_tessere_lendinara failed'
+        //  /* . mysql_error()*/
+        // );
         
-        $query_tessere_motorclub = "SELECT * FROM motorclub where id = '$id'";
-        $result_tessere_motorclub = mysql_query($query_tessere_motorclub, $conn) or die('Error, select query_tessere_motorclub failed' . mysql_error());
+        // $query_tessere_motorclub = "SELECT * FROM motorclub where id = '$id'";
+        // $result_tessere_motorclub = mysql_query($query_tessere_motorclub, $conn) or die('Error, select query_tessere_motorclub failed' . mysql_error());
         
-        $array_lendinara = mysql_fetch_array($result_tessere_lendinara);
-        $array_motorclub = mysql_fetch_array($result_tessere_motorclub);
-        
+        // $array_lendinara = mysql_fetch_array($result_tessere_lendinara);
+        // $array_motorclub = mysql_fetch_array($result_tessere_motorclub);
+        $query_tessere = "SELECT * FROM tessere where proprietario = '$id'";
+        $result_tessere = mysql_query($query_tessere, $conn) or die('Error, select query_tessere_lendinara failed');
+        $array_tessere = mysql_fetch_array($result_tessere);
+
+        $tessere = '{ "id": "' . $array_tessere['id'] . '",';
+        $tessere = $tessere . '"tessera": "' . $array_tessere['tessera'] . '",';
+        $tessere = $tessere . '"dataemissione": "' . $array_tessere['dataemissione'] . '",';
+        $tessere = $tessere . '"datascadenza": "' . $array_tessere['datascadenza'] . '",';
+        $tessere = $tessere . '"tipo": "' . $array_tessere['tipo'] . '",';
+        $tessere = $tessere . '"assicurazione": "' . $array_tessere['assicurazione'] . '"';
+        $tessere = $tessere . '}';
+
         $ris = '{ "nome": "' . $array['nominativo'] . '",';
         $ris = $ris . '"datanascita": "' . $array['datanascita'] . '",';
         $ris = $ris . '"luogonascita": "' . $array['luogonascita'] . '",';
@@ -45,17 +56,18 @@ if (isset($_GET['iscritto'])) {
         $ris = $ris . '"assicurazione": "' . $array['assicurazione'] . '",';
         $ris = $ris . '"varie": "' . $array['sangue'] . '",';
         $ris = $ris . '"barcode": "' . $array['barcode'] . '",';
-        $ris = $ris . '"tessera_el": "' . $array_lendinara['tesserael'] . '",';
-        $ris = $ris . '"data_el": "' . $array_lendinara['datael'] . '",';
-        $ris = $ris . '"tessera_csen": "' . $array_lendinara['tesseracsen'] . '",';
-        $ris = $ris . '"data_csen": "' . $array_lendinara['datacsen'] . '",';
-        $ris = $ris . '"tessera_fmi": "' . $array_motorclub['tessera'] . '",';
-        $ris = $ris . '"data_fmi": "' . $array_motorclub['datatessera'] . '",';
-        $ris = $ris . '"tessera_sport": "' . $array_motorclub['tesserasport'] . '",';
-        $ris = $ris . '"data_sport": "' . $array_motorclub['datasport'] . '",';
-        $ris = $ris . '"licenza": "' . $array_motorclub['licenza'] . '",';
-        $ris = $ris . '"data_licenza": "' . $array_motorclub['datalicenza'] . '",';
-        $ris = $ris . '"id": "' . $id . '"';
+        // $ris = $ris . '"tessera_el": "' . $array_lendinara['tesserael'] . '",';
+        // $ris = $ris . '"data_el": "' . $array_lendinara['datael'] . '",';
+        // $ris = $ris . '"tessera_csen": "' . $array_lendinara['tesseracsen'] . '",';
+        // $ris = $ris . '"data_csen": "' . $array_lendinara['datacsen'] . '",';
+        // $ris = $ris . '"tessera_fmi": "' . $array_motorclub['tessera'] . '",';
+        // $ris = $ris . '"data_fmi": "' . $array_motorclub['datatessera'] . '",';
+        // $ris = $ris . '"tessera_sport": "' . $array_motorclub['tesserasport'] . '",';
+        // $ris = $ris . '"data_sport": "' . $array_motorclub['datasport'] . '",';
+        // $ris = $ris . '"licenza": "' . $array_motorclub['licenza'] . '",';
+        // $ris = $ris . '"data_licenza": "' . $array_motorclub['datalicenza'] . '",';
+        $ris = $ris . '"id": "' . $id . '",';
+        $ris = $ris . '"tessere": ' . $tessere;
         $ris = $ris . '}';
         echo $ris;
     }
