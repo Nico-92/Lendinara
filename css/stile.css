@@ -251,4 +251,6 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 /*----------------PAGINA TUTORIAL ----------------------*/
 .tutorial-box{
     margin: 10px;
+    padding-left: 20%;
+    padding-right: 20%;
 }
