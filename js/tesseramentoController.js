@@ -22,12 +22,14 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         });
 
         testiService.getOptions().success(function(data) {
+            $scope.avanzatePresenti = false;
+            console.log(data)
             for (var key in data) {
                 if (data[key] === '1') {
                     data[key] = true;
+                    $scope.avanzatePresenti = true;
                 }
             }
-            
             $scope.options = data;
         });
         $scope.getCommonVarie = function(val) {

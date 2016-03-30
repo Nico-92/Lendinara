@@ -129,9 +129,9 @@
 						<div class="span3">
 							<input type="checkbox" ng-model="options.codicefiscale" ng-change="changeOptions()" /> Codice fiscale
 						</div>
-						<div class="span3">
+						<!-- <div class="span3">
 							<input type="checkbox" ng-model="options.certificato" ng-change="changeOptions()" /> Certificato medico
-						</div>
+						</div> -->
 						<div class="span3">
 							<input type="checkbox" ng-model="options.acconto" ng-change="changeOptions()" /> Acconto
 						</div>

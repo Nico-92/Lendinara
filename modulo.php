@@ -72,7 +72,7 @@ mysql_close();
 				<tr>
 					<td>Varie</td><td colspan="3" ><input type="text" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
 				</tr>
-				<tr><td colspan="2" ng-show="options.avanzate == undefined" ng-click="options.avanzate = true">
+				<tr><td colspan="2" ng-show="options.avanzate == undefined && avanzatePresenti == true" ng-click="options.avanzate = true">
 				 	<button class="btn btn-link">Mostra avanzate</button>
 				</td></tr>
 				<tr><td colspan="2" ng-show="options.avanzate == true" ng-click="options.avanzate = undefined">
@@ -90,7 +90,7 @@ mysql_close();
 					<td>Data Acconto</td>
 					<td><input type="date" ng-model="iscritto.dataacconto"/></td>
 				</tr>
-				<tr ng-show="options.avanzate == true">
+				<tr ng-show="options.avanzate == true && options.assicurazione == true">
 					<td>Ass.</td>
 					<td>
 						<select ng-model="iscritto.assicurazione">

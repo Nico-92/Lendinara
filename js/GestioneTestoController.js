@@ -10,7 +10,6 @@ lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', function($s
     testiService.getOptions().success(function(data) {
         for (var key in data) {
             if(data[key] === '1'){
-                console.log(data[key])
                 data[key] = true;
             }
         }
