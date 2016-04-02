@@ -28,7 +28,7 @@ if (isset($_GET['iscritto'])) {
         // $array_lendinara = mysql_fetch_array($result_tessere_lendinara);
         // $array_motorclub = mysql_fetch_array($result_tessere_motorclub);
         $query_tessere = "SELECT * FROM tessere where proprietario = '$id'";
-        $result_tessere = mysql_query($query_tessere, $conn) or die('Error, select query_tessere_lendinara failed');
+        $result_tessere = mysql_query($query_tessere, $conn) or die('Error, select query_tessere_lendinara failed' . mysql_error());
         $array_tessere = mysql_fetch_array($result_tessere);
 
         $tessere = '{ "id": "' . $array_tessere['id'] . '",';
@@ -53,8 +53,7 @@ if (isset($_GET['iscritto'])) {
         $ris = $ris . '"datacauzione": "' . $array['datacauzione'] . '",';
         $ris = $ris . '"acconto": "' . $array['acconto'] . '",';
         $ris = $ris . '"dataacconto": "' . $array['dataacconto'] . '",';
-        $ris = $ris . '"assicurazione": "' . $array['assicurazione'] . '",';
-        $ris = $ris . '"varie": "' . $array['sangue'] . '",';
+        $ris = $ris . '"varie": "' . $array['varie'] . '",';
         $ris = $ris . '"barcode": "' . $array['barcode'] . '",';
         // $ris = $ris . '"tessera_el": "' . $array_lendinara['tesserael'] . '",';
         // $ris = $ris . '"data_el": "' . $array_lendinara['datael'] . '",';

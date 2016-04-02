@@ -7,7 +7,7 @@ $password = $login->{'password'};
 
 if($user == 'demo' && $password == 'demo'){
 	// $_SESSION["DB_NAME"] = 'my_nicolotresoldi';
-	setcookie('DB_NAME', 'my_nicolotresoldi' , time() + (86400 * 30), "/");
+	setcookie('DB_NAME', 'prova' , time() + (86400 * 30), "/");
 	echo "true";
 }else{
 	setcookie('DB_NAME', '' , time() + (86400 * 30), "/");
