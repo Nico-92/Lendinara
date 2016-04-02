@@ -34,6 +34,8 @@
 	    </span>
 		<a href="modulo.php"><input tabindex="-1" type="button" value="Modulo" class="btn btn-default unstamp" /></a>
 	    <a href="gara.php"><input tabindex="-1" type="button" value="Pannello di controllo" class="btn btn-default unstamp" /></a>
+	    	<a href="tutorial.php"><input tabindex="-1" type="button" value="Guida" class="btn btn-default unstamp" /></a>
+
 		<!-- <a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a> -->
 	</div>
 	<!-- <table cellpadding="5" cellspacing="5">

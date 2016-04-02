@@ -28,9 +28,10 @@
 	    <span class="language" ng-click="changeLanguage('it')">
 	        ITALIAN
 	    </span>
-	    <a href="modulo.php"><input type="button" value="Vai a Modulo" class="btn btn-default unstamp" /></a>
-		<a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a>
+	    <a href="modulo.php"><input type="button" value="Modulo" class="btn btn-default unstamp" /></a>
+		<!-- <a href="riassuntoeventi.php"><input tabindex="-1" type="button" value="Riassunto Eventi" class="btn btn-default unstamp" /></a> -->
 		<a href="riassuntoiscritti.php?on=1"><input tabindex="-1" type="button" value="Elenco tesserati" class="btn btn-default unstamp" /></a>
+		<a href="tutorial.php"><input tabindex="-1" type="button" value="Guida" class="btn btn-default unstamp" /></a>
 	</div>
 		
 		<div align="center">

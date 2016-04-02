@@ -3,8 +3,23 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<title>Guida</title>
+	<script src="js/vendor.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/services/translationService.js"></script>
+	<script type="text/javascript" src="js/translationController.js"></script>
 </head>
 <body>
+	<div class="col-md-12 languageNavbar" ng-controller="translationController">
+	    <a href="modulo.php"><input type="button" value="Modulo" class="btn btn-default unstamp" /></a>
+	    <a href="gara.php"><input tabindex="-1" type="button" value="Pannello di controllo" class="btn btn-default unstamp" /></a>
+		<a href="riassuntoiscritti.php?on=1"><input tabindex="-1" type="button" value="Elenco tesserati" class="btn btn-default unstamp" /></a>
+		<span class="language" ng-click="changeLanguage('en')">
+	        ENGLISH
+	    </span>
+	    <span class="language" ng-click="changeLanguage('it')">
+	        ITALIAN
+	    </span>
+	</div>
 	<div class="tutorial-box">
 		<h1 id="tesseramento">Tesseramento</h1>
 			<p>La sezione tesseramento può essere usata in due modi:</p>
@@ -101,13 +116,13 @@
 		<h1 id="lista_iscritti_evento">Lista iscritti evento</h1>
 		Qui è possibile vedere un elenco degli iscritti con tutte le informazioni.
 		Per stampare l'elenco cliccare su Stampa.
-		Per salvare l'elenco in formato csv (leggibile da Excel) cliccare su Formato csv.
-		Se una data informazione non interessa, ad esempio Motoclub o varie, e possibile eliminare la colonna cliccando sulla X accanto al nome della colonna.
-		L'ordine delle colonne può essere modificato usando le frecce accanto al nome della colonna.
-		L'elenco può essere modificato cliccando su Modifica, quindi su Salva.
-		Per eliminare un iscritto fare click sulla X all'inizio della riga corrispondente.
+		<p>Per salvare l'elenco in formato csv (leggibile da Excel) cliccare su Formato csv.</p>
+		<p>Se una data informazione non interessa, ad esempio Motoclub o varie, e possibile eliminare la colonna cliccando sulla X accanto al nome della colonna.
+		L'ordine delle colonne può essere modificato usando le frecce accanto al nome della colonna.</p>
+		<p>I dati dei concorrenti possono essere modificato cliccando su Modifica, quindi su Salva.
+		Per eliminare un iscritto fare click sulla X all'inizio della riga corrispondente.</p>
 		<img src="" alt="Pagina elenco iscritti ad evento">
-
+		<h1 id="riassunto_tesserati">Riassunto tesserati</h1>
 	</div>
 </body>
 </html>
