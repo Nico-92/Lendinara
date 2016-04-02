@@ -75,13 +75,17 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							Visualizza solo tesserati <input type="checkbox" ng-model="filtro.tesserati" ng-change="filtra()">
+							<br />
+							<button class="btn btn-default" ng-click="tesseratiOggi();">TESSERATI OGGI</button> 
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<br />
-							<button class="btn btn-default" ng-click="tesseratiOggi();">TESSERATI OGGI</button> 
+						<input type="checkbox" checked="checked" ng-model="filtro.tipoTessere.nonTesserati" ng-change="cambiaTipoTessere()"/> Non tesserati
+						<br />
+						<input type="checkbox" checked="checked" ng-model="filtro.tipoTessere.lendinara" ng-change="cambiaTipoTessere()"/> Lendinara
+						<br />
+						<input type="checkbox" ng-model="filtro.tipoTessere.csen"  ng-change="cambiaTipoTessere()"/> CSEN
 						</div>
 					</div>
 					 <hr />

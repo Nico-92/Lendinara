@@ -61,7 +61,7 @@ $varie=mysql_escape_string($varie);
 if($funzione == "salva"){
 	// Salvo i dati del tesserato
 	// echo "salva";
-	$query="insert into iscritti (nominativo, datanascita, luogonascita, via, cap, citta, email, telefono, sangue, scadenza_visita, codicefiscale, acconto, dataacconto, cauzione, datacauzione, assicurazione) values ('$nome', '$datanascita', '$luogonascita', '$via', '$cap', '$citta', '$email', '$telefono', '$varie', '$scadenza', '$codicefiscale', '$acconto', '$dataacconto', '$cauzione', '$datacauzione', '$assicurazione')";
+	$query="insert into iscritti (nominativo, datanascita, luogonascita, via, cap, citta, email, telefono, varie, scadenza_visita, codicefiscale, acconto, dataacconto, cauzione, datacauzione) values ('$nome', '$datanascita', '$luogonascita', '$via', '$cap', '$citta', '$email', '$telefono', '$varie', '$scadenza', '$codicefiscale', '$acconto', '$dataacconto', '$cauzione', '$datacauzione')";
 	$result=mysql_query($query, $conn) or die('Errore, iscrizione fallita: ' . mysql_error());
 	// Recupero l'id del tesserato appena salvato
 	$query_get_id = "SELECT id FROM iscritti WHERE nominativo = '$nome'";
@@ -78,7 +78,7 @@ if($funzione == "salva"){
 }
 else{
 	$id=$iscritto->{'id'};
-	$query = "UPDATE iscritti SET nominativo='$nome', datanascita='$datanascita', luogonascita='$luogonascita', via='$via', cap='$cap', citta='$citta', email='$email', telefono='$telefono', sangue='$varie', scadenza_visita='$scadenza', codicefiscale = '$codicefiscale', acconto = '$acconto', dataacconto = '$dataacconto', cauzione = '$cauzione', datacauzione = '$datacauzione', assicurazione = '$assicurazione' WHERE id='$id'";
+	$query = "UPDATE iscritti SET nominativo='$nome', datanascita='$datanascita', luogonascita='$luogonascita', via='$via', cap='$cap', citta='$citta', email='$email', telefono='$telefono', varie='$varie', scadenza_visita='$scadenza', codicefiscale = '$codicefiscale', acconto = '$acconto', dataacconto = '$dataacconto', cauzione = '$cauzione', datacauzione = '$datacauzione' WHERE id='$id'";
 	$result = mysql_query($query, $conn) or die('Errore, modifica fallita: ' . mysql_error());
 	$query_tessera = "UPDATE tessere SET tessera = '$tessera', dataemissione = '$dataemissione', datascadenza = '$datascadenza', tipo = '$tipo', assicurazione = '$assicurazione' WHERE proprietario='$id'";
 	$result_tessera=mysql_query($query_tessera, $conn) or die('Errore, modifica tessera fallita: ' . mysql_error());

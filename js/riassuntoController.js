@@ -1,5 +1,5 @@
 function JSONToCSVConvertor(e, r, t) {
-    for(var i = 0; i< e.length; i++){
+    for (var i = 0; i < e.length; i++) {
         delete e[i].fields.id;
         e[i].fields['Cod.Aff.Societa'] = '30119';
         e[i] = e[i].fields;
@@ -27,7 +27,11 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
     function($scope, $http, $rootScope, iscrittiService) {
         $scope.showMore = false;
         $scope.filtro = {};
-        var iscritti;
+        $scope.filtro.tipoTessere = {
+            lendinara: true,
+            csen: true,
+            nonTesserati: true
+        };
         $scope.tesserati = function() {
             return iscrittiService.getIscritti().success(function(data) {
                 $scope.iscritti = data.risultato;
@@ -105,19 +109,50 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                 return 0;
             }
         }
-
-        $scope.resetFiltri = function(){
+        $scope.resetFiltri = function() {
             $scope.filtro = {};
             $scope.iscritti = iscritti;
         };
+        $scope.cambiaTipoTessere = function() {
+            var tesserati = [];
+            if ($scope.filtro.tipoTessere.lendinara === true && $scope.filtro.tipoTessere.csen === true && $scope.filtro.tipoTessere.nonTesserati === true) {
+                // Tutto
+                $scope.iscritti = iscritti;
+            } else {
+                if ($scope.filtro.tipoTessere.lendinara === true) {
+                    for (i = 0; i < $scope.iscritti.length; i++) {
+                        if ($scope.iscritti[i].fields.Tipo === 'Lendinara') {
+                            tesserati.push($scope.iscritti[i]);
+                        }
+                    }
+                }
+                if ($scope.filtro.tipoTessere.csen === true) {
+                    for (i = 0; i < $scope.iscritti.length; i++) {
+                        if ($scope.iscritti[i].fields.Tipo === 'csen') {
+                            tesserati.push($scope.iscritti[i]);
+                        }
+                    }
+                }
+                if ($scope.filtro.tipoTessere.nonTesserati === true) {
+                    for (i = 0; i < $scope.iscritti.length; i++) {
+                        if ($scope.iscritti[i].fields.Tipo === '') {
+                            tesserati.push($scope.iscritti[i]);
+                        }
+                    }
+                }
+                $scope.iscritti = tesserati;
+            }
+            if ($scope.filtro.tipoTessere.lendinara === false && $scope.filtro.tipoTessere.csen === false && $scope.filtro.tipoTessere.nonTesserati === false) {
+                // Niente
+                $scope.iscritti = [];
+            }
+        };
         $scope.gridOptions = {
             data: 'iscritti',
-            columnDefs: [
-                 {
+            columnDefs: [{
                     field: "fields['Cognome']",
                     displayName: 'Cognome'
-                },
-                {
+                }, {
                     field: "fields['Nome']",
                     displayName: 'Nome'
                 },
@@ -145,21 +180,17 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                 {
                     field: "fields['Codice fiscale']",
                     displayName: 'Codice fiscale'
-                }, 
-                {
+                }, {
                     field: "fields['Tipo assicurazione']",
                     displayName: 'Tipo assicurazione'
-                },
-                 {
+                }, {
                     field: "fields['Data emissione']",
                     displayName: 'Data Emissione',
                     sortFn: dateSort
-                },
-                 {
+                }, {
                     field: "fields['Data scadenza']",
                     displayName: 'Data Scadenza'
-                },
-                {
+                }, {
                     field: "fields['Numero Tessera']",
                     displayName: 'Numero Tessera'
                 }
