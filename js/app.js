@@ -1,5 +1,5 @@
 var moduloServices = angular.module('moduloServices', []);
-var lendinara = angular.module('lendinara', ['ngResource', 'ui.bootstrap', 'ngGrid', 'moduloServices'], function($locationProvider) {
+var lendinara = angular.module('lendinara', ['ngResource','ngSanitize','ui.bootstrap', 'ngGrid', 'moduloServices'], function($locationProvider) {
     $locationProvider.html5Mode(true);
 });
 var tessera = angular.module('tessera', ['barcodeGenerator', 'moduloServices', 'ipCookie']);

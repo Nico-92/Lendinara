@@ -33,6 +33,11 @@ lendinara.controller('layoutStampaController', ['$scope', 'testiService', '$time
                 }
             });
         };
+        $scope.nuovaPosizioneBlocco2 = function(){
+            var blocco1 = parseInt($scope.blocco1.altezza);
+            blocco1 = blocco1 + 14;
+            return blocco1 + 'cm';
+        }
         carica_testi = function() {
             testiService.getTesti(tipo).success(function(data) {
                 if (data !== 'errore') {

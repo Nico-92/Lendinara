@@ -27,13 +27,13 @@
 	</div>
 	<div ng-controller="layoutStampaController">
 		<div  class="layoutStampa">
-			<div class="blocco blocco-uno" ng-style="styleblocco1">
+			<div class="blocco blocco-uno" ng-style="{'height':blocco1.altezza + 'cm'}">
 				<textarea class="form-control" ng-model="blocco1.testo"></textarea>
 			</div>
-			<div class="blocco blocco-dati text-center">
+			<div class="blocco blocco-dati text-center" ng-style="{'top':blocco1.altezza + 'cm'}">
 				Qui verranno visualizzati i dati del tesserato
 			</div>
-			<div class="blocco blocco-due" ng-style="styleblocco2">
+			<div class="blocco blocco-due" ng-style="{'height':blocco2.altezza + 'cm', 'top': nuovaPosizioneBlocco2()}">
 				<textarea  class="form-control" ng-model="blocco2.testo"></textarea>
 			</div>
 		</div>
@@ -45,9 +45,9 @@
 			</p>
 			<p>Se il testo viene tagliato, o resta troppo spazio bianco puoi modifcare l'altezza dei due blocchi cambiando i valori qui sotto.</p>
 			<p>Per un video tutorial <a href="">clicca qui</a></p>
-			<p>Altezza blocco 1 in cm: <input type="text" ng-model="blocco1.altezza" class="form-control input-small" /> <button class="btn btn-default" ng-click="styleblocco1={'height':blocco1.altezza + 'cm'}"> Modifica</button></p>
+			<p>Altezza blocco 1 in cm: <input type="text" ng-model="blocco1.altezza" class="form-control input-small" /> <!-- <button class="btn btn-default" ng-click="styleblocco1={'height':blocco1.altezza + 'cm'}"> Modifica</button> --></p>
 			<p>Altezza blocco 2 in cm: 
-			<input type="text" ng-model="blocco2.altezza" class="form-control input-small" /> <button class="btn btn-default" ng-click="styleblocco2={'height':blocco2.altezza + 'cm'}"> Modifica</button></p>	
+			<input type="text" ng-model="blocco2.altezza" class="form-control input-small" /> <!-- <button class="btn btn-default" ng-click="styleblocco2={'height':blocco2.altezza + 'cm'}"> Modifica</button> --></p>	
 			<p><button class="btn btn-default" ng-click="modifica()">Salva</button></p>
 			<div ng-if="messaggio==true" class="alert alert-success alert-dismissable unstamp">Testi salvati</div>
 			<div ng-if="errore==true" class="alert alert-danger alert-dismissable unstamp">Qualcosa non ha funzionato. Riprova</div>

@@ -25,6 +25,7 @@
 </head>
 
 <body ng-app="lendinara">
+
 	<div class="col-md-12 languageNavbar" ng-controller="translationController">
 	    <span class="language" ng-click="changeLanguage('en')">
 	        ENGLISH

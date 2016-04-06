@@ -36,7 +36,7 @@ mysql_close();
 <script type="text/javascript" src="//fast.eager.io/c2PMTMaiw7.js"></script>
 </head>
 <body ng-app="lendinara">
- <div class="col-md-12 languageNavbar" id="main-menu" ng-controller="translationController">
+ <div class="col-md-12 languageNavbar unstamp" id="main-menu" ng-controller="translationController">
     <span class="language" ng-click="changeLanguage('en')">
         ENGLISH
     </span>
@@ -50,6 +50,7 @@ mysql_close();
 </div>
 <div align="center">
 <div class="panel panel-default {{printable}}" id="iscrizioneLendinara" ng-controller="tesseramentoCtrl">
+	<p id="testo2Blocco1" class="{{classeStampa}}" style="white-space: pre-wrap;"  >{{blocco1}}</p>
 	<div class="panel-heading">{{translation.SUBSCRIPTION}}</div>
 	<div class="panel-body" >
 		<form name="nuovaIscrizione" id="nuovaIscrizione">
@@ -72,22 +73,22 @@ mysql_close();
 				<tr>
 					<td>Varie</td><td colspan="3" ><input type="text" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
 				</tr>
-				<tr><td colspan="2" ng-show="options.avanzate == undefined && avanzatePresenti == true" ng-click="options.avanzate = true">
+				<!-- <tr><td colspan="2" ng-show="options.avanzate == undefined && avanzatePresenti == true" ng-click="options.avanzate = true">
 				 	<button class="btn btn-link">Mostra avanzate</button>
 				</td></tr>
 				<tr><td colspan="2" ng-show="options.avanzate == true" ng-click="options.avanzate = undefined">
 				 	<button class="btn btn-link">Nascondi avanzate</button>
-				</td></tr>
+				</td></tr> -->
 				<tr ng-show="options.avanzate == true && options.codicefiscale == true">
 					<td>Codice Fiscale</td><td> <input type="text" placeholder="Codice fiscale" id="codicefiscale" ng-model="iscritto.codicefiscale"/></td>
 					<td><label style="display:inline" for="m">M</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="M">
 						<label style="display:inline" for="f">F</label><input type="radio" name="sesso" ng-model="iscritto.sesso" value="F"></td>
-					<td><button class="btn" ng-click="calcolaCodiceFiscale();">Ricalcola</button></td>
+					<td><button class="btn unstamp" ng-click="calcolaCodiceFiscale();">Ricalcola</button></td>
 				</tr>
 				<tr ng-show="options.avanzate == true && options.acconto == true">
-					<td>Acconto</td>
+					<td>Pagamento</td>
 					<td><input type="text" ng-model="iscritto.acconto"/></td>
-					<td>Data Acconto</td>
+					<td>Data pagamento</td>
 					<td><input type="date" ng-model="iscritto.dataacconto"/></td>
 				</tr>
 				<tr ng-show="options.avanzate == true && options.assicurazione == true">
@@ -110,18 +111,19 @@ mysql_close();
 				</tr>
 			</table>
 			  	<div ng-repeat="tessera in tessere">
+			  		<div ng-if="tesseraMancante==true" class="alert alert-danger alert-dismissable unstamp">Nessuna tessera trovata</div>
 				  	<table class="table larger-font">
 				  		<tr>
 				  			<td>Tipo:</td>
 				  			<td>
 						  		<select ng-model="tessera.tipo">
 						  			<option  value="Lendinara" selected="selected">Lendinara</option>
-						  			<option value="csen">CSEN</option>
+						  			<option value="csen">csen</option>
 						  		</select>
 				  			</td>
 				  			<td>Numero:</td>
 				  			<td>
-				  				<input type="text" ng-model="tessera.tessera"></input>
+				  				<input type="text" ng-model="tessera.tessera" ng-focus="tesseraMancante = false"></input>
 				  			</td>
 				  			<td>Ass.:</td>
 				  			<td>
@@ -142,7 +144,7 @@ mysql_close();
 				  		</tr>
 					</table>
 			  	</div>
-			  	<div class="panel-body" ng-show="stato=='Nascondi'">
+			  	<!-- <div class="panel-body" ng-show="stato=='Nascondi'">
 			    	<table>
 			      	<tr>
 						<td>Tessera E.L.</td><td><input type="text" name="tesserael" id="tesserael" ng-model="iscritto.tessera_el" /></td>
@@ -163,8 +165,8 @@ mysql_close();
 					    <td>Data</td><td><input type="date" name="datalicenzafmi" ng-model="iscritto.data_licenza" /></td>
 					</tr>
 					</table>
-			  	</div>
-				<div class="row">
+			  	</div> -->
+				<div class="row unstamp">
 					<div class="col-md-2" ng-show="iscritto.nome && iscritto.id"><input type="submit" value="Modifica" ng-click="salva(iscritto, 'modifica');" class="unstamp btn btn-warning" /></div>
 					<div class="col-md-2" ng-show="iscritto.nome && nuovoIscritto && !iscritto.id"><input type="submit" value="Salva" ng-click="salva(iscritto, 'salva');" class="unstamp btn btn-success" /></div>
 					<div class="col-md-2"  ng-show="iscritto.nome"><input type="button" value="Elimina" ng-click="elimina(iscritto);" class="unstamp btn btn-danger"/></div>
@@ -174,17 +176,19 @@ mysql_close();
 			    			Stampa tessera
 			    		</a></div>
 			    	<div class="col-md-2"><input type="reset" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></div>
+			    	<div class="col-md-2" ng-show="controlloMinorenni(iscritto, true) ==true"><input type="button" value="Liberatoria" class="unstamp btn" ng-click="apriLiberatoria(iscritto)" /></div>
+			    	
 				</div>
 			  	
 			<br />
 			<div ng-if="risultato==true" class="alert alert-success alert-dismissable unstamp">{{messaggio}}</div>
 			<div ng-if="risultato==false" class="alert alert-danger alert-dismissable unstamp">{{messaggio}}</div>
 		</form>
-		<div id="testo2" class="{{classeStampa}}" ng-repeat="testo in testi">
-				<p class="list-group-item-text">{{testo.testo}}</p>
-		</div>
+		
+		<p id="testo2Blocco2" class="{{classeStampa}}" style="white-space: pre-wrap;"  >{{blocco2}}</p>
+		
 		<!-- BOX FIRME -->
-		<br /><br /><br />
+		<!-- <br /><br /><br />
  		<div class="{{classeStampa}}" id="firma1">
 		  	<div class="panel-heading">Firma</div>
 		  	<div class="panel-body">
@@ -197,7 +201,7 @@ mysql_close();
 		  	<div class="panel-body">
 		    	Il sottoscritto: ..............................................................
 		  	</div>
-		</div>	 
+		</div>	  -->
 </div> </div><!-- CHIUDO IL PANEL DI ISCRIZIONE A LENDINARA -->
 
 
