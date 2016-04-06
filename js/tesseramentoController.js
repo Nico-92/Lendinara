@@ -86,7 +86,7 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
                     if (data.tessere.tessera !== '') {
                         $scope.tessere.push(data.tessere);
                     } else {
-                    	$scope.tesseraMancante = true;
+                        $scope.tesseraMancante = true;
                         $scope.tessere = [{
                             tipo: 'Lendinara',
                             tessera: '',
@@ -115,6 +115,8 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         };
         $scope.reset = function(val) {
             $scope.iscritto = {};
+            
+            $scope.iscritto.dataacconto = moment().format("YYYY-MM-DD");
             $scope.tesseraMancante = false;
             if (val == 1) {
                 $timeout(function() {
@@ -125,6 +127,14 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
                 $scope.messaggio = "";
                 $scope.risultato = undefined;
             }
+            $scope.tessere = [{
+                tipo: 'Lendinara',
+                tessera: '',
+                assicurazione: 'Base',
+                dataemissione: moment().format("YYYY-MM-DD"),
+                datascadenza: moment().add(1, 'year').format("YYYY-MM-DD")
+            }];
+            console.log($scope.tessere)
         };
         $scope.apriLiberatoria = function(iscritto) {
             window.open("minore.php?nominativo=" + iscritto.nome + "&datanascita=" + iscritto.datanascita + "&luogonascita=" + iscritto.luogonascita + "&citta=" + iscritto.citta + "&via=" + iscritto.via);

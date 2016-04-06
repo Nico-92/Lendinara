@@ -175,7 +175,7 @@ mysql_close();
 					<div class="col-md-2" ng-show="iscritto.nome"><a href="tessera.php?nome={{iscritto.nome}}" target="_blank" class="unstamp btn btn-info"  >
 			    			Stampa tessera
 			    		</a></div>
-			    	<div class="col-md-2"><input type="reset" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></div>
+			    	<div class="col-md-2"><input type="button" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></div>
 			    	<div class="col-md-2" ng-show="controlloMinorenni(iscritto, true) ==true"><input type="button" value="Liberatoria" class="unstamp btn" ng-click="apriLiberatoria(iscritto)" /></div>
 			    	
 				</div>

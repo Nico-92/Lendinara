@@ -35,7 +35,8 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
         $scope.tesserati = function() {
             return iscrittiService.getIscritti().success(function(data) {
                 $scope.iscritti = data.risultato;
-                iscritti = data.risultato;;
+                iscritti = data.risultato;
+                console.log($scope.iscritti)
             });
         };
         $scope.esporta = function() {
@@ -180,10 +181,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                 {
                     field: "fields['Codice fiscale']",
                     displayName: 'Codice fiscale'
-                }, {
-                    field: "fields['Tipo assicurazione']",
-                    displayName: 'Tipo assicurazione'
-                }, {
+                },{
                     field: "fields['Data emissione']",
                     displayName: 'Data Emissione',
                     sortFn: dateSort
@@ -191,6 +189,9 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                     field: "fields['Data scadenza']",
                     displayName: 'Data Scadenza'
                 }, {
+                    field: "fields['Tipo assicurazione']",
+                    displayName: 'Tipo assicurazione'
+                },  {
                     field: "fields['Numero Tessera']",
                     displayName: 'Numero Tessera'
                 }
