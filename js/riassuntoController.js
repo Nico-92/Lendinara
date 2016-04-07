@@ -1,6 +1,9 @@
 function JSONToCSVConvertor(e, r, t) {
     for (var i = 0; i < e.length; i++) {
         delete e[i].fields.id;
+        e[i].fields['Nome cane'] = '';
+        e[i].fields['Razza cane'] = '';
+        e[i].fields['Microchip / tatuaggio'] = '';
         e[i].fields['Cod.Aff.Societa'] = '30119';
         e[i] = e[i].fields;
     }
@@ -13,7 +16,7 @@ function JSONToCSVConvertor(e, r, t) {
     }
     for (var c = 0; c < a.length; c++) {
         var o = "";
-        for (var i in a[c]) o += '"' + a[c][i] + '";';
+        for (var i in a[c]) o += a[c][i] + ';';
         o.slice(0, o.length - 1), n += o + "\r\n";
     }
     if ("" == n) return void alert("Invalid data");
@@ -44,7 +47,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
         };
         $scope.tesseratiOggi = function() {
             $scope.filtro.inizio = moment().format("YYYY-MM-DD");
-            // $scope.filtro.fine = moment().format("YYYY-MM-DD");
+            $scope.filtro.fine = moment().format("YYYY-MM-DD");
             $scope.filtraDate();
         };
         $scope.tesserati();
@@ -53,13 +56,12 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             var arrayData = [];
             var datatessera;
             if ($scope.filtro.inizio) {
-                var inizio = new Date($scope.filtro.inizio);
-                inizio = inizio.getTime();
+                var inizio = moment($scope.filtro.inizio, 'YYYY-MM-DD').valueOf();
                 for (i = 0; i < $scope.iscritti.length; i++) {
                     if ($scope.iscritti[i].fields['Data emissione']) {
                         arrayData = $scope.iscritti[i].fields['Data emissione'].split('-');
-                        datatessera = new Date(arrayData[2] + '-' + arrayData[1] + '-' + arrayData[0]);
-                        datatessera = datatessera.getTime();
+                        datatessera = moment($scope.iscritti[i].fields['Data emissione'], "DD/MM/YYYY").valueOf();
+                        // console.log(datatessera)
                         if (datatessera >= inizio) {
                             tesserati.push($scope.iscritti[i]);
                         }
@@ -85,6 +87,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
         };
         $scope.filtra = function() {
             var tesserati = [];
+            console.log($scope.filtro.tesserati)
             if ($scope.filtro.tesserati) {
                 for (i = 0; i < $scope.iscritti.length; i++) {
                     if ($scope.iscritti[i].tessera !== '') {
@@ -113,6 +116,11 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
         $scope.resetFiltri = function() {
             $scope.filtro = {};
             $scope.iscritti = iscritti;
+            $scope.filtro.tipoTessere = {
+                lendinara: true,
+                csen: true,
+                nonTesserati: true
+            };
         };
         $scope.cambiaTipoTessere = function() {
             var tesserati = [];
@@ -181,7 +189,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                 {
                     field: "fields['Codice fiscale']",
                     displayName: 'Codice fiscale'
-                },{
+                }, {
                     field: "fields['Data emissione']",
                     displayName: 'Data Emissione',
                     sortFn: dateSort
@@ -191,7 +199,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                 }, {
                     field: "fields['Tipo assicurazione']",
                     displayName: 'Tipo assicurazione'
-                },  {
+                }, {
                     field: "fields['Numero Tessera']",
                     displayName: 'Numero Tessera'
                 }

@@ -84,7 +84,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-						<input type="checkbox" checked="checked" ng-model="filtro.tipoTessere.nonTesserati" ng-change="cambiaTipoTessere()"/> Non tesserati
+						<input type="checkbox" checked="checked" ng-model="filtro.tipoTessere.nonTesserati" ng-change="cambiaTipoTessere()"/> Altre tessere
 						<br />
 						<input type="checkbox" checked="checked" ng-model="filtro.tipoTessere.lendinara" ng-change="cambiaTipoTessere()"/> Lendinara
 						<br />

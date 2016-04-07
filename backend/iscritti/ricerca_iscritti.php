@@ -61,9 +61,11 @@ while ($array = mysql_fetch_array($result)) {
     //$ris = $ris . '"varie": "'.trim ($array['sangue'] ).'",';
 
     // Aggiungo  i dati sulla tessera
+    $dataemissione = date('d/m/Y', strtotime($array_tessere['dataemissione']));
+    $datascadenza = date('d/m/Y', strtotime($array_tessere['datascadenza']));
     $ris = $ris . '"Numero Tessera": "' . $array_tessere['tessera'] . '",';
-    $ris = $ris . '"Data emissione": "' . $array_tessere['dataemissione'] . '",';
-    $ris = $ris . '"Data Scadenza": "' . $array_tessere['datascadenza'] . '",';
+    $ris = $ris . '"Data emissione": "' . $dataemissione . '",';
+    $ris = $ris . '"Data Scadenza": "' . $datascadenza . '",';
     $ris = $ris . '"Tipo": "' . $array_tessere['tipo'] . '",';
     $ris = $ris . '"Assicurazione": "' . $array_tessere['assicurazione'] . '",';
     // if ($array_lendinara['tesserael'] != '') {

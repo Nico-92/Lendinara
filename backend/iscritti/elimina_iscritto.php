@@ -12,17 +12,17 @@ if (isset($_GET['id'])) {
     $array = mysql_fetch_array($result);
     $nome = $array['nominativo'];
     
-    $query3 = "delete from r1 where nominativo='$nome'";
-    mysql_query($query3, $conn) or die('Error, delete from r1 failed' . mysql_error());
+    // $query3 = "delete from r1 where nominativo='$nome'";
+    // mysql_query($query3, $conn) or die('Error, delete from r1 failed' . mysql_error());
     
     $query3 = "delete from iscritti where id='$id'";
     mysql_query($query3, $conn) or die('Error, delete from iscritti failed' . mysql_error());
-    $query3 = "delete from lendinara where id='$id'";
-    mysql_query($query3, $conn) or die('Error, insert query failed' . mysql_error());
-    $query3 = "delete from motorclub where id='$id'";
-    mysql_query($query3, $conn) or die('Error, insert query failed' . mysql_error());
-    $query3 = "delete from esterni where id='$id'";
-    mysql_query($query3, $conn) or die('Error, insert query failed' . mysql_error());
+    // $query3 = "delete from lendinara where id='$id'";
+    // mysql_query($query3, $conn) or die('Error, insert query failed' . mysql_error());
+    // $query3 = "delete from motorclub where id='$id'";
+    // mysql_query($query3, $conn) or die('Error, insert query failed' . mysql_error());
+    // $query3 = "delete from esterni where id='$id'";
+    // mysql_query($query3, $conn) or die('Error, insert query failed' . mysql_error());
     
     if ($result) {
         echo "true";

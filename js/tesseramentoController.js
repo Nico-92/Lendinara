@@ -79,6 +79,7 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         $scope.loadData = function(val) {
             iscrittiService.get(val).then(function(res) {
                 var data = res.data;
+                console.log(data)
                 if (data == 'false') {
                     $scope.nuovoIscritto = true;
                 } else {
