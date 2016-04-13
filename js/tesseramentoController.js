@@ -1,5 +1,5 @@
-lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootScope', 'iscrittiService', 'mySharedService', 'testiService', 'translationService',
-    function($scope, $http, $timeout, $rootScope, iscrittiService, sharedService, testiService, translationService) {
+lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootScope', 'iscrittiService', 'mySharedService', 'testiService', 'translationService', 'ipCookie',
+    function($scope, $http, $timeout, $rootScope, iscrittiService, sharedService, testiService, translationService, ipCookie) {
         $http.get('files/city.json').then(function(res) {
             $scope.cities = res.data;
         });
@@ -9,6 +9,7 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         $scope.$on('handleBroadcast', function() {
             $scope.loadData(sharedService.iscritto);
         });
+       
         $scope.stato = 'Mostra';
         $scope.classeStampa = 'hide';
         $scope.printable = 'unstamp';
@@ -26,7 +27,7 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             tessera: '',
             assicurazione: 'Base',
             dataemissione: moment().format("YYYY-MM-DD"),
-            datascadenza: moment().add(1, 'year').format("YYYY-MM-DD")
+            datascadenza: moment().add(1, 'year').subtract(1, "days").format("YYYY-MM-DD")
         }];
         testiService.getOptions().success(function(data) {
             $scope.avanzatePresenti = false;
@@ -39,6 +40,52 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             $scope.options = data;
             $scope.options.avanzate = true;
         });
+        $scope.loadData = function(val) {
+            iscrittiService.get(val).then(function(res) {
+                var data = res.data;
+                console.log(data)
+                if (data == 'false') {
+                    $scope.nuovoIscritto = true;
+                } else {
+                    $scope.tessere = [];
+                    if (data.tessere.tessera !== '') {
+                        if(data.tessere.datascadenza === ''){
+                            data.tessere.datascadenza = moment(data.tessere.dataemissione).add(1, 'year').format("YYYY-MM-DD");
+                        }
+                        $scope.tessere.push(data.tessere);
+                    } else {
+                        $scope.tesseraMancante = true;
+                        $scope.tessere = [{
+                            tipo: 'Lendinara',
+                            tessera: '',
+                            assicurazione: 'Base',
+                            dataemissione: moment().format("YYYY-MM-DD"),
+                            datascadenza: moment().add(1, 'year').subtract(1, "days").format("YYYY-MM-DD")
+                        }];
+                    }
+                    $scope.nuovoIscritto = false;
+                    $scope.id = data.id;
+                    $scope.iscritto = data;
+                    $scope.iscritto.cap = parseFloat($scope.iscritto.cap, 2);
+                    $scope.iscritto.sesso = 'M';
+                    if ($scope.iscritto.dataacconto == '') {
+                        $scope.iscritto.dataacconto = moment().format("YYYY-MM-DD");
+                    }
+                    //Verifico se il certificato è scaduto
+                    var oggi = new Date();
+                    var scadenza = new Date($scope.iscritto.scadenza);
+                    if (scadenza.setHours(0, 0, 0, 0) <= oggi.setHours(0, 0, 0, 0)) {
+                        $scope.risultato = false;
+                        $scope.messaggio = 'ATTENZIONE: Certificato medico scaduto';
+                    }
+                }
+            })
+        };
+         iscrittoCookie = ipCookie('iscritto');
+        if (iscrittoCookie) {
+            ipCookie.remove('iscritto');
+            $scope.loadData(iscrittoCookie);
+        }
         $scope.getCommonVarie = function(val) {
             return $http.get('listaCommonVarie.php', {
                 params: {
@@ -76,47 +123,9 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             var data = $scope.iscritto.datanascita.split("-");
             $scope.iscritto.codicefiscale = CFisc.calcola_codice(nome[1], nome[0], sesso, data[2], data[1], data[0], $scope.iscritto.luogonascita);
         }
-        $scope.loadData = function(val) {
-            iscrittiService.get(val).then(function(res) {
-                var data = res.data;
-                console.log(data)
-                if (data == 'false') {
-                    $scope.nuovoIscritto = true;
-                } else {
-                    $scope.tessere = [];
-                    if (data.tessere.tessera !== '') {
-                        $scope.tessere.push(data.tessere);
-                    } else {
-                        $scope.tesseraMancante = true;
-                        $scope.tessere = [{
-                            tipo: 'Lendinara',
-                            tessera: '',
-                            assicurazione: 'Base',
-                            dataemissione: moment().format("YYYY-MM-DD"),
-                            datascadenza: moment().add(1, 'year').format("YYYY-MM-DD")
-                        }];
-                    }
-                    $scope.nuovoIscritto = false;
-                    $scope.id = data.id;
-                    $scope.iscritto = data;
-                    $scope.iscritto.cap = parseFloat($scope.iscritto.cap, 2);
-                    $scope.iscritto.sesso = 'M';
-                    if ($scope.iscritto.dataacconto == '') {
-                        $scope.iscritto.dataacconto = moment().format("YYYY-MM-DD");
-                    }
-                    //Verifico se il certificato è scaduto
-                    var oggi = new Date();
-                    var scadenza = new Date($scope.iscritto.scadenza);
-                    if (scadenza.setHours(0, 0, 0, 0) <= oggi.setHours(0, 0, 0, 0)) {
-                        $scope.risultato = false;
-                        $scope.messaggio = 'ATTENZIONE: Certificato medico scaduto';
-                    }
-                }
-            })
-        };
+        
         $scope.reset = function(val) {
             $scope.iscritto = {};
-            
             $scope.iscritto.dataacconto = moment().format("YYYY-MM-DD");
             $scope.tesseraMancante = false;
             if (val == 1) {
@@ -133,7 +142,7 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
                 tessera: '',
                 assicurazione: 'Base',
                 dataemissione: moment().format("YYYY-MM-DD"),
-                datascadenza: moment().add(1, 'year').format("YYYY-MM-DD")
+                datascadenza: moment().add(1, 'year').subtract(1, "days").format("YYYY-MM-DD")
             }];
             console.log($scope.tessere)
         };
@@ -323,6 +332,9 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             } else {
                 $scope.stato = 'Mostra';
             }
+        };
+        $scope.aggiornaDataScadenza = function(){
+             $scope.tessere[0].datascadenza =moment( $scope.tessere[0].dataemissione).add(1, 'year').subtract(1, "days").format("YYYY-MM-DD");
         }
     }
 ]);

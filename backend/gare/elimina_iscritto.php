@@ -6,7 +6,7 @@ $nome = $_GET['nome'];
 $evento = $_GET['evento'];
 $numero = $_GET['numero'];
 
-$query3 = "DELETE FROM r1 WHERE nominativo='$nome' AND nomeevento='$evento' ";
+$query3 = "DELETE FROM concorrenti WHERE nominativo1='$nome' AND nomeevento='$evento' ";
 $result = mysql_query($query3, $conn) or die('Error, insert query failed' . mysql_error());
 echo $result;
 mysql_close();

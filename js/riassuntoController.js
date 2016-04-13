@@ -26,8 +26,8 @@ function JSONToCSVConvertor(e, r, t) {
         v = document.createElement("a");
     v.href = l, v.style = "visibility:hidden", v.download = d + ".csv", document.body.appendChild(v), v.click(), document.body.removeChild(v);
 }
-lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'iscrittiService',
-    function($scope, $http, $rootScope, iscrittiService) {
+lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'iscrittiService', 'ipCookie',
+    function($scope, $http, $rootScope, iscrittiService, ipCookie) {
         $scope.showMore = false;
         $scope.filtro = {};
         $scope.filtro.tipoTessere = {
@@ -50,6 +50,21 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             $scope.filtro.fine = moment().format("YYYY-MM-DD");
             $scope.filtraDate();
         };
+        $scope.config = {
+            title: '',
+            tooltips: true,
+            labels: false,
+            mouseover: function() {},
+            mouseout: function() {},
+            click: function() {},
+            legend: {
+                display: true,
+                //could be 'left, right'
+                position: 'left'
+            },
+            innerRadius: 0, // applicable on pieCharts, can be a percentage like '50%'
+            lineLegend: 'lineEnd' // can be also 'traditional'
+        }
         $scope.tesserati();
         $scope.filtraDate = function() {
             var tesserati = [];
@@ -156,11 +171,17 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                 $scope.iscritti = [];
             }
         };
+        $scope.vaiAModulo = function(row) {
+            ipCookie('iscritto', row.getProperty("fields['Cognome']") + ' ' + row.getProperty("fields['Nome']"))
+            window.open("modulo.php");
+        };
         $scope.gridOptions = {
             data: 'iscritti',
+            selectedItems: $scope.mySelections,
             columnDefs: [{
                     field: "fields['Cognome']",
-                    displayName: 'Cognome'
+                    displayName: 'Cognome',
+                    cellTemplate: '<div  ng-click="vaiAModulo(row)" ng-bind="row.getProperty(col.field)"></div>'
                 }, {
                     field: "fields['Nome']",
                     displayName: 'Nome'
@@ -194,7 +215,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                     displayName: 'Data Emissione',
                     sortFn: dateSort
                 }, {
-                    field: "fields['Data scadenza']",
+                    field: "fields['Data Scadenza']",
                     displayName: 'Data Scadenza'
                 }, {
                     field: "fields['Tipo assicurazione']",

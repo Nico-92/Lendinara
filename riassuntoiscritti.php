@@ -17,6 +17,8 @@
 	<script type="text/javascript" src="js/services/translationService.js"></script>
 	<script type="text/javascript" src="js/riassuntoController.js"></script>
 	<script type="text/javascript" src="js/translationController.js"></script>
+	<script type='text/javascript' src='bower_components/d3/d3.min.js'></script> 
+	<script type='text/javascript' src='bower_components/angular-charts/dist/angular-charts.min.js'></script>
 
 
 	<style type="text/css">
@@ -55,7 +57,7 @@
 		</div>
 		<br />
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-3 filtri-riassunto">
 				<div class="row">
 					<div class="col-md-12">
 						<h1><small>Filtri</small></h1>
@@ -102,6 +104,11 @@
 				</div>
 				<div class="row">
 					<div class="tabella" ng-grid="gridOptions"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div ac-chart="bar" ac-data="iscritti" ac-config="config" id='chart' class='chart'></div>
 				</div>
 			</div>
 		</div>

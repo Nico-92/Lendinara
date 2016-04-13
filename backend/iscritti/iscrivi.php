@@ -69,8 +69,10 @@ if($funzione == "salva"){
 	$array=mysql_fetch_array($result_id);
 	$id = $array['id'];
 	// Uso l'id per salvare i dati della tessera
-	$query_tessera = "INSERT INTO tessere (tessera, dataemissione, datascadenza, tipo, proprietario, assicurazione) VALUES ('$tessera', '$dataemissione', '$datascadenza', '$tipo', '$id', '$assicurazione')";
-	$result_tessera = mysql_query($query_tessera, $conn) or die('Errore, salvataggio tessera fallita: ' . mysql_error());
+	if($tessera){
+		$query_tessera = "INSERT INTO tessere (tessera, dataemissione, datascadenza, tipo, proprietario, assicurazione) VALUES ('$tessera', '$dataemissione', '$datascadenza', '$tipo', '$id', '$assicurazione')";
+		$result_tessera = mysql_query($query_tessera, $conn) or die('Errore, salvataggio tessera fallita: ' . mysql_error());
+	}
 	// $query_lendinara = "INSERT INTO lendinara (id,tesserael, tesseracsen, datael, datacsen) VALUES ('$id', '$tessera_el', '$tessera_csen', '$data_el', '$data_csen')";
 	// $result_lendinara = mysql_query($query_lendinara, $conn) or die('Errore, iscrizione tessere lendinara fallita: ' . mysql_error());
 	// $query_motoclub = "INSERT INTO motorclub (id, tessera, datatessera, licenza, datalicenza, tesserasport, datasport) VALUES ('$id', '$tessera_fmi', '$data_fmi', '$licenza', '$data_licenza', '$tessera_sport', '$data_sport')";
@@ -80,9 +82,10 @@ else{
 	$id=$iscritto->{'id'};
 	$query = "UPDATE iscritti SET nominativo='$nome', datanascita='$datanascita', luogonascita='$luogonascita', via='$via', cap='$cap', citta='$citta', email='$email', telefono='$telefono', varie='$varie', scadenza_visita='$scadenza', codicefiscale = '$codicefiscale', acconto = '$acconto', dataacconto = '$dataacconto', cauzione = '$cauzione', datacauzione = '$datacauzione' WHERE id='$id'";
 	$result = mysql_query($query, $conn) or die('Errore, modifica fallita: ' . mysql_error());
-	$query_tessera = "UPDATE tessere SET tessera = '$tessera', dataemissione = '$dataemissione', datascadenza = '$datascadenza', tipo = '$tipo', assicurazione = '$assicurazione' WHERE proprietario='$id'";
-	$result_tessera=mysql_query($query_tessera, $conn) or die('Errore, modifica tessera fallita: ' . mysql_error());
-
+	if($tessera){
+		$query_tessera = "UPDATE tessere SET tessera = '$tessera', dataemissione = '$dataemissione', datascadenza = '$datascadenza', tipo = '$tipo', assicurazione = '$assicurazione' WHERE proprietario='$id'";
+		$result_tessera=mysql_query($query_tessera, $conn) or die('Errore, modifica tessera fallita: ' . mysql_error());
+	}
 	// $query_lendinara = "UPDATE lendinara SET tesserael = '$tessera_el', datael = '$data_el', tesseracsen = '$tessera_csen', datacsen = '$data_csen' WHERE id='$id'";
 	// $result_lendinara=mysql_query($query_lendinara, $conn) or die('Errore, modifica tessere lendinara fallita: ' . mysql_error());
 	// $query_motoclub = "UPDATE motorclub SET tessera = '$tessera_fmi', datatessera = '$data_fmi', licenza = '$licenza', datalicenza = '$data_licenza', tesserasport = '$tessera_sport', datasport = '$data_sport' WHERE id='$id'";

@@ -32,9 +32,17 @@
 	      	<h4><small>Totale: {{numero_iscritti}}</small></h4>
 	    </div>
 
-	    <button class="btn unstamp" ng-click="formaggiunta = true">Aggiungi</button>
+	    <!-- <button class="btn unstamp" ng-click="formaggiunta = true">Aggiungi</button> -->
     	<button class="btn unstamp" ng-click="modifica();">{{condizione_modifica}}</button>
-		<button class="btn unstamp" ng-click="esporta();">Formato {{formato}}</button>
+		<button class="btn unstamp" ng-click="esporta();">Esporta concorrenti</button>
+		 <!-- <div id="fileupload" >  
+        <div class="myfileupload-buttonbar ">  
+            <label class="myui-button">  
+                <span >Importa concorrenti</span>  
+                <input id="file" type="file" name="files[]"  ng-file-select="onFileSelect($files)" />  
+            </label>  
+        </div>  
+    </div>   -->
 		<button class="btn unstamp" ng-click="stampa();">Stampa</button><br /><br />
 		<span ng-repeat="iscritto in iscritti track by $index" ng-if="formato=='lettura'">
 				{{iscritto.numero}},{{iscritto.nome}},{{iscritto.categoria}},{{iscritto.moto}},{{iscritto.motoclub}},{{iscritto.varie}}<br />
@@ -51,7 +59,7 @@
 		        </th>
 	      	</tr>
 			<tr ng-repeat="iscritto in iscritti | orderBy:predicato:reverse track by $index">
-				<td><span class="glyphicon glyphicon-remove pointer" ng-click="elimina(iscritto)"></span></td>
+				<td><span class="glyphicon glyphicon-remove pointer unstamp" ng-click="elimina(iscritto)"></span></td>
 				<td ng-repeat="property in properties">
 					<span ng-if="modifica_attiva==false">{{iscritto[property]}}</span>
 					<span ng-if="modifica_attiva==true"><input class="input-small" type="text" ng-model="iscritto[property]" /></span>

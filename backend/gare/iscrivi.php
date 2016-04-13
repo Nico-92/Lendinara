@@ -26,10 +26,15 @@ $moto = mysql_escape_string($moto);
 $motoclub = mysql_escape_string($motoclub);
 $grandeNumero = mysql_escape_string($grandeNumero);
 
-$controllo = "SELECT numero FROM r1 WHERE numero='$grandeNumero' AND nomeevento='$evento'";
+$controllo = "SELECT numero FROM concorrenti WHERE numero='$grandeNumero' AND nomeevento='$evento'";
 $result_controllo = mysql_query($controllo, $conn) or die('Error, check query failed ' . mysql_error());
 if( (mysql_num_rows($result_controllo) == 0) || ($grandeNumero == 0) ){
-	$query = "INSERT INTO r1 (nomeevento, nominativo, moto, motorclub, categoria, varie, numero, nominativo1, nominativo2) VALUES ('$evento','$nome','$moto','$motoclub', '$categoria', '$varie', '$grandeNumero', '$nome2', '$nome3')";
+	$query_get_id = "SELECT id FROM iscritti WHERE nominativo = '$nome'";
+	$result_id = mysql_query($query_get_id, $conn) or die('Errore, non riesco a recuperare id: ' . mysql_error());
+	$array=mysql_fetch_array($result_id);
+	$id = $array['id'];
+
+	$query = "INSERT INTO concorrenti (nomeevento, idconcorrente, moto, motorclub, categoria, varie, numero, nominativo1, nominativo2, nominativo3) VALUES ('$evento','$id','$moto','$motoclub', '$categoria', '$varie', '$grandeNumero', '$nome', '$nome2', '$nome3')";
 	$result = mysql_query($query, $conn) or die('Error, insert query failed ' . mysql_error());
 	if($result){
 		echo 'true';

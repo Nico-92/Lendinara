@@ -5,7 +5,7 @@ require '../' . 'dbconfig.php';
 /* RECUPERO IL PARAMETRO IN FORMATO JSON, LO DECODIFICO */
 if(isset($_GET['evento'])){
 	$evento = $_GET['evento'];
-	$query = "SELECT * FROM r1 WHERE nomeevento='$evento' ";
+	$query = "SELECT * FROM concorrenti WHERE nomeevento='$evento' ";
 	$result = mysql_query($query, $conn) or die('Error, query failed ' . mysql_error());
 	if($result){
 		//successo
@@ -13,9 +13,9 @@ if(isset($_GET['evento'])){
 		$ris = '[';
 		while($array = mysql_fetch_array($result)){
 			if($i==mysql_num_rows($result)-1)
-				$ris=$ris . '{ "numero": '.$array['numero'].', "nome": "'.$array['nominativo'].'","nome2": "'.$array['nominativo1'].'","nome3": "'.$array['nominativo2'].'", "moto": "'.$array['moto'].'", "motoclub": "'.$array['motorclub'].'", "varie": "'.$array['varie'].'", "categoria": "'.$array['categoria'].'"}';
+				$ris=$ris . '{ "numero": '.$array['numero'].', "nome": "'.$array['nominativo1'].'","nome2": "'.$array['nominativo2'].'","nome3": "'.$array['nominativo3'].'", "moto": "'.$array['moto'].'", "motoclub": "'.$array['motorclub'].'", "varie": "'.$array['varie'].'", "categoria": "'.$array['categoria'].'"}';
 			else
-				$ris=$ris . '{ "numero": '.$array['numero'].', "nome": "'.$array['nominativo'].'","nome2": "'.$array['nominativo1'].'","nome3": "'.$array['nominativo2'].'", "moto": "'.$array['moto'].'", "motoclub": "'.$array['motorclub'].'", "varie": "'.$array['varie'].'", "categoria": "'.$array['categoria'].'"},';
+				$ris=$ris . '{ "numero": '.$array['numero'].', "nome": "'.$array['nominativo1'].'","nome2": "'.$array['nominativo2'].'","nome3": "'.$array['nominativo3'].'", "moto": "'.$array['moto'].'", "motoclub": "'.$array['motorclub'].'", "varie": "'.$array['varie'].'", "categoria": "'.$array['categoria'].'"},';
 			$i++;
 		}
 		$ris=$ris.']';

@@ -207,6 +207,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 #nuovaIscrizione{
     margin: 0px;
 }
+.filtri-riassunto{
+    padding-left: 30px !important;
+}
 /*----------------PAGINA LAYOUTTESSERAMENTO ----------------------*/
 .layoutStampa {
     position: absolute;
@@ -259,3 +262,28 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
     padding-left: 20%;
     padding-right: 20%;
 }
+/*----------------PAGINA RIASSUNTO ISCRITTI GARA ----------------------*/
+.myfileupload-buttonbar input  
+{  
+    position: absolute;  
+    top: 0;  
+    right: 0;  
+    margin: 0;  
+    border: solid transparent;  
+    border-width: 0 0 100px 200px;  
+    opacity: 0.0;  
+    filter: alpha(opacity=0);  
+    -o-transform: translate(250px, -50px) scale(1);  
+    -moz-transform: translate(-300px, 0) scale(4);  
+    direction: ltr;  
+    cursor: pointer;  
+}  
+.myui-button  
+{  
+    position: relative;  
+    cursor: pointer;  
+    text-align: center;  
+    overflow: visible;  
+    background-color: red;  
+    overflow: hidden;  
+}  

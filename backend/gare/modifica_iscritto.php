@@ -18,7 +18,7 @@ for($i=0; $i< count($iscritti); $i++){
 	$motoclub = $iscritti[$i]->motoclub;
 	$varie = $iscritti[$i]->varie;
 	$categoria = $iscritti[$i]->categoria;
-	$query="UPDATE r1 SET numero = '$numero', nominativo1 = '$nome2', nominativo2 = '$nome3', moto = '$moto', categoria = '$categoria', motorclub = '$motoclub', varie = '$varie' where nomeevento = '$evento' and nominativo = '$nome'";
+	$query="UPDATE concorrenti SET numero = '$numero', nominativo1 = '$nome2', nominativo2 = '$nome3', moto = '$moto', categoria = '$categoria', motorclub = '$motoclub', varie = '$varie' where nomeevento = '$evento' and nominativo1 = '$nome'";
 	$result=mysql_query($query, $conn) or die('Error, update query failed' . mysql_error());
 }
 echo $result;

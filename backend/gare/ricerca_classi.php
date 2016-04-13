@@ -5,7 +5,7 @@ require '../' . 'dbconfig.php';
 
 $evento = $_GET['evento'];
 $categoria = $_GET['categoria'];
-$query = "select DISTINCT categoria from r1 where categoria like '$categoria%' and nomeevento = '$evento' order by categoria";
+$query = "select DISTINCT categoria from concorrenti where categoria like '$categoria%' and nomeevento = '$evento' order by categoria";
 $result = mysql_query($query, $conn) or die(mysql_error());
 $i = 0;
 $ris = '{ "risultato": [';

@@ -68,7 +68,7 @@ mysql_close();
 				<tr>
 					<td>Email</td><td><input type="email" ng-model="iscritto.email"/></td>
 					<td>Numero telefono</td><td><input type="text"  ng-model="iscritto.telefono"/></td>
-					<td ng-show="options.certificato == true">Scadenza certificato</td><td><input type="date"  ng-model="iscritto.scadenza"/></td>
+					<td>Scadenza certificato</td><td><input type="date"  ng-model="iscritto.scadenza"/></td>
 				</tr>
 				<tr>
 					<td>Varie</td><td colspan="3" ><input type="text" ng-model="iscritto.varie" style="width: 150%;" typeahead="nome for nome in getCommonVarie()"/></td>
@@ -138,7 +138,7 @@ mysql_close();
 				  		</tr>
 				  		<tr>
 				  			<td>Emissione:</td>
-				  			<td><input type="date" ng-model="tessera.dataemissione" ></input></td>
+				  			<td><input type="date" ng-model="tessera.dataemissione" ng-change="aggiornaDataScadenza()"></input></td>
 				  			<td>Scadenza:</td>
 				  			<td><input type="date" ng-model="tessera.datascadenza" ></input></td>
 				  		</tr>
@@ -176,7 +176,7 @@ mysql_close();
 			    			Stampa tessera
 			    		</a></div>
 			    	<div class="col-md-2"><input type="button" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></div>
-			    	<div class="col-md-2" ng-show="controlloMinorenni(iscritto, true) ==true"><input type="button" value="Liberatoria" class="unstamp btn" ng-click="apriLiberatoria(iscritto)" /></div>
+			    	<div class="col-md-2" ng-show="controlloMinorenni(iscritto, true) ==true"><input type="button" value="Assenso" class="unstamp btn" ng-click="apriLiberatoria(iscritto)" /></div>
 			    	
 				</div>
 			  	

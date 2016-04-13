@@ -6,7 +6,7 @@ require '../' . 'dbconfig.php';
 $evento = $_GET['evento'];
 $evento = json_decode($evento);
 $evento = $evento->{'nome'};
-$query = "select DISTINCT numero from r1 where nomeevento = '$evento' order by numero";
+$query = "select DISTINCT numero from concorrenti where nomeevento = '$evento' order by numero";
 $result = mysql_query($query, $conn) or die(mysql_error());
 $i = 0;
 $ris = '{ "risultato": [';
