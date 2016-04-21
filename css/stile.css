@@ -143,6 +143,20 @@ div.boxsuggerimenti ul li {
 .riga-tessere {
     position: relative;
 }
+#tessera{
+    height: 5cm;
+    width: 5cm;
+    overflow: hidden;
+    font-size: small;
+}
+#tessera p{
+    margin-bottom: 1px; 
+}
+#tessera img{
+    height: 1cm;
+    width: 4.5cm;
+    visibility: hidden;
+}
 
 .tessera {
     height: 4.7cm !important;

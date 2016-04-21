@@ -14,6 +14,7 @@
 
 	<script type="text/javascript" src="js/app.js"></script>
 	<script type="text/javascript" src="js/services/iscrittiService.js"></script>
+	<script type="text/javascript" src="js/services/tessereService.js"></script>
 	<script type="text/javascript" src="js/services/translationService.js"></script>
 	<script type="text/javascript" src="js/riassuntoController.js"></script>
 	<script type="text/javascript" src="js/translationController.js"></script>

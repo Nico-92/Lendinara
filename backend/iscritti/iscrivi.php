@@ -72,6 +72,8 @@ if($funzione == "salva"){
 	if($tessera){
 		$query_tessera = "INSERT INTO tessere (tessera, dataemissione, datascadenza, tipo, proprietario, assicurazione) VALUES ('$tessera', '$dataemissione', '$datascadenza', '$tipo', '$id', '$assicurazione')";
 		$result_tessera = mysql_query($query_tessera, $conn) or die('Errore, salvataggio tessera fallita: ' . mysql_error());
+	}else{
+		$result_tessera = true;
 	}
 	// $query_lendinara = "INSERT INTO lendinara (id,tesserael, tesseracsen, datael, datacsen) VALUES ('$id', '$tessera_el', '$tessera_csen', '$data_el', '$data_csen')";
 	// $result_lendinara = mysql_query($query_lendinara, $conn) or die('Errore, iscrizione tessere lendinara fallita: ' . mysql_error());
@@ -85,6 +87,8 @@ else{
 	if($tessera){
 		$query_tessera = "UPDATE tessere SET tessera = '$tessera', dataemissione = '$dataemissione', datascadenza = '$datascadenza', tipo = '$tipo', assicurazione = '$assicurazione' WHERE proprietario='$id'";
 		$result_tessera=mysql_query($query_tessera, $conn) or die('Errore, modifica tessera fallita: ' . mysql_error());
+	}else{
+		$result_tessera = true;
 	}
 	// $query_lendinara = "UPDATE lendinara SET tesserael = '$tessera_el', datael = '$data_el', tesseracsen = '$tessera_csen', datacsen = '$data_csen' WHERE id='$id'";
 	// $result_lendinara=mysql_query($query_lendinara, $conn) or die('Errore, modifica tessere lendinara fallita: ' . mysql_error());

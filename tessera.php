@@ -41,22 +41,24 @@
 							
 						</div>
 					</div>
-					<div class="row riga-tessere" ng-style="{'margin-top': margine.superiore + 'cm', left: margine.sinistro + 'cm'}">
+					<!-- <div class="row riga-tessere" ng-style="{'margin-top': margine.superiore + 'cm', left: margine.sinistro + 'cm'}"> -->
 						
 						
-						<div class="col-xs-3 tessera" ng-repeat="i in arrayEtichette track by $index">
-							<div ng-show="$index +1 == etichette.stampaIn">
-								<p><strong>Enduro Lendinara</strong></p>
-								<div barcode-generator="{{iscritto.barcode}}" style="height:20px;" ng-show="iscritto.barcode"></div>
-								<div ng-shoW="!iscritto.barcode"><button class="btn btn-default" ng-click="setBarcode()">Genera codice</button></div>
-								<p class="nome">Nome: {{iscritto.nome | uppercase}}</p>
+						<!-- <div class="col-xs-3 tessera" ng-repeat="i in arrayEtichette track by $index"> -->
+							<!-- <div ng-show="$index +1 == etichette.stampaIn"> -->
+							<img id="barcode">
+							<div id="tessera">
+								<!-- <div barcode-generator="{{iscritto.barcode}}" style="height:20px;" ng-show="iscritto.barcode"></div> -->
+								<!-- <div ng-shoW="!iscritto.barcode"><button class="btn btn-default" ng-click="setBarcode()">Genera codice</button></div> -->
+								<p>{{iscritto.nome | uppercase}}</p>
 								<p>Data di nascita: {{iscritto.dataNascita}}</p>
 								<p>Data di rilascio: {{iscritto.dataRilascio}}</p>
 								<p>Qual.: socio - Sport: Moto</p>
 								<p>Comitato provinciale: PD</p>
 							</div>
-						</div>
-					</div>
+							<!-- </div> -->
+						<!-- </div> -->
+					<!-- </div> -->
 				</div>
 			</body>
 		</html>

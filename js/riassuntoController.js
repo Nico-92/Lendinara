@@ -26,8 +26,8 @@ function JSONToCSVConvertor(e, r, t) {
         v = document.createElement("a");
     v.href = l, v.style = "visibility:hidden", v.download = d + ".csv", document.body.appendChild(v), v.click(), document.body.removeChild(v);
 }
-lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'iscrittiService', 'ipCookie',
-    function($scope, $http, $rootScope, iscrittiService, ipCookie) {
+lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 'iscrittiService', 'ipCookie', 'tessereService',
+    function($scope, $http, $rootScope, iscrittiService, ipCookie, tessereService) {
         $scope.showMore = false;
         $scope.filtro = {};
         $scope.filtro.tipoTessere = {
@@ -175,16 +175,25 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             ipCookie('iscritto', row.getProperty("fields['Cognome']") + ' ' + row.getProperty("fields['Nome']"))
             window.open("modulo.php");
         };
+        $scope.$on('ngGridEventEndCellEdit', function(evt) {
+            tessereService.update(evt.targetScope.row.entity.fields).success(function(data) {
+                console.log(data)
+            });
+            console.log(evt.targetScope.row.entity.fields); // the underlying data bound to the row
+            // Detect changes and send entity to server 
+        });
         $scope.gridOptions = {
             data: 'iscritti',
             selectedItems: $scope.mySelections,
+            enableCellEditOnFocus: true,
             columnDefs: [{
                     field: "fields['Cognome']",
                     displayName: 'Cognome',
                     cellTemplate: '<div  ng-click="vaiAModulo(row)" ng-bind="row.getProperty(col.field)"></div>'
                 }, {
                     field: "fields['Nome']",
-                    displayName: 'Nome'
+                    displayName: 'Nome',
+                    cellTemplate: '<div  ng-click="vaiAModulo(row)" ng-bind="row.getProperty(col.field)"></div>'
                 },
                 /* {
                                 field: 'datanascita',
@@ -209,7 +218,8 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                             }*/
                 {
                     field: "fields['Codice fiscale']",
-                    displayName: 'Codice fiscale'
+                    displayName: 'Codice fiscale',
+                    enableCellEdit: false,
                 }, {
                     field: "fields['Data emissione']",
                     displayName: 'Data Emissione',

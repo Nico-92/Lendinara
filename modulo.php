@@ -171,7 +171,7 @@ mysql_close();
 					<div class="col-md-2" ng-show="iscritto.nome && nuovoIscritto && !iscritto.id"><input type="submit" value="Salva" ng-click="salva(iscritto, 'salva');" class="unstamp btn btn-success" /></div>
 					<div class="col-md-2"  ng-show="iscritto.nome"><input type="button" value="Elimina" ng-click="elimina(iscritto);" class="unstamp btn btn-danger"/></div>
 					<!-- <div class="col-md-2"><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></div> -->
-					<div class="col-md-2"><button class="unstamp btn btn-info" ng-click="stampa();" >Stampa</button></div>
+					<div class="col-md-2"><button ng-show="!nuovoIscritto" class="unstamp btn btn-info" ng-click="stampa();" >Stampa</button></div>
 					<div class="col-md-2" ng-show="iscritto.nome"><a href="tessera.php?nome={{iscritto.nome}}" target="_blank" class="unstamp btn btn-info"  >
 			    			Stampa tessera
 			    		</a></div>
@@ -181,8 +181,8 @@ mysql_close();
 				</div>
 			  	
 			<br />
-			<div ng-if="risultato==true" class="alert alert-success alert-dismissable unstamp">{{messaggio}}</div>
-			<div ng-if="risultato==false" class="alert alert-danger alert-dismissable unstamp">{{messaggio}}</div>
+			<div ng-if="risultato==true" class="alert alert-success unstamp">{{messaggio}}</div>
+			<div ng-if="risultato==false" class="alert alert-danger unstamp">{{messaggio}}</div>
 		</form>
 		
 		<p id="testo2Blocco2" class="{{classeStampa}}" style="white-space: pre-wrap;"  >{{blocco2}}</p>

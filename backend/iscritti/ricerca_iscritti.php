@@ -64,11 +64,11 @@ while ($array = mysql_fetch_array($result)) {
     $dataemissione = date('d/m/Y', strtotime($array_tessere['dataemissione']));
     if($array_tessere['datascadenza'] == ''){
         $datascadenza = date('Y-m-d', strtotime('-1 days', strtotime($array_tessere['dataemissione'])) );
+        $datascadenza = date('d/m/Y', strtotime('+1 years', strtotime($datascadenza)) );
     }else{
-        $datascadenza = date('Y-m-d', strtotime($array_tessere['datascadenza']));
+        $datascadenza = date('d/m/Y', strtotime($array_tessere['datascadenza']));
     }
 
-    $datascadenza = date('d/m/Y', strtotime('+1 years', strtotime($datascadenza)) );
     $ris = $ris . '"Numero Tessera": "' . $array_tessere['tessera'] . '",';
     $ris = $ris . '"Data emissione": "' . $dataemissione . '",';
     $ris = $ris . '"Data Scadenza": "' . $datascadenza . '",';
