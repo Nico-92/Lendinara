@@ -29,6 +29,17 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             dataemissione: moment().format("YYYY-MM-DD"),
             datascadenza: moment().add(1, 'year').subtract(1, "days").format("YYYY-MM-DD")
         }];
+        var doc = new jsPDF('p', 'mm', [50, 100]);
+        doc.setFontSize(12);
+        var start = 10;
+        var barcodeOptions = {
+                    format: "CODE128",
+                    lineColor: "#000",
+                    width:1,
+                    height:50,
+                    displayValue: false,
+                    textMargin: 0
+                };
         testiService.getOptions().success(function(data) {
             $scope.avanzatePresenti = false;
             for (var key in data) {
@@ -336,6 +347,58 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
         $scope.aggiornaDataScadenza = function(){
              $scope.tessere[0].datascadenza =moment( $scope.tessere[0].dataemissione).add(1, 'year').subtract(1, "days").format("YYYY-MM-DD");
         }
+        // $scope.datarilascio = moment().format("YYYY-MM-DD");
+        $scope.stampaTessera = function(){
+            console.log($scope.iscritto.barcode)
+            if(!$scope.iscritto.barcode){
+                setBarcode();
+            }else{
+                $("#barcode").JsBarcode(data.barcode, barcodeOptions);
+                doc.text(2, start, "ENDURO LENDINARA");
+                var imgData = $('#barcode').attr('src');
+                $timeout(function(){
+                    doc.addImage(imgData, 'JPEG', 0, start + 6, 50, 20);
+                    doc.text(2, start + 35, $scope.iscritto.nome);
+                    doc.text(2, start + 45, 'Data di nascita:');
+                    doc.text(2, start + 50, $scope.iscritto.datanascita);
+                    doc.text(2, start + 60, 'Data di rilascio:');
+                    doc.text(2, start + 65, $scope.iscritto.datascadenza);
+                    doc.text(2, start + 75, 'Qual. socio - Sport: Moto');
+                    doc.text(2, start + 80, 'Comitato provinciale: PD');
+                    doc.autoPrint();
+                    window.open(doc.output('bloburl'), '_blank');
+                }, 100);
+            }
+        };
+        // Genera un barcode per chi ne è sprovvsito e lo salva in database
+        setBarcode = function() {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (var i = 0; i < 4; i++) {
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            iscrittiService.updateField('iscritti', 'barcode', text, 'id', $scope.iscritto.id).success(function(data) {
+                if (data === '1') {
+                    $scope.iscritto.barcode = text;
+                }
+                $("#barcode").JsBarcode(data.barcode, barcodeOptions);
+                
+                doc.text(2, start, "ENDURO LENDINARA");
+                var imgData = $('#barcode').attr('src');
+                $timeout(function(){
+                   doc.addImage(imgData, 'JPEG', 0, start + 6, 50, 20);
+                    doc.text(2, start + 35, $scope.iscritto.nome);
+                    doc.text(2, start + 45, 'Data di nascita:');
+                    doc.text(2, start + 50, $scope.iscritto.datanascita);
+                    doc.text(2, start + 60, 'Data di rilascio:');
+                    doc.text(2, start + 65, $scope.tessera.datascadenza);
+                    doc.text(2, start + 75, 'Qual. socio - Sport: Moto');
+                    doc.text(2, start + 80, 'Comitato provinciale: PD');
+                    doc.autoPrint();
+                    window.open(doc.output('bloburl'), '_blank');
+                }, 100);
+            });
+        };
     }
 ]);
 var CFisc = {}

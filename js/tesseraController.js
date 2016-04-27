@@ -4,8 +4,17 @@ tessera.config(['$locationProvider', function($locationProvider) {
 tessera.controller('tesseraController', ['$scope', '$location', 'iscrittiService', 'ipCookie', '$timeout', function($scope, $location, iscrittiService, ipCookie, $timeout) {
     // Recupero i parametri dall'url
     var paramValue = $location.search();
-    var doc = new jsPDF('p', 'mm', [50, 50]);
-
+    var doc = new jsPDF('p', 'mm', [50, 100]);
+    doc.setFontSize(12);
+    var start = 10;
+    var barcodeOptions = {
+                format: "CODE128",
+                lineColor: "#000",
+                width:1,
+                height:50,
+                displayValue: false,
+                textMargin: 0
+            };
     // Recupero i dati relativi all'utente passato nell'url
     iscrittiService.get(paramValue.nome).success(function(data) {
         $scope.iscritto = {
@@ -21,27 +30,28 @@ tessera.controller('tesseraController', ['$scope', '$location', 'iscrittiService
         if(!data.barcode){
             $scope.setBarcode();
         }else{
-            $("#barcode").JsBarcode(data.barcode, {
-                format: "CODE128",
-                lineColor: "#000",
-                width:1,
-                height:30,
-                displayValue: false,
-                textMargin: 0
-            });
-            doc.setFontSize(10);
-            doc.text(2, 5, "Enduro Lendinara");
+            $("#barcode").JsBarcode(data.barcode, barcodeOptions);
+            doc.text(2, start, "ENDURO LENDINARA");
             var imgData = $('#barcode').attr('src');
             $timeout(function(){
-            	doc.addImage(imgData, 'JPEG', 0, 6, 50, 10);
-	 			doc.fromHTML($('#tessera')[0], 2, 16, {
+            	doc.addImage(imgData, 'JPEG', 0, start + 6, 50, 20);
+                doc.text(2, start + 35, $scope.iscritto.nome);
+                doc.text(2, start + 45, 'Data di nascita:');
+                doc.text(2, start + 50, $scope.iscritto.dataNascita);
+                doc.text(2, start + 60, 'Data di rilascio:');
+                doc.text(2, start + 65, $scope.iscritto.dataRilascio);
+                doc.text(2, start + 75, 'Qual. socio - Sport: Moto');
+                doc.text(2, start + 80, 'Comitato provinciale: PD');
+                doc.autoPrint();
+                window.open(doc.output('bloburl'), '_blank');
+	 			/*doc.fromHTML($('#tessera')[0], 2, start + 36, {
 	              'background': '#fff',
 	            }, function() {
 	            	// pdf.save( 'file' );
 	                doc.autoPrint();
 	                window.open(doc.output('bloburl'), '_blank');
-	            });
-            }, 100)
+	            });*/
+            }, 100);
         }
     });
     // Genera un barcode per chi ne è sprovvsito e lo salva in database
@@ -55,27 +65,22 @@ tessera.controller('tesseraController', ['$scope', '$location', 'iscrittiService
             if (data === '1') {
                 $scope.iscritto.barcode = text;
             }
-            $("#barcode").JsBarcode(data.barcode, {
-                format: "CODE128",
-                lineColor: "#000",
-                width:1,
-                height:30,
-                displayValue: false,
-                textMargin: 0
-            });
-            doc.setFontSize(10);
-            doc.text(2, 5, "Enduro Lendinara");
+            $("#barcode").JsBarcode(data.barcode, barcodeOptions);
+            
+            doc.text(2, start, "ENDURO LENDINARA");
             var imgData = $('#barcode').attr('src');
             $timeout(function(){
-            	doc.addImage(imgData, 'JPEG', 0, 6, 50, 10);
-	 			doc.fromHTML($('#tessera')[0], 2, 16, {
-	              'background': '#fff',
-	            }, function() {
-	            	// pdf.save( 'file' );
-	                doc.autoPrint();
-	                window.open(doc.output('bloburl'), '_blank');
-	            });
-            }, 100)
+               doc.addImage(imgData, 'JPEG', 0, start + 6, 50, 20);
+                doc.text(2, start + 35, $scope.iscritto.nome);
+                doc.text(2, start + 45, 'Data di nascita:');
+                doc.text(2, start + 50, $scope.iscritto.dataNascita);
+                doc.text(2, start + 60, 'Data di rilascio:');
+                doc.text(2, start + 65, $scope.iscritto.dataRilascio);
+                doc.text(2, start + 75, 'Qual. socio - Sport: Moto');
+                doc.text(2, start + 80, 'Comitato provinciale: PD');
+                doc.autoPrint();
+                window.open(doc.output('bloburl'), '_blank');
+            }, 100);
         });
     };
 

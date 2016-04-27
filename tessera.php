@@ -46,7 +46,7 @@
 						
 						<!-- <div class="col-xs-3 tessera" ng-repeat="i in arrayEtichette track by $index"> -->
 							<!-- <div ng-show="$index +1 == etichette.stampaIn"> -->
-							<img id="barcode">
+							<img id="barcode" style="visibility: hidden;">
 							<div id="tessera">
 								<!-- <div barcode-generator="{{iscritto.barcode}}" style="height:20px;" ng-show="iscritto.barcode"></div> -->
 								<!-- <div ng-shoW="!iscritto.barcode"><button class="btn btn-default" ng-click="setBarcode()">Genera codice</button></div> -->
