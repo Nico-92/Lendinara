@@ -144,7 +144,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                     $("#barcode").JsBarcode($scope.iscritti[i].fields.barcode, barcodeOptions);
                     imgData = $('#barcode').attr('src');
                     stampa(imgData, $scope.iscritti[i].fields);
-                    if(i != $scope.iscritti.length -1 ){
+                    if(i < $scope.iscritti.length -1 ){
                         doc.addPage();
                     }
                 }else{
@@ -157,6 +157,9 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
                     $("#barcode").JsBarcode(text, barcodeOptions);
                     imgData = $('#barcode').attr('src');
                     stampa(imgData, $scope.iscritti[i].fields);
+                    if(i < $scope.iscritti.length -1 ){
+                        doc.addPage();
+                    }
                 }
                 
             }
