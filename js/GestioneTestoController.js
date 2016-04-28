@@ -1,4 +1,4 @@
-lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', function($scope, testiService) {
+lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', '$timeout', function($scope, testiService, $timeout) {
     $scope.nuovo = false;
     $scope.options = {
         certificato: false,
@@ -92,9 +92,15 @@ lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', function($s
             if (data == 'true') {
                 $scope.risultatoBiglietti = true;
                 $scope.messaggio = 'Testo modificato con successo';
+                $timeout(function(){
+                    $scope.risultatoBiglietti = undefined;
+                }, 3000);
             } else {
                 $scope.risultatoBiglietti = false;
                 $scope.messaggio = data;
+                $timeout(function(){
+                    $scope.risultatoBiglietti = undefined;
+                }, 3000);
             }
         });
     };
@@ -103,6 +109,9 @@ lendinara.controller('GestioneTestoCtrl', ['$scope', 'testiService', function($s
         testiService.changeOptions($scope.options).success(function(data) {
             if (data === 'true') {
                 $scope.optionsMessage = true;
+                $timeout(function(){
+                    $scope.optionsMessage = undefined;
+                }, 3000);
             } else {
                 //qualcosa
             }

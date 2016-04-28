@@ -37,53 +37,55 @@
 		<div align="center">
 			<div id="corpo">
 				<h1>Pannello di controllo</h1>
-				<div id="left" ng-controller="GestioneEventoCtrl">
-					<form name="evento">
-						<fieldset>
-							<legend>Gestione evento</legend>
-							<table><tr><td>Nome</td><td>
-							
-							<select ng-model="selezionaEvento" ng-options="evento.nome for evento in eventi" ng-change="selezionato()">
-								<option value="">Seleziona Evento</option>
-							</select>
-						</td></tr>
-						<td>Luogo</td><td><input type="text" placeholder="Luogo evento" ng-model="datievento.luogo" required /></td></tr>
-						<td>Data</td><td><input type="date" ng-model="datievento.data" required/></td></tr>
-						<td>Costo</td><td><input type="number" placeholder="Costo evento" ng-model="datievento.costo" required></td></tr>
-						<td>Altro</td><td><input type="text" placeholder="Altro" ng-model="datievento.altro" /></td></tr>
-					</table>
-					<input type="submit" value="Modifica" class="btn btn-success" ng-click="modifica(datievento)" ng-show="selezionaEvento" />
-					<input type="button" class="btn btn-danger" value="Elimina evento" ng-show="selezionaEvento" ng-click="elimina()" />
-				</fieldset>
-			</form>
-			<div ng-if="risultato==true" class="alert alert-success alert-dismissable">{{messaggio}}</div>
-			<div ng-if="risultato==false" class="alert alert-danger alert-dismissable">{{messaggio}}</div>
-		</div>
-		<div id="right" ng-controller="CreaEventoCtrl">
-			<form name="creaevento">
-				<fieldset>
-					<legend>Crea evento</legend>
-					<table><tr>
-						<td>Nome</td> <td><input type="text" ng-model="evento.nome" name="nomeevento" required/></td></tr>
-						<tr><td>Data</td> <td><input type="date" ng-model="evento.data" name="dataevento" required /></td></tr>
-						<tr><td>Luogo</td> <td><input placeholder="Luogo evento" type="text" ng-model="evento.luogo" name="luogoevento" /></td></tr>
-						<tr><td>Costo</td> <td><input placeholder="Costo evento" type="number" ng-model="evento.costo" name="costoevento" /></td></tr>
-						<tr><td>Altro</td> <td><input placeholder="Altro" type="text" ng-model="evento.altro" name="altro" /></td></tr>
-					</table>
-					<input type="submit" value="Crea evento" class="btn btn-success" ng-click="crea(evento)" ng-show="evento.nome" />
-					<input type="reset" class="btn" />
-				</fieldset>
-			</form>
-			<div ng-if="risultato==true" class="alert alert-success">{{messaggio}}</div>
-			<div ng-if="risultato==false" class="alert alert-danger">{{messaggio}}</div>
-		</div>
-		<div id="riassunti">
+				<div id="#eventi">
+					<div id="left" ng-controller="GestioneEventoCtrl">
+						<form name="evento">
+							<fieldset>
+								<legend>Gestione evento</legend>
+								<table><tr><td>Nome</td><td>
+								
+								<select ng-model="selezionaEvento" ng-options="evento.nome for evento in eventi" ng-change="selezionato()">
+									<option value="">Seleziona Evento</option>
+								</select>
+							</td></tr>
+							<td>Data</td><td><input type="date" ng-model="datievento.data" required/></td></tr>
+							<td>Luogo</td><td><input type="text" placeholder="Luogo evento" ng-model="datievento.luogo" required /></td></tr>
+							<td>Costo</td><td><input type="number" placeholder="Costo evento" ng-model="datievento.costo" required></td></tr>
+							<td>Altro</td><td><input type="text" placeholder="Altro" ng-model="datievento.altro" /></td></tr>
+						</table>
+						<input type="submit" value="Modifica" class="btn btn-success" ng-click="modifica(datievento)" ng-show="selezionaEvento" />
+						<input type="button" class="btn btn-danger" value="Elimina evento" ng-show="selezionaEvento" ng-click="elimina()" />
+					</fieldset>
+				</form>
+				<div ng-if="risultato==true" class="alert alert-success alert-dismissable">{{messaggio}}</div>
+				<div ng-if="risultato==false" class="alert alert-danger alert-dismissable">{{messaggio}}</div>
+			</div>
+			<div id="right" ng-controller="CreaEventoCtrl">
+				<form name="creaevento" ng-click="risultato = undefined">
+					<fieldset>
+						<legend>Crea evento</legend>
+						<table><tr>
+							<td>Nome</td> <td><input type="text" ng-model="evento.nome" name="nomeevento" required/></td></tr>
+							<tr><td>Data</td> <td><input type="date" ng-model="evento.data" name="dataevento" required /></td></tr>
+							<tr><td>Luogo</td> <td><input placeholder="Luogo evento" type="text" ng-model="evento.luogo" name="luogoevento" /></td></tr>
+							<tr><td>Costo</td> <td><input placeholder="Costo evento" type="number" ng-model="evento.costo" name="costoevento" /></td></tr>
+							<tr><td>Altro</td> <td><input placeholder="Altro" type="text" ng-model="evento.altro" name="altro" /></td></tr>
+						</table>
+						<input type="button" value="Crea evento" class="btn btn-success" ng-click="crea(evento)" ng-show="evento.nome" />
+						<input type="reset" class="btn" />
+					</fieldset>
+				</form>
+				<div ng-if="risultato==true" class="alert alert-success">{{messaggio}}</div>
+				<div ng-if="risultato==false" class="alert alert-danger">{{messaggio}}</div>
+			</div>
+			</div>
+		<!-- <div id="riassunti">
 			<fieldset>
 				<legend>Riassunti</legend>
-				<!-- <input type="button" value="Riassunto eventi" onclick="goto2();" class="btn btn-default" /> -->
+				<input type="button" value="Riassunto eventi" onclick="goto2();" class="btn btn-default" />
 				<input type="button" value="Elenco tesserati" onclick="goto3();" class="btn btn-default" />
 			</fieldset>
-		</div>
+		</div> -->
 		<div id="gestioneTesto" ng-controller="GestioneTestoCtrl">
 			<fieldset>
 				<legend>Layout di stampa</legend>
@@ -116,8 +118,12 @@
 				<table class="table">
 					<tr>
 						<th>Biglietto sinistra</th><th>Biglietto destra</th></tr>
-						<tr><td><textarea  style="width: 250px"; rows="10" placeholder="Inserisci testo" ng-model="bigliettosx"></textarea> </td>
-						<td><textarea  style="width: 250px"; rows="10" placeholder="Inserisci testo" ng-model="bigliettodx"></textarea></td>
+						<tr><td>
+								<input type="text" ng-model="bigliettosx" maxlength="15">
+							</td>
+							<td>
+								<input type="text" ng-model="bigliettodx" maxlength="15">
+							</td>
 						<td><button ng-click="modificaBiglietti(bigliettosx,bigliettodx);" class="btn btn-success">Modifica</button>
 							<div ng-if="risultatoBiglietti==true" class="alert alert-success alert-dismissable">{{messaggio}}</div>
 							<div ng-if="risultatoBiglietti==false" class="alert alert-danger alert-dismissable">{{messaggio}}</div></td>

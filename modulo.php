@@ -309,16 +309,16 @@ mysql_close();
 
 			<!-- AVVISI STRAPPABILI -->
 
-			<div class="avviso {{classeStampa}}" style="width:420px; height:190px; float:left; border:double;"  name="altro1" align="left">
-				<table border="1" width="100%" height="100%">
+			<div class="avviso {{classeStampa}}" style="width:9cm; height:3cm; top: 30cm; float:left; border:double;"  name="altro1" align="left">
+				<table border="0" width="100%" height="100%">
 					<tr><td><h1><?php echo $control['altro1']; ?></h1></td>
 						<td><h1>{{grandeNumero}}</h1></td>
 					</tr>
 				</table>
  			</div>
 
- 			<div class="avviso {{classeStampa}}" style="width:420px; height:190px; float:right; border:double;"  name="altro1" align="left">
-				<table border="1" width="100%" height="100%">
+ 			<div class="avviso {{classeStampa}}" style="width:9cm; height:3cm; top: 30cm; float:right; border:double;"  name="altro1" align="left">
+				<table border="0" width="100%" height="100%">
 					<tr><td><h1><?php echo $control['altro2']; ?></h1></td>
 						<td><h1>{{grandeNumero}}</h1></td>
 					</tr>

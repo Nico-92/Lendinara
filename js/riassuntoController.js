@@ -126,6 +126,7 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             }
         };
 
+        //Genera pdf dell'etichetta tessera
         function stampa(imgData, iscritto){
             doc.text(2, start, "ENDURO LENDINARA");
             doc.addImage(imgData, 'JPEG', 0, start + 6, 50, 20);
@@ -137,6 +138,8 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             doc.text(2, start + 75, 'Qual. socio - Sport: Moto');
             doc.text(2, start + 80, 'Comitato provinciale: PD');
         };
+
+        // Stampa l'etichetta della tessera di tutti gli iscritti nello scope.iscritti
         $scope.stampaTessere = function(){
             var imgData = '';
             for (var i = 0; i < $scope.iscritti.length; i++) {

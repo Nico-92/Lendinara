@@ -109,11 +109,11 @@
 					<div class="tabella" ng-grid="gridOptions"></div>
 				</div>
 			</div>
-			<div class="row">
+			<!-- <div class="row">
 				<div class="col-md-12">
 					<div ac-chart="bar" ac-data="iscritti" ac-config="config" id='chart' class='chart'></div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </body>

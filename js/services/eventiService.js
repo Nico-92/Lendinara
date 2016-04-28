@@ -40,3 +40,18 @@ moduloServices.factory('eventiService', ['$http',
 		};
 	}
 ]);
+moduloServices.factory('eventiSharedService', ['$rootScope',
+    function($rootScope) {
+        var eventiSharedService = {};
+        eventiSharedService.prepareBroadcast = prepareBroadcast;
+        eventiSharedService.broadcastItem = broadcastItem;
+
+        function prepareBroadcast() {
+            this.broadcastItem();
+        };
+        function broadcastItem() {
+            $rootScope.$broadcast('eventiBroadcast');
+        };
+        return eventiSharedService;
+    }
+]);

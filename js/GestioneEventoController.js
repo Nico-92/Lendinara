@@ -1,8 +1,12 @@
-lendinara.controller('GestioneEventoCtrl', ['$scope', 'eventiService', function($scope, eventiService) {
+lendinara.controller('GestioneEventoCtrl', ['$scope', 'eventiService', '$timeout', 'eventiSharedService', function($scope, eventiService, $timeout, eventiSharedService) {
     $scope.selezionaEvento = null;
-    eventiService.get().success(function(data) {
-        $scope.eventi = data;
-    });
+
+    function caricaEventi() {
+        eventiService.get().success(function(data) {
+            $scope.eventi = data;
+        });
+    };
+    caricaEventi();
     $scope.selezionato = function() {
         eventiService.get($scope.selezionaEvento).success(function(data) {
             $scope.datievento = data;
@@ -18,22 +22,38 @@ lendinara.controller('GestioneEventoCtrl', ['$scope', 'eventiService', function(
             if (data == 'true') {
                 $scope.risultato = true;
                 $scope.messaggio = 'Evento modificato con successo';
+                $timeout(function() {
+                    $scope.risultato = undefined;
+                }, 3000);
             } else {
                 $scope.risultato = false;
                 $scope.messaggio = data;
+                $timeout(function() {
+                    $scope.risultato = undefined;
+                }, 3000);
             }
         });
     };
+    $scope.$on('eventiBroadcast', function() {
+        caricaEventi();
+    });
     $scope.elimina = function() {
-        if (confirm('Sicuro di voler eliminare l\'evento ' + $scope.selezionaEvento.nome + '? tutti gli iscritti andranno persi')) {
-              eventiService.delete($scope.selezionaEvento).success(function(data) {
+        if (confirm('Sicuro di voler eliminare l\'evento ' + $scope.selezionaEvento.nome + '? Tutti gli iscritti andranno persi')) {
+            eventiService.delete($scope.selezionaEvento).success(function(data) {
                 if (data == 'true') {
                     $scope.risultato = true;
                     $scope.messaggio = 'Evento eliminato con successo';
-                    location.reload();
+                    caricaEventi();
+                    $scope.datievento = {};
+                    $timeout(function() {
+                        $scope.risultato = undefined;
+                    }, 3000);
                 } else {
                     $scope.risultato = false;
                     $scope.messaggio = data;
+                    $timeout(function() {
+                        $scope.risultato = undefined;
+                    }, 3000);
                 }
             });
         }
