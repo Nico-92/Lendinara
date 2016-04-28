@@ -35,6 +35,17 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             csen: true,
             nonTesserati: true
         };
+        var doc = new jsPDF('p', 'mm', [50, 100]);
+        doc.setFontSize(12);
+        var start = 10;
+        var barcodeOptions = {
+                    format: "CODE128",
+                    lineColor: "#000",
+                    width:1,
+                    height:50,
+                    displayValue: false,
+                    textMargin: 0
+                };
         $scope.tesserati = function() {
             return iscrittiService.getIscritti().success(function(data) {
                 $scope.iscritti = data.risultato;
@@ -113,6 +124,44 @@ lendinara.controller('RiassuntoIscrittiCtrl', ['$scope', '$http', '$rootScope', 
             } else {
                 $scope.tesserati();
             }
+        };
+
+        function stampa(imgData, iscritto){
+            doc.text(2, start, "ENDURO LENDINARA");
+            doc.addImage(imgData, 'JPEG', 0, start + 6, 50, 20);
+            doc.text(2, start + 35, iscritto.Cognome + ' ' + iscritto.Nome);
+            doc.text(2, start + 45, 'Data di nascita:');
+            doc.text(2, start + 50, iscritto.datanascita);
+            doc.text(2, start + 60, 'Data di rilascio:');
+            doc.text(2, start + 65, iscritto['Data emissione']);
+            doc.text(2, start + 75, 'Qual. socio - Sport: Moto');
+            doc.text(2, start + 80, 'Comitato provinciale: PD');
+        };
+        $scope.stampaTessere = function(){
+            var imgData = '';
+            for (var i = 0; i < $scope.iscritti.length; i++) {
+                if($scope.iscritti[i].fields.barcode){
+                    $("#barcode").JsBarcode($scope.iscritti[i].fields.barcode, barcodeOptions);
+                    imgData = $('#barcode').attr('src');
+                    stampa(imgData, $scope.iscritti[i].fields);
+                    if(i != $scope.iscritti.length -1 ){
+                        doc.addPage();
+                    }
+                }else{
+                    var text = "";
+                    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+                    for (var j = 0; j < 4; j++) {
+                        text += possible.charAt(Math.floor(Math.random() * possible.length));
+                    }
+                    iscrittiService.updateField('iscritti', 'barcode', text, 'id', $scope.iscritti[i].fields.id);
+                    $("#barcode").JsBarcode(text, barcodeOptions);
+                    imgData = $('#barcode').attr('src');
+                    stampa(imgData, $scope.iscritti[i].fields);
+                }
+                
+            }
+            doc.autoPrint();
+            window.open(doc.output('bloburl'), '_blank');
         };
 
         function dateSort(dataUno, dataDue) {

@@ -20,7 +20,7 @@ while ($array = mysql_fetch_array($result)) {
     $result_tessere = mysql_query($query_tessere, $conn) or die('Error, select query_tessere_motorclub failed' . mysql_error());
     $array_tessere = mysql_fetch_array($result_tessere);
     
-    // $datanascita = date('d-m-Y', strtotime($array['datanascita']));
+    $datanascita = date('d/m/Y', strtotime($array['datanascita']));
     // if ($array_lendinara['datael'] == '0000-00-00' || !$array_lendinara['datael']) {
     //     $data_el = '';
     // } 
@@ -49,8 +49,9 @@ while ($array = mysql_fetch_array($result)) {
     // Del tesserato aggiungo altri due campi al momento
     $ris = $ris . '"Codice fiscale": "' . trim($array['codicefiscale']) . '",';
     $ris = $ris . '"Tipo assicurazione": "' . 'Base' . '",';
-   /* $ris = $ris . '"datanascita": "' . trim($datanascita) . '",';
-    $ris = $ris . '"luogonascita": "' . trim($array['luogonascita']) . '",';
+    $ris = $ris . '"datanascita": "' . trim($datanascita) . '",';
+    $ris = $ris . '"barcode": "' . trim($array['barcode']) . '",';
+    /*$ris = $ris . '"luogonascita": "' . trim($array['luogonascita']) . '",';
     $ris = $ris . '"via": "' . trim($array['via']) . '",';
     $ris = $ris . '"cap": "' . trim($array['cap']) . '",';
     $ris = $ris . '"citta": "' . trim($array['citta']) . '",';

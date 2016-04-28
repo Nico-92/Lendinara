@@ -172,7 +172,8 @@ mysql_close();
 					<div class="col-md-2"  ng-show="iscritto.nome"><input type="button" value="Elimina" ng-click="elimina(iscritto);" class="unstamp btn btn-danger"/></div>
 					<!-- <div class="col-md-2"><button class="unstamp btn btn-info" ng-click="gestioneTessere();">{{stato}} tessere</button></div> -->
 					<div class="col-md-2"><button ng-show="!nuovoIscritto" class="unstamp btn btn-info" ng-click="stampa();" >Stampa</button></div>
-					<div class="col-md-2" ng-show="iscritto.nome"><button class="unstamp btn btn-info" ng-click="stampaTessera()" >Stampa tessera</button></div>
+					<!-- <div class="col-md-2" ng-show="iscritto.nome"><button class="unstamp btn btn-info" ng-click="stampaTessera()" >Stampa tessera</button></div> -->
+					<a ng-show="iscritto.tessere.tessera" href="tessera.php?nome={{iscritto.nome}}" target="_blank" class="unstamp btn btn-info"  >Stampa tessera</a>
 			    	<div class="col-md-2"><input type="button" value="Pulisci form" class="unstamp btn" ng-click="reset()" /></div>
 			    	<div class="col-md-2" ng-show="controlloMinorenni(iscritto, true) ==true"><input type="button" value="Assenso" class="unstamp btn" ng-click="apriLiberatoria(iscritto)" /></div>
 			    	<img id="barcode">

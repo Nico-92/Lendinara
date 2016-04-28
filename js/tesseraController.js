@@ -19,22 +19,26 @@ tessera.controller('tesseraController', ['$scope', '$location', 'iscrittiService
     iscrittiService.get(paramValue.nome).success(function(data) {
         $scope.iscritto = {
             dataNascita: moment(data.datanascita, 'YYYY-MM-DD').format('DD / MM / YYYY'),
-            dataRilascio: moment().format("DD / MM / YYYY"),
+            dataRilascio: moment(data.tessere.dataemissione, 'YYYY-MM-DD').format("DD / MM / YYYY"),
             nome: data.nome,
             barcode: data.barcode,
             id: data.id
         }
         
-        $scope.datarilascio = moment().format("YYYY-MM-DD");
+        // $scope.datarilascio = moment().format("YYYY-MM-DD");
         console.log(data.barcode)
         if(!data.barcode){
             $scope.setBarcode();
         }else{
-            $("#barcode").JsBarcode(data.barcode, barcodeOptions);
+            stampa(data);   
+        }
+    });
+    function stampa(data){
+        $("#barcode").JsBarcode(data.barcode, barcodeOptions);
             doc.text(2, start, "ENDURO LENDINARA");
             var imgData = $('#barcode').attr('src');
             $timeout(function(){
-            	doc.addImage(imgData, 'JPEG', 0, start + 6, 50, 20);
+                doc.addImage(imgData, 'JPEG', 0, start + 6, 50, 20);
                 doc.text(2, start + 35, $scope.iscritto.nome);
                 doc.text(2, start + 45, 'Data di nascita:');
                 doc.text(2, start + 50, $scope.iscritto.dataNascita);
@@ -44,16 +48,10 @@ tessera.controller('tesseraController', ['$scope', '$location', 'iscrittiService
                 doc.text(2, start + 80, 'Comitato provinciale: PD');
                 doc.autoPrint();
                 window.open(doc.output('bloburl'), '_blank');
-	 			/*doc.fromHTML($('#tessera')[0], 2, start + 36, {
-	              'background': '#fff',
-	            }, function() {
-	            	// pdf.save( 'file' );
-	                doc.autoPrint();
-	                window.open(doc.output('bloburl'), '_blank');
-	            });*/
+                window.close();
             }, 100);
-        }
-    });
+
+    }
     // Genera un barcode per chi ne è sprovvsito e lo salva in database
     $scope.setBarcode = function() {
         var text = "";
@@ -65,22 +63,7 @@ tessera.controller('tesseraController', ['$scope', '$location', 'iscrittiService
             if (data === '1') {
                 $scope.iscritto.barcode = text;
             }
-            $("#barcode").JsBarcode(data.barcode, barcodeOptions);
-            
-            doc.text(2, start, "ENDURO LENDINARA");
-            var imgData = $('#barcode').attr('src');
-            $timeout(function(){
-               doc.addImage(imgData, 'JPEG', 0, start + 6, 50, 20);
-                doc.text(2, start + 35, $scope.iscritto.nome);
-                doc.text(2, start + 45, 'Data di nascita:');
-                doc.text(2, start + 50, $scope.iscritto.dataNascita);
-                doc.text(2, start + 60, 'Data di rilascio:');
-                doc.text(2, start + 65, $scope.iscritto.dataRilascio);
-                doc.text(2, start + 75, 'Qual. socio - Sport: Moto');
-                doc.text(2, start + 80, 'Comitato provinciale: PD');
-                doc.autoPrint();
-                window.open(doc.output('bloburl'), '_blank');
-            }, 100);
+            stampa(data);
         });
     };
 

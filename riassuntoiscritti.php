@@ -55,6 +55,7 @@
 	<div ng-controller="RiassuntoIscrittiCtrl" style="height:100%">
 		<div class="row text-center">
 			<h1>Riassunto tesserati</h1>
+			<img id="barcode" style="visibility: hidden;">
 		</div>
 		<br />
 		<div class="row">
@@ -94,6 +95,7 @@
 						<input type="checkbox" ng-model="filtro.tipoTessere.csen"  ng-change="cambiaTipoTessere()"/> CSEN
 						</div>
 					</div>
+					<button ng-click="stampaTessere();" class="btn btn-default">STAMPA TESSERE</button>
 					 <hr />
 					 <button class="btn btn-default" ng-click="esporta();">ESPORTA IN EXCEL</button>
 					</div>
