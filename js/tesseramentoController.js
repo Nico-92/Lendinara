@@ -52,6 +52,7 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             $scope.options.avanzate = true;
         });
         $scope.loadData = function(val) {
+            console.log(val)
             iscrittiService.get(val).then(function(res) {
                 var data = res.data;
                 console.log(data)
@@ -93,8 +94,9 @@ lendinara.controller('tesseramentoCtrl', ['$scope', '$http', '$timeout', '$rootS
             })
         };
          iscrittoCookie = ipCookie('iscritto');
+         console.log(iscrittoCookie)
         if (iscrittoCookie) {
-            ipCookie.remove('iscritto');
+            // ipCookie.remove('iscritto');
             $scope.loadData(iscrittoCookie);
         }
         $scope.getCommonVarie = function(val) {

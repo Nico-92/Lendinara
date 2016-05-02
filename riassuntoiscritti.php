@@ -74,11 +74,14 @@
 					<div class="col-md-12 col-sm-6">
 					<div class="row">
 						<div class="col-md-2">Da</div>
-						<div class="col-md-10"><input type="date" class="input-medium" ng-model="filtro.inizio" ng-blur="filtraDate()" ng-click="tesserati()" /></div>
+						<div class="col-md-10"><input type="date" class="input-medium" ng-model="filtro.inizio" ng-blur="filtraDateDa()" ng-click="erroreDate = false" /></div>
 					</div>
 					<div class="row">
 						<div class="col-md-2">A</div>
-						<div class="col-md-10"><input type="date" class="input-medium" ng-model="filtro.fine" ng-blur="filtraDate()" ng-click="tesserati()" /></div>
+						<div class="col-md-10"><input type="date" class="input-medium" ng-model="filtro.fine" ng-blur="filtraDateA()" ng-click="erroreDate = false" /></div>
+					</div>
+					<div class="row" ng-if="erroreDate">
+						<div class="alert alert-danger">Date non corrette</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
