@@ -27,7 +27,7 @@ if (isset($_GET['iscritto'])) {
         
         // $array_lendinara = mysql_fetch_array($result_tessere_lendinara);
         // $array_motorclub = mysql_fetch_array($result_tessere_motorclub);
-        $query_tessere = "SELECT * FROM tessere where proprietario = '$id'";
+        $query_tessere = "SELECT * FROM tessere where proprietario = '$id' and tipo = 'Lendinara'";
         $result_tessere = mysql_query($query_tessere, $conn) or die('Error, select query_tessere_lendinara failed' . mysql_error());
         $array_tessere = mysql_fetch_array($result_tessere);
 
